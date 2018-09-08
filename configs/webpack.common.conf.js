@@ -102,7 +102,7 @@ const webConfig = {
    * See http://webpack.github.io/docs/configuration.html#resolve
    */
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
       '@': helper.resolve('src')
     }
@@ -115,6 +115,16 @@ const webConfig = {
   module: {
     // webpack 2.0 
     rules: useEslint.concat([
+      {
+        test: /\.ts$/,
+        use: [{
+          loader: 'ts-loader'
+        }],
+        exclude: config.excludeModuleReg,
+        options: {
+            appendTsSuffixTo: [/\.vue$/]
+        }
+      },
       {
         test: /\.js$/,
         use: [{
@@ -136,7 +146,7 @@ const webConfig = {
               // to convert weex exclusive styles.
               require('postcss-plugin-weex')(),
               require('autoprefixer')({
-                browsers: ['> 0.1%', 'ios >= 8', 'not ie < 12']
+                browsers: ['android >= 4', 'ios >= 8']
               }),
               require('postcss-plugin-px2rem')({
                 // base on 750px standard.
@@ -159,6 +169,9 @@ const webConfig = {
         exclude: config.excludeModuleReg
       }
     ])
+  },
+  externals: {
+    vue: 'Vue'
   },
   /*
    * Add additional plugins to the compiler.
