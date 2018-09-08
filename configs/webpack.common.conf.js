@@ -116,21 +116,19 @@ const webConfig = {
     // webpack 2.0 
     rules: useEslint.concat([
       {
-        test: /\.ts$/,
-        use: [{
-          loader: 'ts-loader'
-        }],
-        exclude: config.excludeModuleReg,
-        options: {
-            appendTsSuffixTo: [/\.vue$/]
-        }
-      },
-      {
         test: /\.js$/,
         use: [{
           loader: 'babel-loader'
         }],
         exclude: config.excludeModuleReg
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: config.excludeModuleReg,
+        options: {
+            appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.vue(\?[^?]+)?$/,
@@ -170,9 +168,11 @@ const webConfig = {
       }
     ])
   },
+  /*
   externals: {
     vue: 'Vue'
   },
+  */
   /*
    * Add additional plugins to the compiler.
    *
@@ -192,7 +192,7 @@ const weexConfig = {
    * See http://webpack.github.io/docs/configuration.html#resolve
    */
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
       '@': helper.resolve('src')
     }
@@ -210,6 +210,14 @@ const weexConfig = {
           loader: 'babel-loader'
         }],
         exclude: config.excludeModuleReg
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: config.excludeModuleReg,
+        options: {
+            appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.vue(\?[^?]+)?$/,

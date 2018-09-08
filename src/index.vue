@@ -2,15 +2,7 @@
   <div><text>hello {{info}}</text></div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-
-@Component
-export default class Index extends Vue {
-  info = "weex";
-}
-</script>
+<script lang="ts" src="./index.ts"></script>
 
 <style scoped>
   .wrapper {
