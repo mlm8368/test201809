@@ -80,6 +80,9 @@ const webConfig = webpackMerge(commonConfig[0], {
      */
     sourceMapFilename: '[name].web.map'
   },
+  externals: {
+    vue: 'Vue'
+  },
   /*
    * Add additional plugins to the compiler.
    *

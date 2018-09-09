@@ -104,7 +104,8 @@ const webConfig = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@': helper.resolve('src')
+      '@': helper.resolve('src'),
+      'vue': 'vue/dist/vue.js'
     }
   },
   /*
@@ -194,7 +195,8 @@ const weexConfig = {
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
-      '@': helper.resolve('src')
+      '@': helper.resolve('src'),
+      'vue': 'vue/dist/vue.js'
     }
   },
   /*
