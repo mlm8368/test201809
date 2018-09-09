@@ -19,8 +19,8 @@
     "lint": "eslint --ext .js,.vue src  test/unit --fix",
     "serve": "webpack-dev-server --env.NODE_ENV=development --progress",
     "ios": "weex run ios",
-    "web": "npm run serve",
     "android": "weex run android",
+    "web": "npm run serve",
     "pack:ios": "npm run clean:ios && weex build ios",
     "pack:android": "npm run clean:android && weex build android",
     "pack:web": "npm run clean:web && npm run build:prod:web"
