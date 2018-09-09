@@ -3,7 +3,7 @@ import Component from 'vue-class-component'
 
 @Component
 export default class App extends Vue {
-  public info = 'weex'
+  info = 'weex'
 
   constructor () {
     super()
