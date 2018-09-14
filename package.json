@@ -1,7 +1,7 @@
 {
-  "name": "weexschool",
-  "version": "1.0.1-beta.3",
-  "description": "a weex project",
+  "name": "eros",
+  "version": "1.0.0",
+  "description": "Eros can help developers build app quickly.",
   "main": "index.js",
   "keywords": [
     "weex"
@@ -9,7 +9,9 @@
   "author": "Zero<a2192466@163.com>",
   "license": "MIT",
   "dependencies": {
-    "eros-widget": "^1.0.2-beta.1"
+    "bui-weex": "^0.2.5",
+    "eros-widget": "^1.0.2-beta.2",
+    "weex-ui": "^0.6.0beta-2"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
