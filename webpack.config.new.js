@@ -71,9 +71,12 @@ const nativeCfg = {
               include: [
                 resolve('src')
               ],
+              loader: 'awesome-typescript-loader',
+              /*
               use: [{
                 loader: 'awesome-typescript-loader'
               }],
+              */
               options: {
                   appendTsSuffixTo: [/\.vue$/]
               }
@@ -103,7 +106,7 @@ const nativeCfg = {
     },
     plugins,
     resolve: {
-        extensions: ['.js', '.vue', '.json', '.css', '.less', '.sass'],
+        extensions: ['.ts', '.js', '.vue', '.json', '.css', '.less', '.sass'],
         alias: getFiles.getAlias(),
         modules: [
             resolve('node_modules')

@@ -9,8 +9,8 @@
       }],
       "stage-0"
   ],
-  "plugins": [
-    ["import",[{
+  "plugins": ["transform-decorators-legacy",
+    ["import",{
         "libraryName": "weex-ui",
         "libraryDirectory": "packages",
         "style": false
@@ -18,7 +18,7 @@
         "libraryName": "bui-weex",
         "libraryDirectory": "src/components",
         "style": false
-    }]],
+    }],
     ["transform-runtime", {
       "polyfill": false,
       "helpers": false
