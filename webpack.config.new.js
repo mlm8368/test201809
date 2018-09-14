@@ -98,6 +98,9 @@ const nativeCfg = {
             }
         ]
     },
+    externals: {
+      vue: 'Vue'
+    },
     plugins,
     resolve: {
         extensions: ['.js', '.vue', '.json', '.css', '.less', '.sass'],
