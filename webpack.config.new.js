@@ -58,28 +58,23 @@ const nativeCfg = {
     },
     module: {
         rules: [
-        {
+          {
+            test: /\.ts$/,
+            include: [
+              resolve('src')
+            ],
+            loader: 'ts-loader',
+            options: {
+                appendTsSuffixTo: [/\.vue$/]
+            }
+          },
+          {
                 test: /\.js$/,
                 use: 'happypack/loader?id=babel',
                 include: [
                     resolve('node_modules'),
                     resolve('src')
                 ]
-            },
-            {
-              test: /\.ts$/,
-              include: [
-                resolve('src')
-              ],
-              loader: 'awesome-typescript-loader',
-              /*
-              use: [{
-                loader: 'awesome-typescript-loader'
-              }],
-              */
-              options: {
-                  appendTsSuffixTo: [/\.vue$/]
-              }
             },
             {
                 test: /\.vue(\?[^?]+)?$/,

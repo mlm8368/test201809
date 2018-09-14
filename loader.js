@@ -167,6 +167,9 @@ module.exports = function (content) {
     var loader = loaders[defaultLang[type]]
     var rewriter = type === 'styles' ? styleRewriter + (scoped ? '&scoped=true!' : '!') : ''
     var injectString = (type === 'script' && query.inject) ? 'inject!' : ''
+	if(lang === 'ts') {
+		loader = undefined
+	} 
     if (loader !== undefined) {
       if (Array.isArray(loader)) {
         loader = stringifyLoaders(loader)
