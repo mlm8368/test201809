@@ -77,7 +77,7 @@ module.exports = function (content) {
     html: templateCompilerPath + '?id=' + moduleId,
     // css: (isServer ? '' : styleLoaderPath + '!') + 'css-loader' + (needCssSourceMap ? '?sourceMap' : ''),
     css: styleLoaderPath,
-	ts: ['ts-loader'],
+    ts: ['ts-loader'],
     js: scriptLoaderPath + '!' + (hasBuble ? ('buble-loader' + bubleOptions) : hasBabel ? ('babel-loader' + babelOptions) : ''),
     scss: ['sass-loader'],
     sass: [{
