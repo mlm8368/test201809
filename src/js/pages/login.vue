@@ -15,7 +15,7 @@
             >
         </div>
         <div class="formBox">
-            <text style="font-size:32px;">用户名：</text>
+            <text style="font-size:32px;">密码：</text>
             <input
                 style="width:490px;font-size: 32px;line-height:60px;border-bottom-width: 1px;border-bottom-color: #4a4a4a;border-bottom-style:solid"
                 type="password"
