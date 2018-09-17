@@ -8,6 +8,7 @@
   ],
   "author": "Zero<a2192466@163.com>",
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "bui-weex": "^0.2.5",
     "eros-widget": "^1.0.2-beta.2",
