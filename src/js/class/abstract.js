@@ -1,8 +1,11 @@
-export default {
-  byId: (id) => {
+export default class Abstract {
+  constructor () {
+    return this
+  }
+  byId(id) {
     return document.getElementById(id)
-  },
-  closest: (el, selector) => {
+  }
+  closest(el, selector) {
     let doms
     let targetDom
     const isSame = (doms, el) => {
@@ -28,21 +31,21 @@ export default {
       return targetDom
     }
     return traversal(el, selector)
-  },
-  jsonToStr: (json) => {
+  }
+  jsonToStr(json) {
     return JSON && JSON.stringify(json)
-  },
-  strToJson: (str) => {
+  }
+  strToJson(str) {
     return JSON && JSON.parse(str)
-  },
-  objToArray: (object) => {
+  }
+  objToArray(object) {
     const array = []
     for (const key in object) {
       array.push(object[key])
     }
     return array
-  },
-  setStorage: (key, value) => {
+  }
+  setStorage(key, value) {
     if (typeof value === 'object') {
       if (value === null) {
         value = 'objnull-null'
@@ -60,8 +63,8 @@ export default {
       value = 'str-' + value
     }
     localStorage[key] = value
-  },
-  getStorage: (key) => {
+  }
+  getStorage(key) {
     let v = localStorage[key]
     if (!v) return null
     if (v.indexOf('obj-') === 0) {
@@ -76,27 +79,27 @@ export default {
     } else if (v.indexOf('objnull-') === 0) {
       return null
     }
-  },
-  setStorageJson: (key, value) => {
+  }
+  setStorageJson(key, value) {
     localStorage[key] = value
-  },
-  getStorageJson: (key) => {
+  }
+  getStorageJson(key) {
     return localStorage[key]
-  },
-  rmStorage: (key) => {
+  }
+  rmStorage(key) {
     delete localStorage[key]
-  },
-  getGender: (gender, typeid = 0) => {
+  }
+  getGender(gender, typeid = 0) {
     const genderName = []
     genderName.push({ 1: '男', 2: '女' })
 
     return genderName[typeid][gender]
-  },
-  getAvatar: (url) => {
+  }
+  getAvatar(url) {
     if (!url) url = '../../static/images/defaultAvatar.png'
     return url
-  },
-  checkMobile: (mobile) => {
+  }
+  checkMobile(mobile) {
     const mobileReg = /^1[0-9]{10}$/
     return mobileReg.test(mobile)
   }
