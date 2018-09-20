@@ -1,4 +1,8 @@
-export default function Cache() {
+export default class Cache {
+
+}
+
+export function Cache2() {
   // const preKey = 'appCacheKey'
 }
 

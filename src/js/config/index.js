@@ -1,4 +1,4 @@
-import Widget from 'eros-widget'
+import Widget from '../../widget/index'
 import apis from './apis'
 import routes from './routes'
 import './push'
