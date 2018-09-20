@@ -1,5 +1,5 @@
 export const appCacheKey = {
-  home: 100, // home
+  app: 100, // home
   student: 200, // student
   student_sbaobao_baobaosParentesSchools: 201,
   teacher: 300, // teacher
@@ -10,7 +10,7 @@ export const appCacheKey = {
   school_cjiaowu_staffs: 404
 }
 export const appStorageKey = {
-  home: 'h000-007', // home
+  app: 'h000-007', // home
   userid: 'h001',
   username: 'h002',
   accessToken: 'h003',

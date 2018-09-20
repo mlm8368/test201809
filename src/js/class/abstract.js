@@ -62,10 +62,10 @@ export default class Abstract {
     } else {
       value = 'str-' + value
     }
-    localStorage[key] = value
+    Vue.$storage.setSync(key, value)
   }
   getStorage(key) {
-    let v = localStorage[key]
+    let v = Vue.$storage.getSync(key)
     if (!v) return null
     if (v.indexOf('obj-') === 0) {
       v = v.slice(4)
@@ -81,13 +81,13 @@ export default class Abstract {
     }
   }
   setStorageJson(key, value) {
-    localStorage[key] = value
+    Vue.$storage.setSync(key, value)
   }
   getStorageJson(key) {
-    return localStorage[key]
+    return Vue.$storage.getSync(key)
   }
   rmStorage(key) {
-    delete localStorage[key]
+    Vue.$storage.deleteSync(key)
   }
   getGender(gender, typeid = 0) {
     const genderName = []
