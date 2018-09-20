@@ -1,4 +1,4 @@
-import Widget from '../../widget/index'
+import Widget from './widget'
 import apis from './apis'
 import routes from './routes'
 import './push'
@@ -11,7 +11,7 @@ new Widget({
         routes
     },
     ajax: {
-        baseUrl: 'http://app.weex-eros.com:52077',
+        baseUrl: 'http://v7.dog1314.com/appdata/1.1',
         /**
          * 接口别名
          */
