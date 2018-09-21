@@ -9,7 +9,8 @@ module.exports = {
         'js/mediator/index.vue',
         // home
         'js/pages/hello.vue',
-        'js/pages/login.vue'
+        // user
+        'js/pages/user/login.vue'
     ],
     'alias': {
         'Components': 'js/components',

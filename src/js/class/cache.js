@@ -23,7 +23,7 @@ export default class Cache {
     if (key2) key2 = '-' + key2
     if (expires > 0) expires = new Date().getTime() + expires * 1000
     value['expires'] = expires
-    
+
     Vue.$storage.setSync(this.preKey + key + key2, value)
   }
 

@@ -20,34 +20,24 @@
         accessToken: null
       }
     },
-    computed: {
-      isLogin: function() {
-        return this.accessToken ? true : false
-      }
-    },
     watch: {
       accessToken(newVal, oldVal) {
-           if(newVal === null) {
-this.$notice.alert({
-    title: '',
-    message: '消息',
-    okTitle: '确认',
-    callback() {
-        // 点击确认按钮的回调
-    }
-})
-}
+        if(newVal === null) {
+          this.$notice.alert({
+            title: '请重新登录',
+            message: '你的登录信息已失效',
+            okTitle: '确认',
+            callback() {
+                // 点击确认按钮的回调
+            }
+          })
         }
+      }
     },
     methods: {
-      setLoginData: function(userInfo, updateAccessToken = true) {
-        abstract.setStorage(appStorageKey.userid, userInfo.userid)
-        abstract.setStorage(appStorageKey.username, userInfo.username)
-        if (updateAccessToken) abstract.setStorage(appStorageKey.accessToken, userInfo.accessToken)
-        abstract.setStorage(appStorageKey.groupid, userInfo.groupid)
-        abstract.setStorage(appStorageKey.area, userInfo.area)
-        abstract.setStorage(appStorageKey.areaid, userInfo.areaid)
-        abstract.setStorageJson(appStorageKey.userInfo, userInfo)
+      setAccessToken: function(accessToken) {
+        this.accessToken = accessToken
+        abstract.setStorage(appStorageKey.accessToken, accessToken)
       }
     },
     created () {

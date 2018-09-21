@@ -40,7 +40,7 @@ module.exports = {
               icon: 'bmlocal://assets/TabBar_Item1@2x.png',
               selectedIcon: 'bmlocal://assets/TabBar_Item1_Selected@2x.png',
               navShow: 'true',
-              navTitle: "首页"
+              navTitle: '首页'
           },
           {
               pagePath: '/pages/hello.js',
