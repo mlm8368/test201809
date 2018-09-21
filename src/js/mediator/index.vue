@@ -17,13 +17,27 @@
   export default {
     data () {
       return {
-        userInfo: null
+        accessToken: null
       }
     },
     computed: {
       isLogin: function() {
-        return this.userInfo ? true : false
+        return this.accessToken ? true : false
       }
+    },
+    watch: {
+      accessToken(newVal, oldVal) {
+           if(newVal === null) {
+this.$notice.alert({
+    title: '',
+    message: '消息',
+    okTitle: '确认',
+    callback() {
+        // 点击确认按钮的回调
+    }
+})
+}
+        }
     },
     methods: {
       setLoginData: function(userInfo, updateAccessToken = true) {
@@ -33,11 +47,11 @@
         abstract.setStorage(appStorageKey.groupid, userInfo.groupid)
         abstract.setStorage(appStorageKey.area, userInfo.area)
         abstract.setStorage(appStorageKey.areaid, userInfo.areaid)
-        abstract.setStorage(appStorageKey.userInfo, userInfo)
+        abstract.setStorageJson(appStorageKey.userInfo, userInfo)
       }
     },
     created () {
-      this.userInfo = abstract.getStorage(appStorageKey.userInfo)
+      this.accessToken = abstract.getStorage(appStorageKey.accessToken)
     }
   }
 </script>
