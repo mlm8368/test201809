@@ -28,7 +28,10 @@
             message: '你的登录信息已失效',
             okTitle: '确认',
             callback() {
-                // 点击确认按钮的回调
+              this.$router.open({
+    name: 'login',
+    type: 'PUSH'
+})
             }
           })
         }
@@ -41,7 +44,22 @@
       }
     },
     created () {
-      this.accessToken = abstract.getStorage(appStorageKey.accessToken)
+      const accessToken = abstract.getStorage(appStorageKey.accessToken)
+
+this.$fetch({
+    method: 'GET',    // 大写
+    name: 'modules.member',
+    params: {query: '&action=login&op=checkloginuserinfo'},
+    data: {
+        count: 1
+    }
+}).then(resData => {
+    // 成功回调
+    console.log(resData)
+}, error => {
+    // 错误回调
+    console.log(error)
+})
     }
   }
 </script>
