@@ -14,11 +14,7 @@ module.exports = {
     ],
     'alias': {
         'Components': 'js/components',
-        'Common': 'js/common',
-        'Config': 'js/config',
-        'Widget': 'js/widget',
-        'Pages': 'js/pages',
-        'Utils': 'js/utils'
+        'Pages': 'js/pages'
     },
     'diff': {
         'pwd': '/Users/yangmingzhe/Work/opensource/eros-diff-folder',

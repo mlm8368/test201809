@@ -9,8 +9,7 @@ module.exports = {
         'iOS': '1.0.0'
     },
     'page': {
-        'homePage': '/pages/login.js',
-        // 'homePage': 'tabBar',
+        'homePage': '/pages/user/login.js',
         'mediatorPage': '/mediator/index.js',
         'navBarColor': '#1DA1F2',
         'navItemColor': '#ffffff'
@@ -35,7 +34,7 @@ module.exports = {
         'backgroundColor': '#fafafa',
         'borderColor': '#dfe1eb',
         'list': [{
-              pagePath: '/pages/login.js',
+              pagePath: '/pages/hello.js',
               text: '首页',
               icon: 'bmlocal://assets/TabBar_Item1@2x.png',
               selectedIcon: 'bmlocal://assets/TabBar_Item1_Selected@2x.png',
