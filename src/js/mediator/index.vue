@@ -1,65 +1,30 @@
 <template> 
-  <div></div>
+    <div></div>
 </template>
 
 <script>
-  // 这个vue的实例我们在app启动的时候就执行并常驻app内存，在app关闭时候销毁，所以data中的数据每次重启都会被初始化
-  // 而我们在app运行期间都可以任意改变data中的数据，然后推送给订阅者
+    // 这个vue的实例我们在app启动的时候就执行并常驻app内存，在app关闭时候销毁，所以data中的数据每次重启都会被初始化
+    // 而我们在app运行期间都可以任意改变data中的数据，然后推送给订阅者
 
-  // 如果想要持久化存储，可以配合storage来完成，每次启动app时候都从本地取数据，当data改变的时候异步的更新一下即可
-  // 住： 不能再app退出的时候来持久化存储，退出时间很短，无法保证存储成功
+    // 如果想要持久化存储，可以配合storage来完成，每次启动app时候都从本地取数据，当data改变的时候异步的更新一下即可
+    // 住： 不能再app退出的时候来持久化存储，退出时间很短，无法保证存储成功
 
-  // 我们不建议在这里存储大量的数据 这里仅仅希望用作一个中介者 来提供给其他页面实例来通信 他无法替代storage 读取速度也远远慢与storage
-  import Abstract from '../class/abstract'
-  import { appStorageKey } from '../class/enum'
-  const abstract = new Abstract()
-  
-  export default {
-    data () {
-      return {
-        accessToken: null
-      }
-    },
-    watch: {
-      accessToken(newVal, oldVal) {
-        if(newVal === null) {
-          this.$notice.alert({
-            title: '请重新登录',
-            message: '你的登录信息已失效',
-            okTitle: '确认',
-            callback() {
-              this.$router.open({
-    name: 'login',
-    type: 'PUSH'
-})
+    // 我们不建议在这里存储大量的数据 这里仅仅希望用作一个中介者 来提供给其他页面实例来通信 他无法替代storage 读取速度也远远慢与storage
+    export default {
+        data () {
+            return {
+
             }
-          })
+        },
+        methods: {
+            bindEvent () {
+                this.$event.on('refresh', resData => {
+                  this.$router.refresh()
+                })
+            }
+        },
+        created () {
+            this.bindEvent()
         }
-      }
-    },
-    methods: {
-      setAccessToken: function(accessToken) {
-        this.accessToken = accessToken
-        abstract.setStorage(appStorageKey.accessToken, accessToken)
-      }
-    },
-    created () {
-      const accessToken = abstract.getStorage(appStorageKey.accessToken)
-
-this.$fetch({
-    method: 'GET',    // 大写
-    name: 'modules.member',
-    params: {query: '&action=login&op=checkloginuserinfo'},
-    data: {
-        count: 1
     }
-}).then(resData => {
-    // 成功回调
-    console.log(resData)
-}, error => {
-    // 错误回调
-    console.log(error)
-})
-    }
-  }
 </script>
