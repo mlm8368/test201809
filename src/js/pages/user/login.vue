@@ -10,7 +10,7 @@
               style="width:490px;font-size: 32px;line-height:60px;border-bottom-width: 1px;border-bottom-color: #4a4a4a;border-bottom-style:solid"
               type="text"
               :singleline= true
-              placeholder="请输入用户名11"
+              placeholder="请输入用户名"
               @input="changeUsername"
           >
       </div>
