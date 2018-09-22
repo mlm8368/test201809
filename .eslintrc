@@ -13,7 +13,8 @@
   },
   "globals": {
     "weex": true,
-    "Vue": true
+    "Vue": true,
+    "WXEnvironment": true
   },
   "rules": {
     "semi": "off",
@@ -23,11 +24,11 @@
     "no-extend-native": 0,
     "handle-callback-err": 0,
     "camelcase": 0,
-    "no-return-assign": [ 2, "except-parens" ]
+    "no-return-assign": [ 2, "except-parens" ],
+    "space-before-function-paren": [0, "never"]
   },
   "extends": [
-    "vue",
-    "WXEnvironment"
+    "vue"
   ],
   "parser": "babel-eslint"
 }

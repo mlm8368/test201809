@@ -25,11 +25,11 @@ export default {
         return
       }
 
-      let uData = {}
+      const uData = {}
       uData['submit'] = 1
       uData['mobile'] = self.username
       uData['password'] = self.password
-      
+
       this.$fetch({
         method: 'POST',
         name: 'modules.member',
