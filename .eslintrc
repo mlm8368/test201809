@@ -26,7 +26,8 @@
     "no-return-assign": [ 2, "except-parens" ]
   },
   "extends": [
-    "vue"
+    "vue",
+    "WXEnvironment"
   ],
   "parser": "babel-eslint"
 }

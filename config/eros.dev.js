@@ -1,3 +1,4 @@
+var path = require('path')
 // appBoard，mediator 不建议进行修改 如果修改了 也请对应修改
 module.exports = {
     'eslint': false,
@@ -13,6 +14,8 @@ module.exports = {
         'js/pages/user/login.vue'
     ],
     'alias': {
+        './variable.less':  path.join(process.cwd(), 'src/theme/base/variable.less'),
+        '../../theme': path.join(process.cwd(), 'src/theme'),
         'Components': 'js/components',
         'Common': 'js/common',
         'Config': 'js/config',

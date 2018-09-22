@@ -18,6 +18,10 @@
         "libraryName": "bui-weex",
         "libraryDirectory": "src/components",
         "style": false
+    },{
+      "libraryName": "weex-amui",
+      "libraryDirectory": "packages",
+      "style": false
     }]],
     ["transform-runtime", {
       "polyfill": false,

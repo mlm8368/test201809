@@ -1,5 +1,4 @@
 const tabPageHeight = WXEnvironment.deviceHeight
-var modal = weex.requireModule('bmModal')
 export default {
   name: 'login',
   data () {
@@ -21,20 +20,26 @@ export default {
     },
     submit() {
       const self = this
-      if (self.username === 'lic' && self.password === '123') {
-        this.$router.open({
-          name: 'index',
-          type: 'OPEN'
-        })
-      } else {
-        modal.alert({
-          message: '用户名或密码错误', // 弹窗内容
-          okTitle: '确定', // 确定按钮文字
-          title: '' // title
-        }, function () {
-          // 点击按钮的回调
-        })
+      if (self.username === '' || self.password === '') {
+        this.$notice.alert({ message: '用户名或密码错误', okTitle: '确定', title: '' })
+        return
       }
+
+      let uData = {}
+      uData['submit'] = 1
+      uData['mobile'] = self.username
+      uData['password'] = self.password
+      
+      this.$fetch({
+        method: 'POST',
+        name: 'modules.member',
+        params: { query: '&action=login' },
+        data: uData
+      }).then(resData => {
+          console.log(resData)
+      }, error => {
+          console.log(error)
+      })
     }
   }
 }
