@@ -14,8 +14,8 @@ module.exports = {
         'js/pages/user/login.vue'
     ],
     'alias': {
-        './variable.less':  path.join(process.cwd(), 'src/theme/base/variable.less'),
-        '../../theme': path.join(process.cwd(), 'src/theme'),
+        './variable.less': path.join(process.cwd(), 'src/js/theme/base/variable.less'),
+        '../../theme': path.join(process.cwd(), 'src/js/theme'),
         'Components': 'js/components',
         'Common': 'js/common',
         'Config': 'js/config',

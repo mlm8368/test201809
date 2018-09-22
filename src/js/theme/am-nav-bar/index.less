@@ -1,0 +1,73 @@
+@import "../base/common.less";
+
+@navbar-height: 45 * @hd;
+
+.am-nav-bar {
+  // align-items: center;
+  align-items: stretch;
+  height: @navbar-height;
+  background-color: @brand-primary;
+  flex-direction: row;
+
+  &-left,
+  &-right {
+    flex: 1;
+    align-items: stretch;
+    // align-items: center;
+    flex-direction: row;
+  }
+
+  &-title {
+    flex: 2;
+    text-align: center;
+    align-self: center;
+    // justify-content: center;
+    font-size: 18 * @hd;
+    white-space: nowrap;
+    color: @fill-base;
+  }
+
+  &-right {
+    justify-content: flex-end;
+    // margin-right: @h-spacing-lg;
+  }
+
+  &-btn {
+    // height: @navbar-height;
+    min-width: @navbar-height;
+    padding-left: 11.5 * @hd;
+    padding-right: 11.5 * @hd;
+    align-items: center;
+    justify-content: center;
+    &:active {
+      background-color: @brand-primary-tap;
+    }
+    &-icon {
+      color: @fill-base;
+    }
+    &-text {
+      font-size: @link-button-font-size;
+      color: @fill-base;
+    }
+  }
+
+
+
+  &-light {
+    background-color: @fill-base;
+    
+    &-title {
+      color: @color-text-base;
+    }
+
+    &-btn {
+      &:active {
+        background-color: @fill-tap;
+      }
+      &-icon, &-text {
+        color: @brand-primary;
+      }
+    }
+  }
+
+}

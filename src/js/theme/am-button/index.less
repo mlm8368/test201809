@@ -1,0 +1,81 @@
+@import '../base/common.less';
+
+.am-button {
+  // width: @button-width;
+  height: @button-height;
+  line-height: @button-height;
+  text-align: center;
+  border-width: @border-width-sm;
+  border-style: solid;
+  border-radius: @button-radius;
+  font-size: @button-font-size;
+  lines: 1;
+  padding-left: @h-spacing-lg;
+  padding-right: @h-spacing-lg;
+
+  
+  &-default {
+    color: @default-button-color;
+    background-color: @default-button-fill;
+    border-color: @default-button-border-color;
+    &-active {
+      background-color: @default-button-fill-tap;
+      border-color: @default-button-border-color-tap;
+    }
+    &-disabled {
+      opacity: @default-button-opacity-disabled;
+      color: @default-button-color-disabled;
+    }
+  }
+
+  &-primary {
+    color: @primary-button-color;
+    background-color: @primary-button-fill;
+    border-color: @primary-button-border-color;
+    &-active {
+      background-color: @primary-button-fill-tap;
+      border-color: @primary-button-border-color-tap;
+      color: @primary-button-color-tap;
+    }
+    &-disabled {
+      opacity: @primary-button-opacity-disabled;
+      color: @primary-button-color-disabled;
+    }
+  }
+  &-warning {
+    color: @warning-button-color;
+    background-color: @warning-button-fill;
+    border-color: @warning-button-border-color;
+    &-active {
+      background-color: @warning-button-fill-tap;
+      border-color: @warning-button-border-color-tap;
+      color: @warning-button-color-tap;
+    }
+    &-disabled {
+      opacity: @warning-button-opacity-disabled;
+      color: @warning-button-color-disabled;
+    }
+  }
+
+  &-ghost {
+    background-color: transparent;
+    border-color: @ghost-button-color;
+    color: @ghost-button-color;
+    &-active {
+      color: @ghost-button-fill-tap;
+      border-color: @ghost-button-fill-tap;
+    }
+    &-disabled {
+      color: @ghost-button-color-disabled;
+      border-color: @ghost-button-color-disabled;
+    }
+  }
+
+  &-small {
+    font-size: @button-font-size-sm;
+    height: @button-height-sm;
+    line-height: @button-height-sm;
+  }
+
+  .buttonTheme()
+}
