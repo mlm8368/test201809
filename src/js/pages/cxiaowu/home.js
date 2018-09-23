@@ -10,8 +10,7 @@ export default {
   data () {
     return {
       statusBarHeight: weex.config.eros.statusBarHeight,
-      navBarHeight: Number.parseInt(weex.config.eros.navBarHeight) + Number.parseInt(weex.config.eros.statusBarHeight),
-      popupHeight: Number.parseInt(weex.config.env.deviceHeight) - 500,
+      navBarBgColor: '#108ee9',
       popupShow: false,
       popupPosition: 'left'
     }
