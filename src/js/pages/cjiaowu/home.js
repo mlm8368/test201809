@@ -1,16 +1,36 @@
-import { AmFlex, AmFlexItem, AmNavBar } from 'weex-amui'
+import { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmNavBar, AmPopup, AmButton } from 'weex-amui'
+import { setFontFace } from '../../class/global'
+import Home from './home.class'
+
+let home = null
 
 export default {
-  name: 'cxiaowuIndex',
-  components: { AmFlex, AmFlexItem, AmNavBar },
+  name: 'cjiaowuHome',
+  components: { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmNavBar, AmPopup, AmButton },
   data () {
     return {
+      statusBarHeight: weex.config.eros.statusBarHeight,
+      navBarBgColor: '#108ee9',
+      popupShow: false,
+      popupPosition: 'left'
     }
   },
+  beforeCreate () {
+    setFontFace()
+  },
   created () {
+    home = new Home(this)
   },
   methods: {
-    changeUsername(e) {
+    navbarClick(key) {
+      // home.log(key)
+      if (key === 'teacher') {
+        this.popupPosition = 'left'
+        this.popupShow = true
+      } else if (key === 'classes') {
+        this.popupPosition = 'right'
+        this.popupShow = true
+      }
     }
   }
 }
