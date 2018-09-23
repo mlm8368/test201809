@@ -1,6 +1,9 @@
 <script lang="js" src="./login.js"></script>
 <template>
   <div class="Container" :style="{'height':Totalheight}">
+    <wxc-loading
+      :show="loadShow"
+    />
       <div class="imgBox">
           <image src="bmlocal://assets/logo.png" style="width: 150px;height:150px;" />
       </div>
@@ -11,7 +14,7 @@
               type="text"
               :singleline= true
               placeholder="请输入用户名"
-              @input="changeUsername"
+              v-model="mobile"
           >
       </div>
       <div class="formBox">
@@ -21,7 +24,7 @@
               type="password"
               :singleline= true
               placeholder="请输入密码"
-              @input="changePassword"
+              v-model="password"
           >
       </div>
       <text :class="['login',pressed?'pressed':'']"   @click="submit">登录</text>

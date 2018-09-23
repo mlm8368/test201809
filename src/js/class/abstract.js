@@ -1,36 +1,31 @@
+import { appStorageKey } from './enum'
+
 export default class Abstract {
-  constructor () {
+  Vue = null
+
+  constructor (Vue) {
+    this.Vue = Vue
     return this
+  }
+  log(str) {
+    const myarraylist = str;
+    if (typeof str === 'object') {
+      if (Array.isArray(str)) {
+        let index;
+        const json = {};
+        for (index in myarraylist) {
+          json[index] = myarraylist[index];
+        }
+        str = JSON.stringify(json);
+      } else {
+        str = JSON.stringify(str);
+      }
+    }
+    // console.log(str);
+    this.Vue.$notice.alert({ message: str, okTitle: '确定', title: 'DEBUG' })
   }
   byId(id) {
     return document.getElementById(id)
-  }
-  closest(el, selector) {
-    let doms
-    let targetDom
-    const isSame = (doms, el) => {
-      let i = 0
-      const len = doms.length
-      for (i; i < len; i++) {
-        if (doms[i].isEqualNode(el)) {
-          return doms[i]
-        }
-      }
-      return false
-    }
-    const traversal = (el, selector) => {
-      doms = el.parentNode.querySelectorAll(selector)
-      targetDom = isSame(doms, el)
-      if (!targetDom) {
-        el = el.parentNode
-        if (el != null && el.nodeType === el.DOCUMENT_NODE) {
-          return false
-        }
-        traversal(el, selector)
-      }
-      return targetDom
-    }
-    return traversal(el, selector)
   }
   jsonToStr(json) {
     return JSON && JSON.stringify(json)
@@ -62,10 +57,10 @@ export default class Abstract {
     } else {
       value = 'str-' + value
     }
-    Vue.$storage.setSync(key, value)
+    this.Vue.$storage.setSync(key, value)
   }
   getStorage(key) {
-    let v = Vue.$storage.getSync(key)
+    let v = this.Vue.$storage.getSync(key)
     if (!v) return null
     if (v.indexOf('obj-') === 0) {
       v = v.slice(4)
@@ -81,13 +76,24 @@ export default class Abstract {
     }
   }
   setStorageJson(key, value) {
-    Vue.$storage.setSync(key, value)
+    this.Vue.$storage.setSync(key, value)
   }
   getStorageJson(key) {
-    return Vue.$storage.getSync(key)
+    return this.Vue.$storage.getSync(key)
   }
   rmStorage(key) {
-    Vue.$storage.deleteSync(key)
+    this.Vue.$storage.deleteSync(key)
+  }
+
+  isLogin() {
+    return 0
+    // return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
+  }
+
+  ajaxHeader(appacctoken = true) {
+    const header = { 'Content-Type': 'application/x-www-form-urlencoded' }
+    if (appacctoken) header['APPACCTOKEN'] = this.getStorage(appStorageKey.accessToken)
+    return header
   }
   getGender(gender, typeid = 0) {
     const genderName = []

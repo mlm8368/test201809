@@ -11,7 +11,7 @@ new Widget({
         routes
     },
     ajax: {
-        baseUrl: 'http://v7.dog1314.com/appdata/1.1/',
+        baseUrl: 'http://v7.dog1314.com/appdata/1.1',
         /**
          * 接口别名
          */
@@ -25,7 +25,7 @@ new Widget({
          * next
          */
         requestHandler (options, next) {
-            console.log('request-opts', options)
+            // console.log('request-opts', options)
             next()
         },
         /**
@@ -36,10 +36,10 @@ new Widget({
          * reject 请求成功请resolve你得结果，这样请求的.then中的失败回调就能拿到你reject的数据
          */
         responseHandler (options, resData, resolve, reject) {
-            const { status, errorMsg, data } = resData
+            const { status, data } = resData
             if (status !== 200) {
-                console.log(`invoke error status: ${status}`)
-                console.log(`invoke error message: ${errorMsg}`)
+                // console.log(`invoke error status: ${status}`)
+                // console.log(`invoke error message: ${errorMsg}`)
                 reject(resData)
             } else {
                 // 自定义请求逻辑
