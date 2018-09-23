@@ -5,16 +5,10 @@
   </div>
 </template>
 <style scoped>
-.container {
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.title {
-  font-size: 100px;
-}
-.desc {
-  font-size: 30px;
-}
+  .container {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
