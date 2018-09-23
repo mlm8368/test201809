@@ -2,7 +2,6 @@ import { AmWhiteSpace, AmFlex, AmFlexItem, AmNavBar } from 'weex-amui'
 import Home from './home.class'
 
 let home = null
-const dom = weex.requireModule('dom')
 
 export default {
   name: 'cxiaowuHome',
@@ -14,16 +13,14 @@ export default {
     }
   },
   beforeCreate () {
-    dom.addRule('fontFace', {
-      'fontFamily': 'SchoolIconFont',
-      'src': 'url(\'https://at.alicdn.com/t/font_849649_01749dnnli6bi.ttf\')'
-    })
+    home.setFontFace()
   },
   created () {
     home = new Home(this)
   },
   methods: {
-    changeUsername(e) {
+    navbarClick(key) {
+      home.log(key)
     }
   }
 }
