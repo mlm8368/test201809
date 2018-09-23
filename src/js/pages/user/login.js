@@ -2,16 +2,14 @@ import { WxcLoading } from 'weex-ui';
 import Login from './login.class'
 
 let login = null
-const tabPageHeight = WXEnvironment.deviceHeight
 
 export default {
-  name: 'login',
+  name: 'userLogin',
   components: { WxcLoading },
   data () {
     return {
       loadShow: false,
-      Totalheight: tabPageHeight,
-      pressed: false,
+      pageHeight: weex.config.env.deviceHeight,
       mobile: '18600360004',
       password: '147258'
     }

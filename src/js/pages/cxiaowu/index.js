@@ -1,13 +1,7 @@
-const tabPageHeight = WXEnvironment.deviceHeight
-var modal = weex.requireModule('bmModal')
 export default {
-  name: 'login',
+  name: 'cxiaowuIndex',
   data () {
     return {
-      Totalheight: tabPageHeight,
-      pressed: false,
-      username: '',
-      password: ''
     }
   },
   created () {

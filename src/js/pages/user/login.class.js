@@ -74,12 +74,7 @@ export default class Login extends Abstract {
     footbar.list = footBarSchool
     tabbar.setInfo(footbar)
 
-    this.Vue.$router.back({
-      type: 'PRESENT',
-      callback: () => {
-        this.log('goPortalSchool')
-      }
-    })
+    this.Vue.$router.back({ type: 'PRESENT' })
   }
   goPortalTeacher() {
     this.log('goPortalTeacher')

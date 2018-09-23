@@ -8,10 +8,13 @@ module.exports = {
     'js/config/index.js',
     // mediator
     'js/mediator/index.vue',
-    // home
+    // test
     'js/pages/hello.vue',
     // user
-    'js/pages/user/login.vue'
+    'js/pages/user/login.vue',
+    // school
+    'js/pages/cxiaowu/index.vue',
+    'js/pages/cjiaowu/index.vue'
   ],
   'alias': {
     './variable.less': path.join(process.cwd(), 'src/js/theme/base/variable.less'),
