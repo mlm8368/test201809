@@ -3,7 +3,7 @@
   <div class="Container" :style="{'height':pageHeight}">
     <wxc-loading
       :show="loadShow"
-      :need-mask="true"
+      need-mask="true"
     />
       <div class="imgBox">
           <image src="bmlocal://assets/logo.png" style="width: 150px;height:150px;" />

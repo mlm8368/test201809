@@ -1,25 +1,8 @@
+<script lang="js" src="./home.js"></script>
 <template>
-	<div class="container">
-		<text class="title">Hello Eros</text>		
-		<text class="desc">一套 Vue 代码，两端原生应用。</text>		
-	</div>
+  <div>
+    <am-nav-bar title="am-flex" :style="{'padding-top': statusBarHeight, 'height': navBarHeight}"></am-nav-bar>
+  </div>
 </template>
-<script>
-	export default {
-
-	}
-</script>
 <style scoped>
-	.container {
-		flex:1;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-	.title {
-		font-size: 100px;
-	}
-	.desc {
-		font-size: 30px;
-	}	
 </style>
