@@ -85,14 +85,6 @@ export default class Abstract {
     this.Vue.$storage.deleteSync(key)
   }
 
-  setFontFace() {
-    const dom = weex.requireModule('dom')
-    dom.addRule('fontFace', {
-      'fontFamily': 'SchoolIconFont',
-      'src': 'url(\'bmlocal://iconfont/iconfont-school.ttf\')'
-    })
-  }
-
   isLogin() {
     return 0 // test
     // return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
