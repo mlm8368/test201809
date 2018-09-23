@@ -1,3 +1,5 @@
+export const appName = 'allapp' // allapp,school,student
+
 export const footBarSchool = [{
   'pagePath': '/pages/hello.js',
   'text': '首页',

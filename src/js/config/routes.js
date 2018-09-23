@@ -6,7 +6,7 @@
 
 export default {
   'hello': {
-    title: '欢迎登录',
+    title: 'HELLO页面',
     url: '/pages/hello.js'
   },
   'login': {

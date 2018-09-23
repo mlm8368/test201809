@@ -1,12 +1,10 @@
 import Abstract from '../../class/abstract'
 import { appStorageKey } from '../../class/enum'
-import { footBarSchool } from './login.config'
+import { appName, footBarSchool } from './login.config'
 
 const tabbar = weex.requireModule('bmTabbar')
 
 export default class Login extends Abstract {
-  appName = 'allapp'
-
   constructor(Vue) {
     super(Vue)
     return this
@@ -30,6 +28,7 @@ export default class Login extends Abstract {
     uData['mobile'] = mobile
     uData['password'] = password
 
+    this.Vue.loadShow = true
     this.Vue.$fetch({
       method: 'POST',
       name: 'modules.member',
@@ -37,6 +36,7 @@ export default class Login extends Abstract {
       header: this.ajaxHeader(false),
       data: uData
     }).then(ret => {
+      this.Vue.loadShow = false
       if (ret.status === 1) {
         this.setLoginData(ret.userInfo)
         // const that = this
@@ -47,12 +47,12 @@ export default class Login extends Abstract {
         this.Vue.$notice.alert({ message: ret.msg })
       }
     }, error => {
-      console.log(error)
+      this.Vue.loadShow = false
     })
   }
 
   goPortal() {
-    switch (this.appName) {
+    switch (appName) {
       case 'student':
         if (this.getStorage(appStorageKey.groupid) === 5) this.goPortalStudent()
         break

@@ -86,7 +86,7 @@ export default class Abstract {
   }
 
   isLogin() {
-    return 0
+    return 0 // test
     // return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
   }
 
