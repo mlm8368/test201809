@@ -13,8 +13,8 @@ module.exports = {
     // user
     'js/pages/user/login.vue',
     // school
-    'js/pages/cxiaowu/index.vue',
-    'js/pages/cjiaowu/index.vue'
+    'js/pages/cxiaowu/home.vue',
+    'js/pages/cjiaowu/home.vue'
   ],
   'alias': {
     './variable.less': path.join(process.cwd(), 'src/js/theme/base/variable.less'),

@@ -1,4 +1,4 @@
-<script lang="js" src="./index.js"></script>
+<script lang="js" src="./home.js"></script>
 <template>
   <div class="container">
     <am-nav-bar title="am-flex"></am-nav-bar>
