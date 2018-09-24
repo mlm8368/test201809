@@ -12,11 +12,18 @@
         <div><text>学前二班</text></div>
         <div>
           <am-flex direction="row" justify="center" align="center" wrap="wrap">
-            <div><text>学前二班</text></div>
-            <div><text>学前二班</text></div>
+            <div><text>老师</text></div>
+            <div><text>学生</text></div>
           </am-flex>
         </div>
       </am-flex>
+      <div v-for="(i, index) in items" :key="index">
+          <bui-swipe-cell :items="btnAry"
+                          :title="i.title" 
+                          :ref="`swipe_${index}`" 
+                          @swipeleft="swipeLeft"
+                          ></bui-swipe-cell>
+      </div>
     </scroller>
     <am-popup
       :show.sync="popupShow"
