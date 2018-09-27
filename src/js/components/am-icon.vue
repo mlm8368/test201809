@@ -26,12 +26,13 @@ export default {
     },
     fontFamily: {
       type: String,
-      default: 'AMUIIconFont'
+      default: 'SchoolIconFont'
     }
   },
   data () {
     return {
       Icon: {
+        /*
         'search': '\ueea3',
         'reload': '\uee47',
         'arrow-down': '\uee4a',
@@ -53,6 +54,9 @@ export default {
         'clock-circle-o': '\uee72',
         'ellipsis': '\ueee4',
         'loading': '\ueee3'
+        */
+        'profile': '\ue7dd',
+        'home': '\ue6b8'
       }
     }
   },
@@ -78,8 +82,8 @@ export default {
   },
   beforeCreate () {
     dom.addRule('fontFace', {
-      'fontFamily': 'AMUIIconFont',
-      'src': "url('https://at.alicdn.com/t/font_666184_6i47o5l7pbiysyvi.ttf')"
+      'fontFamily': 'SchoolIconFont',
+      'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
     })
   }
 }

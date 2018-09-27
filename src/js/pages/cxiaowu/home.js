@@ -1,4 +1,6 @@
-import { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmNavBar, AmPopup, AmButton } from 'weex-amui'
+import AmNavBar from '../../components/am-nav-bar.vue'
+import AmPopup from '../../components/am-popup.vue'
+import AmButton from '../../components/am-button.vue'
 import { setFontFace } from '../../class/global'
 import Home from './home.class'
 
@@ -6,7 +8,7 @@ let home = null
 
 export default {
   name: 'cxiaowuHome',
-  components: { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmNavBar, AmPopup, AmButton },
+  components: { AmNavBar, AmPopup, AmButton },
   data () {
     return {
       statusBarHeight: weex.config.eros.statusBarHeight,
