@@ -1,6 +1,7 @@
-import { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmPopup, AmButton } from 'weex-amui'
+import { AmButton } from 'weex-amui'
 import { buiSwipeCell } from 'bui-weex'
 import AmNavBar from '../../components/am-nav-bar.vue'
+import AmPopup from '../../components/am-popup.vue'
 import { setFontFace } from '../../class/global'
 import Home from './home.class'
 
@@ -8,7 +9,7 @@ let home = null
 
 export default {
   name: 'cjiaowuHome',
-  components: { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmNavBar, AmPopup, AmButton, buiSwipeCell },
+  components: { AmNavBar, AmPopup, AmButton, buiSwipeCell },
   data () {
     return {
       statusBarHeight: weex.config.eros.statusBarHeight,

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['am-nav-bar', `am-nav-bar-${mode}`]">
+  <div :class="['am-nav-bar', `am-nav-bar-${mode}`]" :style="{ backgroundColor: backgroundColor }">
     <div class="am-nav-bar-left">
       <slot name="left">
         <div
@@ -12,17 +12,19 @@
             v-if="item.is === 'icon'"
             :type="item.type"
             :class="['am-nav-bar-btn-icon', `am-nav-bar-${mode}-btn-icon`]"
+            :style="{ color: textColor }"
           />
           <text
             v-else-if="item.is === 'text'"
             :class="['am-nav-bar-btn-text', `am-nav-bar-${mode}-btn-text`]"
+            :style="{ color: textColor }"
           >{{item.text}}</text>
           <!-- <image v-else-if="item.is === 'image'" :src="item.src"/> -->
         </div>
       </slot>
     </div>
     <slot name="title">
-      <text @click="handleClick({key: 'title'})" :class="['am-nav-bar-title', `am-nav-bar-${mode}-title`]">{{title}}</text>
+      <text @click="handleClick({key: 'title'})" :class="['am-nav-bar-title', `am-nav-bar-${mode}-title`]" :style="{ color: textColor }">{{title}}</text>
     </slot>
     <div class="am-nav-bar-right">
       <slot name="right">
@@ -36,10 +38,12 @@
             v-if="item.is === 'icon'"
             :type="item.type"
             :class="['am-nav-bar-btn-icon', `am-nav-bar-${mode}-btn-icon`]"
+            :style="{ color: textColor }"
           />
           <text
             v-else-if="item.is === 'text'"
             :class="['am-nav-bar-btn-text', `am-nav-bar-${mode}-btn-text`]"
+            :style="{ color: textColor }"
           >{{item.text}}</text>
           <!-- <image v-else-if="item.is === 'image'" :src="item.src"/> -->
         </div>
@@ -54,6 +58,14 @@ const Navigator = weex.requireModule('navigator')
 export default {
   name: 'am-nav-bar',
   props: {
+    backgroundColor: {
+      type: String,
+      default: '#FFC900'
+    },
+    textColor: {
+      type: String,
+      default: '#3D3D3D'
+    },
     mode: {
       type: String,
       default: 'dark' // dark, light
