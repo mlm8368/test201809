@@ -1,13 +1,13 @@
 <template>
-  <cell class="bui-cell-swipe-menu" :style="{'height': height}">
-      <div class="bui-list-swipe" ref='swipeBox'>
+  <cell class="bui-cell-swipe-menu">
+      <div :style="{'height': height}" class="bui-list-swipe" ref='swipeBox'>
           <slot name="action">
               <div class="bui-list-swipe-btn" :style="{'background-color': item.bgcolor}" @click="_actionClick(index)" :key="index" v-for="(item, index) in items">
                   <text class="bui-list-swipe-btn-text">{{item.title}}</text>
               </div>
           </slot>
       </div>
-      <div @click="_click" @swipe="_swipe($event)" class="bui-list-swipe-main" ref="swipedom">
+      <div @click="_click" @swipe="_swipe($event)" :style="{'height': height}" class="bui-list-swipe-main" ref="swipedom">
           <slot name="content">
               <text class="bui-list-title" v-if="title">{{title}}</text>
           </slot>
