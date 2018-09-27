@@ -1,5 +1,6 @@
-import { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmNavBar, AmPopup, AmButton } from 'weex-amui'
+import { AmWhiteSpace, AmWingBlank, AmFlex, AmFlexItem, AmPopup, AmButton } from 'weex-amui'
 import { buiSwipeCell } from 'bui-weex'
+import AmNavBar from '../../components/am-nav-bar.vue'
 import { setFontFace } from '../../class/global'
 import Home from './home.class'
 
