@@ -1,8 +1,7 @@
-import { buiSwipeCell } from 'bui-weex'
 import AmNavBar from '../../components/am-nav-bar.vue'
 import AmPopup from '../../components/am-popup.vue'
 import AmButton from '../../components/am-button.vue'
-import { setFontFace } from '../../class/global'
+import buiSwipeCell from '../../components/bui-swipe-cell.vue'
 import Home from './home.class'
 
 let home = null
@@ -45,9 +44,6 @@ export default {
         }
     ]
     }
-  },
-  beforeCreate () {
-    setFontFace()
   },
   created () {
     home = new Home(this)

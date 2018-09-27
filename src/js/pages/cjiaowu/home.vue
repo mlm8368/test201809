@@ -9,7 +9,7 @@
       :left-btn = "[{is: 'text', text: '教职工', key: 'teacher'}]"
       :right-btn="[{is: 'text', text: '班级', key: 'classes'}]"
       @click="navbarClick" />
-    <div><text>学前二班</text></div>
+    <div class="banji"><text class="banji-title">学前二班</text></div>
     <div>
         <div><text>老师</text></div>
         <div><text>学生</text></div>
@@ -18,13 +18,14 @@
       <header>
         <text>班级老师</text>
       </header>
-      <cell v-for="(i, index) in items" :key="index">
-        <bui-swipe-cell :items="btnAry"
-                        :title="i.title" 
-                        :ref="`swipe_${index}`" 
-                        @swipeleft="swipeLeft"
-                        ></bui-swipe-cell>
-      </cell>
+      <bui-swipe-cell 
+        :items="btnAry"
+        :title="i.title" 
+        :ref="`swipe_${index}`" 
+        @swipeleft="swipeLeft"
+        v-for="(i, index) in items"
+        :key="index"
+        ></bui-swipe-cell>
     </list>
       
     <am-popup
@@ -40,5 +41,14 @@
     </am-popup>
   </div>
 </template>
-<style scoped>
+<style scoped lang="less">
+@import "../../../css/variable.less";
+
+.banji {
+  heigh: 25 * @hd;
+  
+  &-title {
+    color: @color-text-base;
+  }
+}
 </style>

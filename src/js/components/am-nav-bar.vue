@@ -168,7 +168,6 @@ export default {
   }
 
   &-btn {
-    // height: @navbar-height;
     min-width: @navbar-height;
     padding-left: 11.5 * @hd;
     padding-right: 11.5 * @hd;

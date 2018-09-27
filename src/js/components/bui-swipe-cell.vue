@@ -1,61 +1,20 @@
 <template>
-    <div class="bui-list-swipe-menu">
-        <div class="bui-cell-swipe-menu" :style="{'height': height}">
-            <div class="bui-list-swipe" ref='swipeBox'>
-                <slot name="action">
-                    <div class="bui-list-swipe-btn" :style="{'background-color': item.bgcolor}" @click="_actionClick(index)" :key="index" v-for="(item, index) in items">
-                        <text class="bui-list-swipe-btn-text">{{item.title}}</text>
-                    </div>
-                </slot>
-            </div>
-            <div @click="_click" @swipe="_swipe($event)" class="bui-list-main bui-list-swipe-main" ref="swipedom">
-                <div class="bui-list-main-left">
-                    <slot name="content">
-                        <text class="bui-list-title" v-if="title">{{title}}</text>
-                    </slot>
-                </div>
-            </div>
-
-        </div>
-    </div>
+  <cell class="bui-cell-swipe-menu" :style="{'height': height}">
+      <div class="bui-list-swipe" ref='swipeBox'>
+          <slot name="action">
+              <div class="bui-list-swipe-btn" :style="{'background-color': item.bgcolor}" @click="_actionClick(index)" :key="index" v-for="(item, index) in items">
+                  <text class="bui-list-swipe-btn-text">{{item.title}}</text>
+              </div>
+          </slot>
+      </div>
+      <div @click="_click" @swipe="_swipe($event)" class="bui-list-swipe-main" ref="swipedom">
+          <slot name="content">
+              <text class="bui-list-title" v-if="title">{{title}}</text>
+          </slot>
+      </div>
+  </cell>
 </template>
-<style scoped lang="less">
-.bui-cell-swipe-menu{
-  lex-direction: row;
-  //height: $nb120;
-  border-bottom-width: 1px;
-  border-bottom-color: $color_border;
-  border-bottom-style: solid;
-}
-.bui-list-swipe{
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-.bui-list-swipe-btn{
-  flex-direction: row;
-  width: 120px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #c6c7c8;
-}
-.bgRed{
-  background-color: $color_danger_active;
-}
-.bui-list-swipe-btn-text{
-  font-size: 30px;
-  color: $color_white;
-}
-.bui-list-swipe-main{
-  flex-direction: row;
-  justify-content: flex-start
-}
-</style>
+
 <script>
     const animation = weex.requireModule('animation');
     let defaultAction=[
@@ -150,3 +109,48 @@
         }
     }
 </script>
+
+<style scoped lang="less">
+@import "../../css/variable.less";
+
+.bui-cell-swipe-menu{
+  lex-direction: row;
+  border-bottom-width: 1px;
+  border-bottom-color: @border-color-base;
+  border-bottom-style: solid;
+}
+.bui-list-swipe{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.bui-list-swipe-btn{
+  flex-direction: row;
+  width: 120px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #c6c7c8;
+}
+.bui-list-swipe-btn-text{
+  font-size: 30px;
+  color: @color-text-base-inverse;
+}
+.bui-list-swipe-main{
+  padding-left: 20px;
+  flex: 1;
+  background-color: #ffffff;
+  flex-direction: row;
+  justify-content: flex-start
+}
+.bui-list-title {
+  font-size: $nb34;
+  color: @color-text-base;
+  text-overflow: ellipsis;
+  lines: 1;
+}
+</style>
