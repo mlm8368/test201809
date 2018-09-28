@@ -9,10 +9,10 @@
       :left-btn = "[{is: 'text', text: '教职工', key: 'teacher'}]"
       :right-btn="[{is: 'text', text: '班级', key: 'classes'}]"
       @click="navbarClick" />
-    <div class="banji"><text class="banji-title">学前二班</text></div>
-    <div>
-        <div><text>老师</text></div>
-        <div><text>学生</text></div>
+    <text class="banji-title">学前二班</text>
+    <div class="banji-info">
+        <div><text>3人</text><text>老师</text></div>
+        <div><text>学生</text><text>23人</text></div>
     </div>
     <list>
       <header>
@@ -44,11 +44,14 @@
 <style scoped lang="less">
 @import "../../../css/variable.less";
 
-.banji {
-  heigh: 25 * @hd;
-  
-  &-title {
-    color: @color-text-base;
-  }
+.banji-title {
+  font-size: @font-size-heading;
+  height: 45 * @hd;
+  line-height: 45 * @hd;
+  color: @color-text-base;
+  text-align: center;
+}
+.banji-info {
+  display:flex;
 }
 </style>
