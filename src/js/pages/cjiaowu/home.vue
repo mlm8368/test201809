@@ -41,7 +41,7 @@
     </am-popup>
   </div>
 </template>
-<style scoped lang="less">
+<style lang='less' scoped>
 @import "../../../css/variable.less";
 
 .banji-title {
@@ -52,6 +52,6 @@
   text-align: center;
 }
 .banji-info {
-  display:flex;
+  justify-content: flex-start;
 }
 </style>
