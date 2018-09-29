@@ -9,6 +9,7 @@
     "html"
   ],
   "parserOptions": {
+    "parser": "babel-eslint",
     "sourceType": "module"
   },
   "globals": {
@@ -28,7 +29,7 @@
     "space-before-function-paren": [0, "never"]
   },
   "extends": [
+    "plugin:vue/recommended",
     "vue"
-  ],
-  "parser": "babel-eslint"
+  ]
 }
