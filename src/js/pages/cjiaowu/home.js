@@ -8,6 +8,7 @@ let home = null
 
 export default {
   name: 'cjiaowuHome',
+  store,
   components: { AmNavBar, AmPopup, AmButton, buiSwipeCell },
   data () {
     return {

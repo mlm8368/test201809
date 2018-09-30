@@ -15,7 +15,7 @@
   "globals": {
     "weex": true,
     "Vue": true,
-    "WXEnvironment": true
+    "store": true
   },
   "rules": {
     "semi": "off",
