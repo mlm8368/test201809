@@ -15,6 +15,7 @@
   "globals": {
     "weex": true,
     "Vue": true,
+    "Vuex": true,
     "store": true
   },
   "rules": {
