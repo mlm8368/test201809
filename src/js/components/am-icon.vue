@@ -56,7 +56,8 @@ export default {
         'loading': '\ueee3'
         */
         'profile': '\ue7dd',
-        'home': '\ue6b8'
+        'home': '\ue6b8',
+        'right': '\ue7eb'
       }
     }
   },
@@ -83,7 +84,8 @@ export default {
   beforeCreate () {
     dom.addRule('fontFace', {
       'fontFamily': 'SchoolIconFont',
-      'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
+      //'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
+      'src': "url('https://at.alicdn.com/t/font_849649_gbye5rhcl2t.ttf')"
     })
   }
 }

@@ -16,110 +16,110 @@
 </template>
 
 <script>
-    const animation = weex.requireModule('animation');
-    let defaultAction=[
-        {
-            'title': '取消',
-            'bgcolor' : '#c6c7c8'
-        },
-        {
-            'title': '删除',
-            'bgcolor' : '#fa3300'
-        }
-    ];
-    module.exports = {
-	    data: function () {
-	            return {
-	                ss : ''
-	                }
-	        },
-        props: {
-            items: {
-                type: Array,
-                default(){
-                    return defaultAction;
-                }
-            },
-            height: {
-                type: String,
-                default: '100px'
-            },
-            title: {
-                type: String
-            }
-        },
-        methods: {
-            //操作点击事件
-            _actionClick (index){
-                this.close(()=>{
-                    this.$emit('actionClick', index);
-                });
-            },
-            _swipe(e){
-                switch (e.direction) {
-                    case 'left':
-                        this.open(()=>{
-                            this.$emit('swipeleft');
-                        });
-                        break;
-                    case 'right':
-                        this.close(()=>{
-                            this.$emit('swiperight');
-                        });
-                        break;
-                }
-            },
-            _click(){
-                this.$emit('click');
-                this.close();
-            },
-            close(fn){
-                let translate = 'translate(0px, 0px)';
-                let el = this.$refs.swipedom;
-                this._animationFn(el, 1, translate, 'ease-in',()=> {
-                    fn && fn();
-                });
-            },
-            open(fn){
-                let swipeDom = this.$refs.swipeBox;
-                let lenDom;
-                if(swipeDom.hasOwnProperty('pureChildren')) lenDom = swipeDom.pureChildren;
-                else lenDom = this.$refs.swipeBox.children;
-                let len = (lenDom&&lenDom.length)||0;
-                let translate = 'translate(-'+120*len+'px, 0px)';
-                let el = this.$refs.swipedom;
-                this._animationFn(el, 1, translate, 'ease-in',()=>{
-                    fn && fn();
-                });
-            },
-            _animationFn (el, opacity, translate, timing, fn){
-                animation.transition(el, {
-                    styles: {
-                        opacity: opacity,
-                        transform: translate,
-                        transformOrigin: 'center center'
-                    },
-                    duration: 200,
-                    timingFunction: timing,
-                    delay: 0
-                }, () => {
-                    fn && fn();
-                });
-            }
-        }
+const animation = weex.requireModule("animation")
+let defaultAction = [
+  { title: "取消", bgcolor: "#c6c7c8" },
+  { title: "删除", bgcolor: "#fa3300" }
+]
+export default {
+  name: 'bui-swipe-cell',
+  props: {
+    items: {
+      type: Array,
+      default() {
+        return defaultAction
+      }
+    },
+    height: {
+      type: String,
+      default: "100px"
+    },
+    title: {
+      type: String
     }
+  },
+  provide () {
+    return {
+      noBorder: this.noBorder
+    }
+  },
+  methods: {
+    //操作点击事件
+    _actionClick(index) {
+      this.close(() => {
+        this.$emit("actionClick", index);
+      })
+    },
+    _swipe(e) {
+      switch (e.direction) {
+        case "left":
+          this.open(() => {
+            this.$emit("swipeleft");
+          })
+          break
+        case "right":
+          this.close(() => {
+            this.$emit("swiperight");
+          })
+          break
+      }
+    },
+    _click() {
+      this.$emit("click")
+      this.close()
+    },
+    close(fn) {
+      let translate = "translate(0px, 0px)";
+      let el = this.$refs.swipedom;
+      this._animationFn(el, 1, translate, "ease-in", () => {
+        fn && fn();
+      })
+    },
+    open(fn) {
+      let swipeDom = this.$refs.swipeBox;
+      let lenDom;
+      if (swipeDom.hasOwnProperty("pureChildren"))
+        lenDom = swipeDom.pureChildren;
+      else lenDom = this.$refs.swipeBox.children;
+      let len = (lenDom && lenDom.length) || 0;
+      let translate = "translate(-" + 120 * len + "px, 0px)";
+      let el = this.$refs.swipedom;
+      this._animationFn(el, 1, translate, "ease-in", () => {
+        fn && fn();
+      })
+    },
+    _animationFn(el, opacity, translate, timing, fn) {
+      animation.transition(
+        el,
+        {
+          styles: {
+            opacity: opacity,
+            transform: translate,
+            transformOrigin: "center center"
+          },
+          duration: 200,
+          timingFunction: timing,
+          delay: 0
+        },
+        () => {
+          fn && fn();
+        }
+      )
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">
 @import "../../css/variable.less";
 
-.bui-cell-swipe-menu{
+.bui-cell-swipe-menu {
   flex-direction: row;
   border-bottom-width: 1px;
   border-bottom-color: @border-color-base;
   border-bottom-style: solid;
 }
-.bui-list-swipe{
+.bui-list-swipe {
   position: absolute;
   left: 0px;
   right: 0px;
@@ -128,7 +128,7 @@
   flex-direction: row;
   justify-content: flex-end;
 }
-.bui-list-swipe-btn{
+.bui-list-swipe-btn {
   flex-direction: row;
   width: 120px;
   align-items: center;
@@ -136,12 +136,11 @@
   text-align: center;
   background-color: #c6c7c8;
 }
-.bui-list-swipe-btn-text{
+.bui-list-swipe-btn-text {
   font-size: 30px;
   color: @color-text-base-inverse;
 }
-.bui-list-swipe-main{
-  padding-left: 20px;
+.bui-list-swipe-main {
   flex: 1;
   background-color: #ffffff;
   flex-direction: row;

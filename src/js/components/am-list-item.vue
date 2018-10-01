@@ -35,107 +35,118 @@
 </template>
 
 <script>
-import AmIcon from './am-icon.vue'
+import AmIcon from "./am-icon.vue";
 // const arrowUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABnUlEQVRYR82XTW7CMBCFZzRehFW5SYlKkbwq3ABOULgBPQm9QekJ4AbQDUioKHCTsCKLRFMZRJVWceKfRG2WiZ332TOeN0YoeaIoaidJtiCil14vPJSNdf2GuolK/HxOV4jYYYYYkUdSPq5dhXTztADb7eccAJ5/TsSJlA/qfW1P6Q4kSboEwKcmIbQAN9Gmd6ISQIEUQ8Bcyu7ENxZGAE1CGAM0BWEFUAKxDgIahWEY24bEGkAJbDb7KSLP8mLMfGi1xMAWwgnguhP7MQC/+UI4A5RBCCEmpqXbC0APAbEQNDCB8AbwhagFIAfxCgB3t7wwMbHaAJTobhd1sixTjvkNcYXRm1jtAGmarRChbWpgtQGoY8nMs1/iJwAelvURtQAU1QQAOBFRv+okeAP4iF+yw7Z258drxI9ENK5a+e0/zgA68SCgvo0fOAEUmREAHG3FnUJQ3B3xRxCIoc3KnUKgac3epeyOXXPJOARNiBuHoClxI4A/a8vzVzPTuu6SB//9anax1ntV16tMxWX1lTlwvZ6nSyIxNS2ttiBf02PsISPWB9wAAAAASUVORK5CYII='
 
-const makeClassList = (classList) => {
-  Object.keys(classList).filter(classname => classList[classname])
+const makeClassList = classList => {
+  if (Array.isArray(classList)) {
+    return classList
+  }else {
+    return Object.keys(classList).filter(classname => classList[classname])
+  }
 }
 
 const itemMixin = {
   computed: {
-    _isFirstChild () {
-      if ('_isFirstChild' in this.$parent) {
+    _isFirstChild() {
+      if ("_isFirstChild" in this.$parent) {
         return this.$parent._isFirstChild
       }
-      return this.$parent.$slots.default && this.$parent.$slots.default[0] === this.$vnode
+      return (
+        this.$parent.$slots.default &&
+        this.$parent.$slots.default[0] === this.$vnode
+      )
     },
-    _isLastChild () {
-      if ('_isLastChild' in this.$parent) {
+    _isLastChild() {
+      if ("_isLastChild" in this.$parent) {
         return this.$parent._isLastChild
       }
-      return this.$parent.$slots.default && this.$parent.$slots.default[this.$parent.$slots.default.length - 1] === this.$vnode
+      return (
+        this.$parent.$slots.default &&
+        this.$parent.$slots.default[this.$parent.$slots.default.length - 1] ===
+          this.$vnode
+      )
     }
   }
 }
 
 export default {
-  name: 'am-list-item',
-  components: {AmIcon},
+  name: "am-list-item",
+  components: { AmIcon },
   mixins: [itemMixin],
-  props: () => ({
-  title: {
-    type: String,
-    default: null
-  },
-  titleNumber: {
-    type: Number,
-    default: 0
-  },
-  titleDisabled: {
-    type: Boolean,
-    default: false
-  },
-  extra: {
-    type: String,
-    default: null
-  },
-  arrow: {
-    type: String,
-    default: 'right'
-  },
-  thumb: {
-    type: String,
-    default: null
-  },
-  thumbStyle: {
-    type: Object,
-    default () {
-      return {}
+  props: {
+    title: {
+      type: String,
+      default: null
+    },
+    titleNumber: {
+      type: Number,
+      default: 0
+    },
+    titleDisabled: {
+      type: Boolean,
+      default: false
+    },
+    extra: {
+      type: String,
+      default: null
+    },
+    arrow: {
+      type: String,
+      default: "right"
+    },
+    thumb: {
+      type: String,
+      default: null
+    },
+    thumbStyle: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
+    brief: {
+      type: String,
+      default: null
+    },
+    tapActive: {
+      type: Boolean,
+      default: true
+    },
+    align: {
+      type: String,
+      default: "middle"
     }
+    // multiple: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
-  brief: {
-    type: String,
-    default: null
-  },
-  tapActive: {
-    type: Boolean,
-    default: true
-  },
-  align: {
-    type: String,
-    default: 'middle'
-  }
-  // multiple: {
-  //   type: Boolean,
-  //   default: false
-  // }
-}),
-  data () {
+  data() {
     return {
       // arrowUrl: arrowUrl
     }
   },
-  inject: ['noBorder'],
+  inject: ["noBorder"],
   computed: {
-    showArrow () {
-      return this.arrow && this.arrow !== 'empty'
+    showArrow() {
+      return this.arrow && this.arrow !== "empty";
     },
-    itemClass () {
+    itemClass() {
       return makeClassList({
-        'am-list-item-tap': this.tapActive,
-        'am-list-item-first': !this.noBorder && this._isFirstChild,
-        'am-list-item-last': !this.noBorder && this._isLastChild
+        "am-list-item-tap": this.tapActive,
+        "am-list-item-first": !this.noBorder && this._isFirstChild,
+        "am-list-item-last": !this.noBorder && this._isLastChild
       })
     },
-    lineClass () {
+    lineClass() {
       return makeClassList({
-        'am-list-line-border': !this.noBorder,
-        'am-list-line-align-top': this.align === 'top',
-        'am-list-line-align-middle': this.align === 'middle',
-        'am-list-line-align-bottom': this.align === 'bottom',
+        "am-list-line-border": !this.noBorder,
+        "am-list-line-align-top": this.align === "top",
+        "am-list-line-align-middle": this.align === "middle",
+        "am-list-line-align-bottom": this.align === "bottom",
         // 'am-list-line-multiple': this.multiple || !!this.brief,
-        'am-list-line-last': this._isLastChild
+        "am-list-line-last": this._isLastChild
       })
     },
     // arrowClass () {
@@ -144,15 +155,15 @@ export default {
     //     'am-list-arrow-vertical-up': this.arrow === 'up'
     //   })
     // },
-    contentTextClass () {
-      return Utils.makeClassList({
-        'am-list-content-text-disabled': this.titleDisabled
+    contentTextClass() {
+      return makeClassList({
+        "am-list-content-text-disabled": this.titleDisabled
       })
     }
   },
   methods: {
-    handleClick ($event) {
-      this.$emit('click', $event)
+    handleClick($event) {
+      this.$emit("click", $event);
     }
   }
 }
@@ -163,6 +174,7 @@ export default {
 
 .am-list {
   &-item {
+    flex: 1;
     position: relative;
     padding-left: @h-spacing-lg;
     // height: @list-item-height;
@@ -190,10 +202,12 @@ export default {
     padding-top: 10 * @hd;
     padding-bottom: 9 * @hd;
     min-height: @list-item-height;
+    /*
     // &-multiple{
     //   padding-top: 10 * @hd;
     //   padding-bottom: 9 * @hd;
     // }
+    */
     &-border {
       border-bottom-color: @border-color-base;
       border-bottom-width: @border-width-sm;
@@ -232,23 +246,23 @@ export default {
       &-2 {
         max-width: 2 * @font-size-heading;
       }
-  
+
       &-3 {
         max-width: 3 * @font-size-heading;
       }
-  
+
       &-4 {
         max-width: 4 * @font-size-heading;
       }
-  
+
       &-5 {
         max-width: 5 * @font-size-heading;
       }
-  
+
       &-6 {
         max-width: 6 * @font-size-heading;
       }
-  
+
       &-7 {
         max-width: 7 * @font-size-heading;
       }
@@ -265,7 +279,8 @@ export default {
     // width: @icon-size-xxs;
     // height: @icon-size-xxs;
     margin-left: @h-spacing-md;
-    color: #C7C7CC;
+    color: #c7c7cc;
+    /*
     // font-size: @icon-size-xxs;
 
     // &-vertical {
@@ -275,6 +290,7 @@ export default {
     // &-vertical-up {
     //   transform: rotate(270deg);
     // }
+    */
   }
 }
 

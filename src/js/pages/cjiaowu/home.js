@@ -2,6 +2,9 @@ import AmNavBar from '../../components/am-nav-bar.vue'
 import AmPopup from '../../components/am-popup.vue'
 import AmButton from '../../components/am-button.vue'
 import buiSwipeCell from '../../components/bui-swipe-cell.vue'
+import AmList from '../../components/am-list-card.vue'
+import AmListItem from '../../components/am-list-item.vue'
+// import { AmListItem } from 'weex-amui'
 import store from './home.store'
 import Home from './home.class'
 
@@ -10,7 +13,7 @@ let home = null
 export default {
   name: 'cjiaowuHome',
   store,
-  components: { AmNavBar, AmPopup, AmButton, buiSwipeCell },
+  components: { AmNavBar, AmPopup, AmButton, buiSwipeCell, AmList, AmListItem },
   data () {
     return {
       statusBarHeight: weex.config.eros.statusBarHeight,

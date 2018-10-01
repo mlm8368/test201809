@@ -16,6 +16,15 @@
         <text class="banji-info-student">学生</text>
         <text class="banji-info-num">23人</text>
     </div>
+    <am-list
+          header="带描述"
+        >
+          <am-list-item
+            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+            title="钱包"
+            brief="余额：100元"
+          ></am-list-item>
+        </am-list>
     <list class="banji-list">
       <header class="banji-list-header">
         <text class="banji-list-header-teacher">班级老师</text>
@@ -24,10 +33,16 @@
         :items="btnAry"
         :title="i.title" 
         :ref="`swipe_${index}`" 
-        @swipeleft="swipeLeft"
         v-for="(i, index) in items"
         :key="index"
-        ></bui-swipe-cell>
+        >
+        <am-list-item
+            slot="content"
+            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+            title="钱包"
+            brief="余额：100元"
+          ></am-list-item>
+        </bui-swipe-cell>
       <header class="banji-list-header">
         <text class="banji-list-header-student">班级学生</text>
       </header>
@@ -88,14 +103,17 @@
   }
 }
 .banji-list {
-  
+  width: 750px;
+
   &-header {
     flex-direction: row;
     align-items: center;
-    background-color: @brand-primary;
-    height: @list-title-height;
 
     &-teacher,&-student {
+      width: 750px;
+      height: @list-title-height;
+      line-height: @list-title-height;
+      background-color: @brand-primary;
       padding-left: @page-padding-spacing;
       color: @color-text-base-inverse;
     }
