@@ -6,17 +6,30 @@
       title="教学管理" 
       text-color="#FFFFFF"
       :background-color="navBarBgColor"
-      :left-btn = "[{is: 'text', text: '教职工', key: 'teacher'}]"
+      :left-btn = "[{is: 'text', text: '校老师', key: 'teacher'}]"
       :right-btn="[{is: 'text', text: '班级', key: 'classes'}]"
       @click="navbarClick" />
     <text class="banji-title">学前二班</text>
     <div class="banji-info">
-        <div><text>3人</text><text>老师</text></div>
-        <div><text>学生</text><text>23人</text></div>
+        <text class="banji-info-num">3人</text>
+        <text class="banji-info-teacher">老师</text>
+        <text class="banji-info-student">学生</text>
+        <text class="banji-info-num">23人</text>
     </div>
-    <list>
-      <header>
-        <text>班级老师</text>
+    <list class="banji-list">
+      <header class="banji-list-header">
+        <text class="banji-list-header-teacher">班级老师</text>
+      </header>
+      <bui-swipe-cell 
+        :items="btnAry"
+        :title="i.title" 
+        :ref="`swipe_${index}`" 
+        @swipeleft="swipeLeft"
+        v-for="(i, index) in items"
+        :key="index"
+        ></bui-swipe-cell>
+      <header class="banji-list-header">
+        <text class="banji-list-header-student">班级学生</text>
       </header>
       <bui-swipe-cell 
         :items="btnAry"
@@ -46,12 +59,47 @@
 
 .banji-title {
   font-size: @font-size-heading;
-  height: 45 * @hd;
-  line-height: 45 * @hd;
-  color: @color-text-base;
+  height: 90px;
+  line-height: 90px;
+  color: @brand-primary;
   text-align: center;
 }
 .banji-info {
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  &-num {
+    color: red;
+  }
+
+  &-teacher {
+    padding-left: @h-spacing-md;
+    padding-right: @h-spacing-sm;
+    border-right-width: @border-width-lg;
+    border-right-style: solid;
+    border-right-color: @border-color-base;
+  }
+
+  &-student {
+    padding-left: @h-spacing-sm;
+    padding-right: @h-spacing-md;
+
+  }
+}
+.banji-list {
+  
+  &-header {
+    flex-direction: row;
+    align-items: center;
+    background-color: @brand-primary;
+    height: @list-title-height;
+
+    &-teacher,&-student {
+      padding-left: @page-padding-spacing;
+      color: @color-text-base-inverse;
+    }
+  }
+  
 }
 </style>

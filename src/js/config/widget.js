@@ -33,13 +33,10 @@ import Router from '../../../node_modules/eros-widget/src/router.js'
 // 发送请求
 import Axios from '../../../node_modules/eros-widget/src/axios.js'
 
-import Vuex from 'vuex'
-
 let instance = null
 export default class Widget {
 	constructor ({ router, ajax }) {
 		if (!instance) {
-      Vue.use(Vuex)
 			Vue.use(new Axios(ajax))
 			Vue.use(new Router(router))
 			instance = this

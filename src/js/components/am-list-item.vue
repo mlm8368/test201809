@@ -1,5 +1,5 @@
 <template>
-  <cell class="am-list-item" :class="itemClass" @click="handleClick">
+  <div class="am-list-item" :class="itemClass" @click="handleClick">
     <slot name="thumb">
       <image
         v-if="thumb"
@@ -31,17 +31,33 @@
         site="xxs"
       ></am-icon>
     </div>
-  </cell>
+  </div>
 </template>
 
 <script>
-import itemMixin from './item-mixin'
 import AmIcon from './am-icon.vue'
 // const arrowUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABnUlEQVRYR82XTW7CMBCFZzRehFW5SYlKkbwq3ABOULgBPQm9QekJ4AbQDUioKHCTsCKLRFMZRJVWceKfRG2WiZ332TOeN0YoeaIoaidJtiCil14vPJSNdf2GuolK/HxOV4jYYYYYkUdSPq5dhXTztADb7eccAJ5/TsSJlA/qfW1P6Q4kSboEwKcmIbQAN9Gmd6ISQIEUQ8Bcyu7ENxZGAE1CGAM0BWEFUAKxDgIahWEY24bEGkAJbDb7KSLP8mLMfGi1xMAWwgnguhP7MQC/+UI4A5RBCCEmpqXbC0APAbEQNDCB8AbwhagFIAfxCgB3t7wwMbHaAJTobhd1sixTjvkNcYXRm1jtAGmarRChbWpgtQGoY8nMs1/iJwAelvURtQAU1QQAOBFRv+okeAP4iF+yw7Z258drxI9ENK5a+e0/zgA68SCgvo0fOAEUmREAHG3FnUJQ3B3xRxCIoc3KnUKgac3epeyOXXPJOARNiBuHoClxI4A/a8vzVzPTuu6SB//9anax1ntV16tMxWX1lTlwvZ6nSyIxNS2ttiBf02PsISPWB9wAAAAASUVORK5CYII='
 
 const makeClassList = (classList) => {
   Object.keys(classList).filter(classname => classList[classname])
-};
+}
+
+const itemMixin = {
+  computed: {
+    _isFirstChild () {
+      if ('_isFirstChild' in this.$parent) {
+        return this.$parent._isFirstChild
+      }
+      return this.$parent.$slots.default && this.$parent.$slots.default[0] === this.$vnode
+    },
+    _isLastChild () {
+      if ('_isLastChild' in this.$parent) {
+        return this.$parent._isLastChild
+      }
+      return this.$parent.$slots.default && this.$parent.$slots.default[this.$parent.$slots.default.length - 1] === this.$vnode
+    }
+  }
+}
 
 export default {
   name: 'am-list-item',

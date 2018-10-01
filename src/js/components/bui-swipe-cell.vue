@@ -114,7 +114,7 @@
 @import "../../css/variable.less";
 
 .bui-cell-swipe-menu{
-  lex-direction: row;
+  flex-direction: row;
   border-bottom-width: 1px;
   border-bottom-color: @border-color-base;
   border-bottom-style: solid;
@@ -145,12 +145,11 @@
   flex: 1;
   background-color: #ffffff;
   flex-direction: row;
-  justify-content: flex-start
+  align-items: center;
 }
 .bui-list-title {
-  font-size: $nb34;
+  font-size: @font-size-caption;
   color: @color-text-base;
   text-overflow: ellipsis;
-  lines: 1;
 }
 </style>

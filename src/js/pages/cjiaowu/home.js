@@ -2,6 +2,7 @@ import AmNavBar from '../../components/am-nav-bar.vue'
 import AmPopup from '../../components/am-popup.vue'
 import AmButton from '../../components/am-button.vue'
 import buiSwipeCell from '../../components/bui-swipe-cell.vue'
+import store from './home.store'
 import Home from './home.class'
 
 let home = null
