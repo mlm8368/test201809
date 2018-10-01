@@ -36,6 +36,10 @@ export default {
     },
     title: {
       type: String
+    },
+    noBorder: {
+      type: Boolean,
+      default: false
     }
   },
   provide () {

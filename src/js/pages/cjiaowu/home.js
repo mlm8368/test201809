@@ -30,7 +30,7 @@ export default {
             'bgcolor': '#fa3300'
         },
         {
-            'title': '标记',
+            'title': '编辑',
             'bgcolor': '#3399ff'
         }
     ],
@@ -64,9 +64,11 @@ export default {
         this.popupShow = true
       }
     },
-    swipeLeft() {
-      home.log('swipeLeft')
-      return false
+    listActionClick(index, menuIndex) {
+      home.log('listActionClick' + index + '-' + menuIndex)
+    },
+    listClick(index) {
+      home.log('listClick' + index)
     }
   }
 }

@@ -16,15 +16,6 @@
         <text class="banji-info-student">学生</text>
         <text class="banji-info-num">23人</text>
     </div>
-    <am-list
-          header="带描述"
-        >
-          <am-list-item
-            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
-            title="钱包"
-            brief="余额：100元"
-          ></am-list-item>
-        </am-list>
     <list class="banji-list">
       <header class="banji-list-header">
         <text class="banji-list-header-teacher">班级老师</text>
@@ -32,15 +23,16 @@
       <bui-swipe-cell 
         :items="btnAry"
         :title="i.title" 
-        :ref="`swipe_${index}`" 
         v-for="(i, index) in items"
         :key="index"
+        @actionClick="listActionClick(index,$event)"
         >
         <am-list-item
             slot="content"
-            thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
             title="钱包"
             brief="余额：100元"
+            arrow="empty"
+            @click="listClick(index)"
           ></am-list-item>
         </bui-swipe-cell>
       <header class="banji-list-header">
