@@ -5,14 +5,14 @@ import buiSwipeCell from '../../components/bui-swipe-cell.vue'
 import AmList from '../../components/am-list-card.vue'
 import AmListItem from '../../components/am-list-item.vue'
 // import { AmListItem } from 'weex-amui'
-import store from './home.store'
+import Store from './home.store'
 import Home from './home.class'
 
 let home = null
 
 export default {
   name: 'cjiaowuHome',
-  store,
+  store: new Store(this),
   components: { AmNavBar, AmPopup, AmButton, buiSwipeCell, AmList, AmListItem },
   data () {
     return {
@@ -20,38 +20,48 @@ export default {
       navBarBgColor: '#108ee9',
       popupShow: false,
       popupPosition: 'left',
-      btnAry: [
-        {
-          'title': '取消',
-          'bgcolor': '#c6c7c8'
-        },
-        {
-            'title': '删除',
-            'bgcolor': '#fa3300'
-        },
-        {
-            'title': '编辑',
-            'bgcolor': '#3399ff'
-        }
-    ],
-    items: [
-        {
-            'title': '行无止尽'
-        },
-        {
-            'title': '柠檬'
-        },
-        {
-            'title': '樊登读书会'
-        },
-        {
-            'title': '云应用平台'
-        }
-    ]
+      btnAry: [{ 'title': '取消', 'bgcolor': '#c6c7c8' },
+        { 'title': '编辑', 'bgcolor': '#3399ff' },
+        { 'title': '删除', 'bgcolor': '#fa3300' }],
+      classesId: 0,
+      classesName: '',
+      teacherLists: [],
+      studentLists: [],
+      teacherListsLoading: false,
+      studentListsLoading: false
     }
   },
   created () {
     home = new Home(this)
+  },
+  watch: {
+    classesId: function(classesId) {
+      if (!classesId) return
+
+      // classesName
+      this.getClasses(function(lists) {
+        for (const one of lists) {
+          if (one.id === classesId) {
+            this.classesName = one.classesname
+            break
+          }
+        }
+      })
+      // teacher
+      this.teacherListsLoading = true
+      this.getTeacherByClassesid(classesId, function(lists) {
+        this.teacherListsLoading = false
+        if (lists.length === 0) return
+        this.teacherLists = this.outTeacher(lists)
+      })
+      // student
+      this.studentListsLoading = true
+      this.getStudentByClassesid(classesId, function(lists) {
+        this.studentListsLoading = false
+        if (lists.length === 0 || !lists[0].id) return
+        this.studentLists = this.outStudent(lists)
+      })
+    }
   },
   methods: {
     navbarClick(key) {

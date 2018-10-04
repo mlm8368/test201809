@@ -22,18 +22,19 @@
       </header>
       <bui-swipe-cell 
         :items="btnAry"
-        :title="i.title" 
-        v-for="(i, index) in items"
+        v-for="(i, index) in teacherLists"
         :key="index"
         @actionClick="listActionClick(index,$event)"
         >
         <am-list-item
-            slot="content"
-            title="钱包"
-            brief="余额：100元"
-            arrow="empty"
-            @click="listClick(index)"
-          ></am-list-item>
+          slot="content"
+          :title="i.title" 
+          brief="余额：100元"
+          arrow="empty"
+          @click="listClick(index)"
+          >
+            <image slot="extra" src="bmlocal://assets/demo.jpg" class="banji-list-avatar"></image>
+          </am-list-item>
         </bui-swipe-cell>
       <header class="banji-list-header">
         <text class="banji-list-header-student">班级学生</text>
@@ -41,9 +42,8 @@
       <bui-swipe-cell 
         :items="btnAry"
         :title="i.title" 
-        :ref="`swipe_${index}`" 
         @swipeleft="swipeLeft"
-        v-for="(i, index) in items"
+        v-for="(i, index) in studentLists"
         :key="index"
         ></bui-swipe-cell>
     </list>
@@ -111,5 +111,13 @@
     }
   }
   
+  &-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: @border-color-base;
+  }
 }
 </style>
