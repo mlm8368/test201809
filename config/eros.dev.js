@@ -12,16 +12,16 @@ module.exports = {
     // user
     'js/pages/user/login.vue',
     // school
-    'js/pages/cxiaowu/home.vue',
-    'js/pages/cjiaowu/home.vue'
+    'js/pages/cxiaowu/app.vue',
+    'js/pages/cjiaowu/app.vue'
   ],
   'alias': {
-    'Components': 'js/components',
-    'Common': 'js/common',
-    'Config': 'js/config',
-    'Widget': 'js/widget',
-    'Pages': 'js/pages',
-    'Utils': 'js/utils'
+    '@Components': 'js/components',
+    '@Common': 'js/common',
+    '@Config': 'js/config',
+    '@Widget': 'js/widget',
+    '@Pages': 'js/pages',
+    '@Utils': 'js/utils'
   },
   'diff': {
     'pwd': '/Users/yangmingzhe/Work/opensource/eros-diff-folder',
