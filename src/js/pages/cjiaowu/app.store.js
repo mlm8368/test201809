@@ -18,7 +18,7 @@ export default new Vuex.Store({
       const classesid = school.getStorage(school.appStorageKey.current_jiaowu_classesid)
       if (classesid) state.classesid = classesid
 
-      school.log(state) // test
+      // school.log(state)
     },
     setClassesid (state, classesid) {
       state.classesid = classesid

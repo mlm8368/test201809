@@ -23,49 +23,62 @@ export default {
     }
   },
   computed: {
+    totalTeacher: function() {
+      return this.teacherLists.length
+    },
+    totalStudent: function() {
+      return this.studentLists.length
+    },
     ...mapState(['schoolid', 'classesid'])
   },
   created () {
     home.setVue(this)
+    if (this.classesid) {
+      home.getClassesName(this.classesid)
+      this.getTeacherLists(this.classesid)
+      this.getStudentLists(this.classesid)
+    }
   },
   mounted () {
     this.$nextTick(function () {
-      this.$store.commit('setClassesid', 1)
+      this.$store.commit('setClassesid', 3)
     })
   },
   watch: {
-    classesid: function(classesId) {
-      // home.log(classesId)
-      if (!classesId) return
+    classesid: function(classesid) {
+      if (!classesid) return
 
       // classesName
-      home.getClasses(function(lists) {
-        for (const one of lists) {
-          if (one.id === classesId) {
-            this.classesName = one.classesname
-            break
-          }
-        }
-      })
-      /*
+      home.getClassesName(classesid)
+
       // teacher
+      this.getTeacherLists(classesid)
+
+      // student
+      this.getStudentLists(classesid)
+    }
+  },
+  methods: {
+    getTeacherLists(classesid, op = null) {
+      if (op === 'refresh') home.cache.remove(home.appCacheKey.school_cjiaowu_teachers, this.classesid)
+
       this.teacherListsLoading = true
-      home.getTeacherByClassesid(classesId, function(lists) {
+      home.getTeacherByClassesid(classesid, (lists) => {
         this.teacherListsLoading = false
         if (lists.length === 0) return
         this.teacherLists = home.outTeacher(lists)
       })
-      // student
+    },
+    getStudentLists(classesid, op = null) {
+      if (op === 'refresh') home.cache.remove(home.appCacheKey.school_cjiaowu_students, this.classesid)
+
       this.studentListsLoading = true
-      home.getStudentByClassesid(classesId, function(lists) {
+      home.getStudentByClassesid(classesid, (lists) => {
         this.studentListsLoading = false
         if (lists.length === 0 || !lists[0].id) return
         this.studentLists = home.outStudent(lists)
       })
-      */
-    }
-  },
-  methods: {
+    },
     listActionClick(index, menuIndex) {
       home.log('listActionClick' + index + '-' + menuIndex)
     },

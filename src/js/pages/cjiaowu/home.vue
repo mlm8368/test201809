@@ -3,10 +3,10 @@
   <div>
     <text class="banji-title">{{classesName}}</text>
     <div class="banji-info">
-        <text class="banji-info-num">3人</text>
+        <text class="banji-info-num">{{totalTeacher}}人</text>
         <text class="banji-info-teacher">老师</text>
         <text class="banji-info-student">学生</text>
-        <text class="banji-info-num">23人</text>
+        <text class="banji-info-num">{{totalStudent}}人</text>
     </div>
     <list class="banji-list">
       <header class="banji-list-header">
@@ -16,16 +16,15 @@
         :items="btnAry"
         v-for="(i, index) in teacherLists"
         :key="index"
-        @actionClick="listActionClick(index,$event)"
-        >
+        @actionClick="listActionClick(index,$event)">
         <am-list-item
           slot="content"
-          :title="i.title" 
-          brief="余额：100元"
+          :title="i.truename" 
+          :brief="i.teacherpost"
           arrow="empty"
           @click="listClick(index)"
           >
-            <image slot="extra" src="bmlocal://assets/demo.jpg" class="banji-list-avatar"></image>
+            <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
           </am-list-item>
         </bui-swipe-cell>
       <header class="banji-list-header">
@@ -33,11 +32,19 @@
       </header>
       <bui-swipe-cell 
         :items="btnAry"
-        :title="i.title" 
-        @swipeleft="swipeLeft"
         v-for="(i, index) in studentLists"
         :key="index"
-        ></bui-swipe-cell>
+        @actionClick="listActionClick(index,$event)">
+          <am-list-item
+          slot="content"
+          :title="i.babyname" 
+          :brief="i.age"
+          arrow="empty"
+          @click="listClick(index)"
+          >
+            <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
+          </am-list-item>
+        </bui-swipe-cell>
     </list>
   </div>
 </template>

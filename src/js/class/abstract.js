@@ -109,7 +109,7 @@ export default class Abstract {
     return genderName[typeid][gender]
   }
   getAvatar(url) {
-    if (!url) url = '../../static/images/defaultAvatar.png'
+    if (!url) url = 'bmlocal://assets/defaultAvatar.png'
     return url
   }
   getAge(beginStr, endStr) {
@@ -167,6 +167,19 @@ export default class Abstract {
 
     return result;
     */
+  }
+  getFormatDate () {
+    const date = new Date()
+    const seperator1 = '-'
+    const month = date.getMonth() + 1
+    let month2 = ''
+    const strDate = date.getDate()
+    let strDate2 = ''
+    if (month >= 1 && month <= 9) month2 = '0' + month
+    else month2 = '' + month
+    if (strDate >= 0 && strDate <= 9) strDate2 = '0' + strDate
+    else strDate2 = '' + strDate
+    return date.getFullYear() + seperator1 + month2 + seperator1 + strDate2
   }
   checkMobile(mobile) {
     const mobileReg = /^1[0-9]{10}$/
