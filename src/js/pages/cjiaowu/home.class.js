@@ -1,8 +1,8 @@
 import School from '../../class/school.class'
 
 export default class Home extends School {
-  constructor(Vue) {
-    super(Vue)
+  constructor() {
+    super()
     return this
   }
 

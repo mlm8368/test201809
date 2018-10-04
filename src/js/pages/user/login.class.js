@@ -5,8 +5,8 @@ import { appName, footBarSchool } from './login.config'
 const tabbar = weex.requireModule('bmTabbar')
 
 export default class Login extends Abstract {
-  constructor(Vue) {
-    super(Vue)
+  constructor() {
+    super()
     return this
   }
 

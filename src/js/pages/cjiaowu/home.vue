@@ -1,7 +1,7 @@
 <script lang="js" src="./home.js"></script>
 <template>
   <div>
-    <text class="banji-title">学前二班</text>
+    <text class="banji-title">{{classesName}}</text>
     <div class="banji-info">
         <text class="banji-info-num">3人</text>
         <text class="banji-info-teacher">老师</text>

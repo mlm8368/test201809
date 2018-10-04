@@ -1,8 +1,8 @@
 import Abstract from './abstract'
 
 export default class School extends Abstract {
-  constructor(Vue) {
-    super(Vue)
+  constructor() {
+    super()
     return this
   }
 
@@ -32,17 +32,17 @@ export default class School extends Abstract {
   }
 
   cacheClasses (op, lists = null) {
-    const schoolid = this.getStorage(this.appStorageKey.userid)
+    const schoolid = this.Vue.schoolid
     const cacheParam = schoolid
     let classes = null
 
     if (op === 'get') {
-      classes = this._cache().get(this.appCacheKey.school_cjiaowu_classes)
+      classes = this.cache.get(this.appCacheKey.school_cjiaowu_classes)
       if (classes !== null && classes.param === cacheParam) return classes.value
       else return null
     } else if (op === 'set') {
       classes = { param: cacheParam, value: lists }
-      this._cache().set(this.appCacheKey.school_cjiaowu_classes, classes)
+      this.cache.set(this.appCacheKey.school_cjiaowu_classes, classes)
     }
   }
 }

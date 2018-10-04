@@ -1,9 +1,7 @@
+import store from './app.store'
 import AmNavBar from '../../components/am-nav-bar.vue'
 import AmPopup from '../../components/am-popup.vue'
 import Home from './home.vue'
-import store from './app.store'
-
-// import Abstract from '../../class/abstract'
 
 export default {
   name: 'cjiaowuApp',
@@ -18,9 +16,17 @@ export default {
     }
   },
   created () {
-    // const tt = new Abstract(this)
-    // const schoolid = tt.getStorage(tt.appStorageKey.userid)
     this.$store.commit('init', this)
-    // tt.log(this.$store.state)
+  },
+  methods: {
+    navbarClick(key) {
+      if (key === 'teacher') {
+        this.popupPosition = 'left'
+        this.popupShow = true
+      } else if (key === 'classes') {
+        this.popupPosition = 'right'
+        this.popupShow = true
+      }
+    }
   }
 }

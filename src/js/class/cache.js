@@ -1,8 +1,12 @@
 export default class Cache {
+  Vue = null
   preKey = 'appCacheKey'
 
   constructor () {
     return this
+  }
+  setVue(Vue) {
+    this.Vue = Vue
   }
   /**
    * getItem
@@ -10,7 +14,7 @@ export default class Cache {
   get (key, key2 = '') {
     if (key) return null // test
     if (key2) key2 = '-' + key2
-    const value = Vue.$storage.getSync(this.preKey + key + key2)
+    const value = this.Vue.$storage.getSync(this.preKey + key + key2)
     if (value === null) return null
     else if (value.expires > 0 && value.expires < new Date().getTime()) return null
     else return value
@@ -24,7 +28,7 @@ export default class Cache {
     if (expires > 0) expires = new Date().getTime() + expires * 1000
     value['expires'] = expires
 
-    Vue.$storage.setSync(this.preKey + key + key2, value)
+    this.Vue.$storage.setSync(this.preKey + key + key2, value)
   }
 
   /**
@@ -32,25 +36,25 @@ export default class Cache {
    */
   remove (key, key2 = '') {
     if (key2) key2 = '-' + key2
-    Vue.$storage.deleteSync(this.preKey + key + key2)
+    this.Vue.$storage.deleteSync(this.preKey + key + key2)
   }
 
   /**
    * clear
    */
   clearAll () {
-    Vue.$storage.removeAllSync()
+    this.Vue.$storage.removeAllSync()
   }
 
   setCacheKeys (key, expires) {
     const cacheKey = 'collectAllCacheKeys'
     if (expires > 0) expires = new Date().getTime() + expires * 1000
 
-    let allKeys = Vue.$storage.getSync(cacheKey)
+    let allKeys = this.Vue.$storage.getSync(cacheKey)
     if (allKeys === null) allKeys = {}
     else allKeys = JSON.parse(allKeys)
 
     allKeys[this.preKey + key] = expires
-    Vue.$storage.setSync(cacheKey, JSON.stringify(allKeys))
+    this.Vue.$storage.setSync(cacheKey, JSON.stringify(allKeys))
   }
 }

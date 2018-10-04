@@ -1,12 +1,18 @@
-import { appStorageKey } from './enum'
+import { appStorageKey, appCacheKey } from './enum'
+import Cache from './cache'
 
 export default class Abstract {
   Vue = null
 
-  constructor (Vue) {
-    this.Vue = Vue
+  constructor () {
     this.appStorageKey = appStorageKey
+    this.appCacheKey = appCacheKey
+    this.cache = new Cache()
     return this
+  }
+  setVue(Vue) {
+    this.Vue = Vue
+    this.cache.setVue(Vue)
   }
   log(str) {
     const myarraylist = str;

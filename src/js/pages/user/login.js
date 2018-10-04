@@ -1,7 +1,7 @@
 import { WxcLoading } from 'weex-ui';
 import Login from './login.class'
 
-let login = null
+const login = new Login()
 
 export default {
   name: 'userLogin',
@@ -15,7 +15,7 @@ export default {
     }
   },
   created () {
-    login = new Login(this)
+    login.setVue(this)
   },
   methods: {
     submit() {
