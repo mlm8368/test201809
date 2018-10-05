@@ -14,6 +14,7 @@ export default {
   components: { AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading },
   data () {
     return {
+      dialog: { width: '500px', height: '800px', title: '窗口' },
       btnAry: [{ 'title': '取消', 'bgcolor': '#c6c7c8' },
         { 'title': '编辑', 'bgcolor': '#3399ff' },
         { 'title': '删除', 'bgcolor': '#fa3300' }],
@@ -44,6 +45,8 @@ export default {
   mounted () {
     this.$nextTick(function () {
       this.$store.commit('setClassesid', 3)
+      // const bmmaskDom = this.$refs.bmmask
+      // bmmaskDom.show()
     })
   },
   watch: {
@@ -56,6 +59,14 @@ export default {
     }
   },
   methods: {
+    openDialog() {
+      const bmmaskDom = this.$refs.bmmask
+      bmmaskDom.show()
+    },
+    closeDialog() {
+      const bmmaskDom = this.$refs.bmmask
+      bmmaskDom.hide()
+    },
     getTeacherLists(op = null) {
       if (op === 'refresh') home.cache.remove(home.appCacheKey.school_cjiaowu_teachers, this.classesid)
 

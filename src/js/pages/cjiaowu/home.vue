@@ -12,7 +12,7 @@
       <header class="banji-list-header">
         <text class="banji-list-header-teacher">班级老师</text>
         <am-icon @click="getTeacherLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
-        <am-icon class="banji-list-header-plus" type="plus" size="sm" />
+        <am-icon @click="openDialog" class="banji-list-header-plus" type="plus" size="sm" />
       </header>
       <cell v-if="teacherListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 
@@ -52,6 +52,21 @@
           </am-list-item>
         </bui-swipe-cell>
     </list>
+    <bmmask class="bmmask" animation="scale" position="center" duration="300" disableMaskEvent="true" ref="bmmask">
+      <bmpop :style="{'width': dialog.width, 'height': dialog.height}" class="bmpop">
+        <div class="dialog-header">
+          <text class="dialog-header-title">{{dialog.title}}</text>
+          <am-icon
+            @click="closeDialog"
+            class="dialog-header-close"
+            type="close"
+            size="sm" />
+        </div>
+        <div class="dialog-body">
+          
+        </div>
+      </bmpop>
+    </bmmask>
   </div>
 </template>
 <style lang='less' scoped>
@@ -139,6 +154,42 @@
     border-width: 1px;
     border-style: solid;
     border-color: @border-color-base;
+  }
+}
+
+.bmmask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+}
+.bmpop {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: @fill-base;
+}
+.dialog-header {
+  background-color: @brand-primary;
+  flex-direction: row;
+  align-content: center;
+  padding-left: @page-padding-spacing;
+
+  &-title,&-close {
+    color: @color-text-base-inverse;
+    height: @list-title-height;
+    line-height: @list-title-height;
+  }
+  &-close {
+    position: absolute;
+    right: @page-padding-spacing;
+  }
+  &-close:active {
+    background-color: @fill-tap;
   }
 }
 </style>

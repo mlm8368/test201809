@@ -12,11 +12,18 @@ export default {
       statusBarHeight: weex.config.eros.statusBarHeight,
       navBarBgColor: '#108ee9',
       popupShow: false,
-      popupPosition: 'left'
+      popupPosition: 'left',
+      homeTop: '150px'
     }
   },
   created () {
     this.$store.commit('init', this)
+  },
+  mounted () {
+    const dom = weex.requireModule('dom')
+    dom.getComponentRect(this.$refs.amnavbar, option => {
+      this.homeTop = option.size.bottom
+    })
   },
   methods: {
     navbarClick(key) {
