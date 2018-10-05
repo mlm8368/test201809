@@ -14,7 +14,7 @@ export default {
   components: { AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading },
   data () {
     return {
-      dialog: { width: '500px', height: '800px', title: '窗口' },
+      dialog: { width: '500px', height: '800px', title: '窗口', type: 'teacher', op: 'add', index: 0 },
       btnAry: [{ 'title': '取消', 'bgcolor': '#c6c7c8' },
         { 'title': '编辑', 'bgcolor': '#3399ff' },
         { 'title': '删除', 'bgcolor': '#fa3300' }],
@@ -45,8 +45,6 @@ export default {
   mounted () {
     this.$nextTick(function () {
       this.$store.commit('setClassesid', 3)
-      // const bmmaskDom = this.$refs.bmmask
-      // bmmaskDom.show()
     })
   },
   watch: {
@@ -59,7 +57,7 @@ export default {
     }
   },
   methods: {
-    openDialog() {
+    openDialog(type = 'teacher', op = 'add', index = 0) {
       const bmmaskDom = this.$refs.bmmask
       bmmaskDom.show()
     },
@@ -92,7 +90,7 @@ export default {
       switch (type) {
         case 'teacher':
           if (menuIndex === 1) {
-            home.editTeacher(index)
+            this.openDialog(type, 'edit', index)
           } else if (menuIndex === 2) {
             this.$notice.confirm({
               message: '确认要删除吗？',
@@ -105,7 +103,7 @@ export default {
 
         case 'student':
           if (menuIndex === 1) {
-            home.editStudent(index)
+            this.openDialog(type, 'edit', index)
           } else if (menuIndex === 2) {
             this.$notice.confirm({
               message: '确认要删除吗？',
@@ -117,8 +115,9 @@ export default {
           break;
       }
     },
-    listClick(index) {
-      home.log('listClick' + index)
+    listClick(type = 'teacher', index) {
+      // home.log('listClick' + index)
+      this.openDialog(type, 'view', index)
     }
   }
 }

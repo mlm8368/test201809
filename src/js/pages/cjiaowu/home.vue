@@ -12,7 +12,7 @@
       <header class="banji-list-header">
         <text class="banji-list-header-teacher">班级老师</text>
         <am-icon @click="getTeacherLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
-        <am-icon @click="openDialog" class="banji-list-header-plus" type="plus" size="sm" />
+        <am-icon @click="openDialog('teacher')" class="banji-list-header-plus" type="plus" size="sm" />
       </header>
       <cell v-if="teacherListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 
@@ -25,7 +25,7 @@
           :title="i.truename" 
           :brief="i.teacherpost"
           arrow="empty"
-          @click="listClick(index)"
+          @click="listClick('teacher', index)"
           >
             <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
           </am-list-item>
@@ -33,7 +33,7 @@
       <header class="banji-list-header">
         <text class="banji-list-header-student">班级学生</text>
         <am-icon @click="getStudentLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
-        <am-icon class="banji-list-header-plus" type="plus" size="sm" />
+        <am-icon @click="openDialog('student')" class="banji-list-header-plus" type="plus" size="sm" />
       </header>
       <cell v-if="studentListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 
@@ -46,7 +46,7 @@
           :title="i.babyname" 
           :brief="i.age"
           arrow="empty"
-          @click="listClick(index)"
+          @click="listClick('student', index)"
           >
             <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
           </am-list-item>
@@ -191,5 +191,10 @@
   &-close:active {
     background-color: @fill-tap;
   }
+}
+.dialog-body {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 </style>
