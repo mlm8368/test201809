@@ -11,7 +11,7 @@
     <list class="banji-list">
       <header class="banji-list-header">
         <text class="banji-list-header-teacher">班级老师</text>
-        <am-icon class="banji-list-header-reload" type="reload" size="sm" />
+        <am-icon @click="getTeacherLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
         <am-icon class="banji-list-header-plus" type="plus" size="sm" />
       </header>
       <cell v-if="teacherListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
@@ -19,7 +19,7 @@
         :items="btnAry"
         v-for="(i, index) in teacherLists"
         :key="index"
-        @actionClick="listActionClick(index,$event)">
+        @actionClick="listActionClick(index, 'teacher', $event)">
         <am-list-item
           slot="content"
           :title="i.truename" 
@@ -32,14 +32,15 @@
         </bui-swipe-cell>
       <header class="banji-list-header">
         <text class="banji-list-header-student">班级学生</text>
-        <am-icon class="banji-list-header-reload" type="reload" size="sm" />
+        <am-icon @click="getStudentLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
         <am-icon class="banji-list-header-plus" type="plus" size="sm" />
       </header>
+      <cell v-if="studentListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 
         :items="btnAry"
         v-for="(i, index) in studentLists"
         :key="index"
-        @actionClick="listActionClick(index,$event)">
+        @actionClick="listActionClick(index, 'student', $event)">
           <am-list-item
           slot="content"
           :title="i.babyname" 

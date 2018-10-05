@@ -1,5 +1,6 @@
 <template>
   <text
+    @click="_click"
     v-if="type"
     class="am-icon"
     :class="iconClass"
@@ -66,6 +67,11 @@ export default {
       //'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
       'src': "url('https://at.alicdn.com/t/font_849649_tq6kkbss0q.ttf')"
     })
+  },
+  methods: {
+    _click() {
+      this.$emit("click")
+    }
   }
 }
 </script>

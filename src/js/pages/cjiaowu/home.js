@@ -36,9 +36,9 @@ export default {
   created () {
     home.setVue(this)
     if (this.classesid) {
-      home.getClassesName(this.classesid)
-      this.getTeacherLists(this.classesid)
-      this.getStudentLists(this.classesid)
+      home.getClassesName()
+      this.getTeacherLists()
+      this.getStudentLists()
     }
   },
   mounted () {
@@ -50,39 +50,61 @@ export default {
     classesid: function(classesid) {
       if (!classesid) return
 
-      // classesName
-      home.getClassesName(classesid)
-
-      // teacher
-      this.getTeacherLists(classesid)
-
-      // student
-      this.getStudentLists(classesid)
+      home.getClassesName()
+      this.getTeacherLists()
+      this.getStudentLists()
     }
   },
   methods: {
-    getTeacherLists(classesid, op = null) {
+    getTeacherLists(op = null) {
       if (op === 'refresh') home.cache.remove(home.appCacheKey.school_cjiaowu_teachers, this.classesid)
 
       this.teacherListsLoading = true
-      home.getTeacherByClassesid(classesid, (lists) => {
+      home.getTeacherByClassesid(this.classesid, (lists) => {
         this.teacherListsLoading = false
         if (lists.length === 0) return
         this.teacherLists = home.outTeacher(lists)
       })
     },
-    getStudentLists(classesid, op = null) {
+    getStudentLists(op = null) {
       if (op === 'refresh') home.cache.remove(home.appCacheKey.school_cjiaowu_students, this.classesid)
 
       this.studentListsLoading = true
-      home.getStudentByClassesid(classesid, (lists) => {
+      home.getStudentByClassesid(this.classesid, (lists) => {
         this.studentListsLoading = false
         if (lists.length === 0 || !lists[0].id) return
         this.studentLists = home.outStudent(lists)
       })
     },
-    listActionClick(index, menuIndex) {
-      home.log('listActionClick' + index + '-' + menuIndex)
+    listActionClick(index, type, menuIndex) {
+      // home.log(`listActionClick - ${index} - ${type} - ${menuIndex}`)
+      switch (type) {
+        case 'teacher':
+          if (menuIndex === 1) {
+            home.editTeacher(index)
+          } else if (menuIndex === 2) {
+            this.$notice.confirm({
+              message: '确认要删除吗？',
+              okCallback() {
+                home.delTeacher(index)
+              }
+            })
+          }
+          break;
+
+        case 'student':
+          if (menuIndex === 1) {
+            home.editStudent(index)
+          } else if (menuIndex === 2) {
+            this.$notice.confirm({
+              message: '确认要删除吗？',
+              okCallback() {
+                home.delStudent(index)
+              }
+            })
+          }
+          break;
+      }
     },
     listClick(index) {
       home.log('listClick' + index)

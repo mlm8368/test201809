@@ -47,10 +47,10 @@ export default class Home extends School {
     }
   }
 
-  getClassesName(classesid) {
+  getClassesName() {
     this.getClasses((lists) => {
       for (const one of lists) {
-        if (one.id === classesid) {
+        if (one.id === this.Vue.classesid) {
           this.Vue.classesName = one.classesname
           break
         }
@@ -114,6 +114,26 @@ export default class Home extends School {
     })
     return teacherLists
   }
+
+  delTeacher (index) {
+    const tid = this.Vue.teacherLists[index].id
+
+    this.Vue.$notice.loading.show('正在删除...')
+    this.Vue.$fetch({
+      method: 'GET',
+      name: 'modules.classes',
+      params: { query: '&action=teacher&op=del' },
+      header: this.ajaxHeader(),
+      data: { id: tid }
+    }).then(ret => {
+      if (ret.status === 1) {
+        this.Vue.$notice.loading.hide()
+        this.Vue.$notice.toast({ message: '删除成功' })
+        this.Vue.getTeacherLists('refresh')
+      }
+    }, error => {
+    })
+  }
   /**
    * getStudentByClassesid
    *
@@ -171,5 +191,25 @@ export default class Home extends School {
       studentLists.push(tmp)
     })
     return studentLists
+  }
+
+  delStudent (index) {
+    const sid = this.Vue.studentLists[index].id
+
+    this.Vue.$notice.loading.show('正在删除...')
+    this.Vue.$fetch({
+      method: 'GET',
+      name: 'modules.classes',
+      params: { query: '&action=student&op=del' },
+      header: this.ajaxHeader(),
+      data: { id: sid }
+    }).then(ret => {
+      if (ret.status === 1) {
+        this.Vue.$notice.loading.hide()
+        this.Vue.$notice.toast({ message: '删除成功' })
+        this.Vue.getStudentLists('refresh')
+      }
+    }, error => {
+    })
   }
 }
