@@ -32,32 +32,11 @@ export default {
   data () {
     return {
       Icon: {
-        /*
-        'search': '\ueea3',
-        'reload': '\uee47',
-        'arrow-down': '\uee4a',
-        'arrow-up': '\uee4b',
-        'arrow-right': '\uee4c',
-        'arrow-left': '\uee4d',
-        'down': '\uee4e',
-        'up': '\uee4f',
-        'right': '\uee50',
-        'left': '\uee51',
-        'warning-circle': '\uee5d',
-        'warning-circle-o': '\uee5e',
-        'close-circle': '\uee5f',
-        'close-circle-o': '\uee60',
-        'check-circle': '\uee61',
-        'check-circle-o': '\uee62',
-        'check': '\uee63',
-        'clock-circle': '\uee71',
-        'clock-circle-o': '\uee72',
-        'ellipsis': '\ueee4',
-        'loading': '\ueee3'
-        */
         'profile': '\ue7dd',
         'home': '\ue6b8',
-        'right': '\ue7eb'
+        'right': '\ue7eb',
+        'reload': '\ue788',
+        'plus': '\ue7fe'
       }
     }
   },
@@ -85,7 +64,7 @@ export default {
     dom.addRule('fontFace', {
       'fontFamily': 'SchoolIconFont',
       //'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
-      'src': "url('https://at.alicdn.com/t/font_849649_gbye5rhcl2t.ttf')"
+      'src': "url('https://at.alicdn.com/t/font_849649_tq6kkbss0q.ttf')"
     })
   }
 }

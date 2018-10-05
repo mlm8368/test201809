@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <image :src="PART"
-           v-if="show"
-           :style="loadingStyle"
-           resize="contain"
-           quality="original"></image>
-  </div>
+  <image :src="PART"
+    v-if="show"
+    :style="loadingStyle"
+    resize="contain"
+    quality="original"></image>
 </template>
 
 <script>
-  import { PART } from '../wxc-loading/type';
   export default {
     props: {
       show: {
@@ -26,7 +23,7 @@
       }
     },
     data: () => ({
-      PART
+      PART: 'bmlocal://assets/loading.gif'
     }),
     computed: {
       loadingStyle () {

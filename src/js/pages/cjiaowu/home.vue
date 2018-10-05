@@ -11,7 +11,10 @@
     <list class="banji-list">
       <header class="banji-list-header">
         <text class="banji-list-header-teacher">班级老师</text>
+        <am-icon class="banji-list-header-reload" type="reload" size="sm" />
+        <am-icon class="banji-list-header-plus" type="plus" size="sm" />
       </header>
+      <cell v-if="teacherListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 
         :items="btnAry"
         v-for="(i, index) in teacherLists"
@@ -29,6 +32,8 @@
         </bui-swipe-cell>
       <header class="banji-list-header">
         <text class="banji-list-header-student">班级学生</text>
+        <am-icon class="banji-list-header-reload" type="reload" size="sm" />
+        <am-icon class="banji-list-header-plus" type="plus" size="sm" />
       </header>
       <bui-swipe-cell 
         :items="btnAry"
@@ -87,15 +92,43 @@
   &-header {
     flex-direction: row;
     align-items: center;
+    background-color: @brand-primary;
 
     &-teacher,&-student {
-      width: 750px;
+      // width: 750px;
       height: @list-title-height;
       line-height: @list-title-height;
-      background-color: @brand-primary;
       padding-left: @page-padding-spacing;
       color: @color-text-base-inverse;
     }
+    &-reload {
+      color: @color-text-base-inverse;
+      width: 70px;
+      height: @list-title-height;
+      line-height: @list-title-height;
+      text-align: center;
+    }
+    &-reload:active {
+      background-color: @fill-tap;
+    }
+    &-plus {
+      color: @color-text-base-inverse;
+      position: absolute;
+      right: @page-padding-spacing;
+      width: 70px;
+      height: @list-title-height;
+      line-height: @list-title-height;
+      text-align: center;
+    }
+    &-plus:active {
+      background-color: @fill-tap;
+    }
+  }
+
+  &-loading {
+    flex-direction: row;
+    justify-content: center;
+    background-color: @fill-base;
   }
   
   &-avatar {

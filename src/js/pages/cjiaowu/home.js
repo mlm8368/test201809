@@ -1,15 +1,17 @@
 import { mapState } from 'vuex'
+import AmIcon from '../../components/am-icon'
 import AmButton from '../../components/am-button.vue'
-import buiSwipeCell from '../../components/bui-swipe-cell.vue'
+import BuiSwipeCell from '../../components/bui-swipe-cell.vue'
 import AmList from '../../components/am-list-card.vue'
 import AmListItem from '../../components/am-list-item.vue'
+import WxcPartLoading from '../../components/wxc-part-loading'
 import Home from './home.class'
 
 const home = new Home()
 
 export default {
   name: 'cjiaowuHome',
-  components: { AmButton, buiSwipeCell, AmList, AmListItem },
+  components: { AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading },
   data () {
     return {
       btnAry: [{ 'title': '取消', 'bgcolor': '#c6c7c8' },
