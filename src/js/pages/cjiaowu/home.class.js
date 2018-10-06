@@ -193,18 +193,6 @@ export default class Home extends School {
     return studentLists
   }
 
-  addStudent () {
-
-  }
-
-  editStudent () {
-
-  }
-
-  viewStudent () {
-
-  }
-
   delStudent (index) {
     const sid = this.Vue.studentLists[index].id
 

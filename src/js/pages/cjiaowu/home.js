@@ -75,26 +75,20 @@ export default {
         case 'teacher':
           if (op === 'add') {
             dialog.title = '添加老师'
-            home.addTeacher()
           } else if (op === 'edit') {
             dialog.title = '编辑老师'
-            home.editTeacher()
           } else if (op === 'view') {
             dialog.title = '查看老师'
-            home.viewTeacher()
           }
           break;
 
         case 'student':
           if (op === 'add') {
             dialog.title = '添加学生'
-            home.addStudent()
           } else if (op === 'edit') {
             dialog.title = '编辑学生'
-            home.editStudent()
           } else if (op === 'view') {
             dialog.title = '查看学生'
-            home.viewStudent()
           }
           break;
       }
