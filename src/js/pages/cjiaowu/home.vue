@@ -63,7 +63,9 @@
             size="sm" />
         </div>
         <div class="dialog-body">
-          
+          <keep-alive>
+            <component :is="currentDialogComponent"></component>
+          </keep-alive>
         </div>
       </bmpop>
     </bmmask>
@@ -186,7 +188,9 @@
   }
   &-close {
     position: absolute;
-    right: @page-padding-spacing;
+    right: 0;
+    width: 70px;
+    text-align: center;
   }
   &-close:active {
     background-color: @fill-tap;

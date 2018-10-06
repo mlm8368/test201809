@@ -1,20 +1,24 @@
 import { mapState } from 'vuex'
-import AmIcon from '../../components/am-icon'
+import AmIcon from '../../components/am-icon.vue'
 import AmButton from '../../components/am-button.vue'
 import BuiSwipeCell from '../../components/bui-swipe-cell.vue'
 import AmList from '../../components/am-list-card.vue'
 import AmListItem from '../../components/am-list-item.vue'
-import WxcPartLoading from '../../components/wxc-part-loading'
+import WxcPartLoading from '../../components/wxc-part-loading.vue'
+import TeacherAdd from './teacher-add.vue'
 import Home from './home.class'
 
 const home = new Home()
 
 export default {
   name: 'cjiaowuHome',
-  components: { AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading },
+  components: {
+    AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading,
+    'dialog-teacher-add': function (resolve) { resolve(TeacherAdd) }
+  },
   data () {
     return {
-      dialog: { width: '500px', height: '800px', title: '窗口', type: 'teacher', op: 'add', index: 0 },
+      dialog: { width: '700px', height: '800px', title: '窗口', type: 'teacher', op: 'add', index: 0 },
       btnAry: [{ 'title': '取消', 'bgcolor': '#c6c7c8' },
         { 'title': '编辑', 'bgcolor': '#3399ff' },
         { 'title': '删除', 'bgcolor': '#fa3300' }],
@@ -31,6 +35,9 @@ export default {
     },
     totalStudent: function() {
       return this.studentLists.length
+    },
+    currentDialogComponent: function () {
+      return `dialog-${this.dialog.type}-${this.dialog.op}`
     },
     ...mapState(['schoolid', 'classesid'])
   },
@@ -58,6 +65,36 @@ export default {
   },
   methods: {
     openDialog(type = 'teacher', op = 'add', index = 0) {
+      const dialog = { width: '700px', height: '800px', title: '窗口', type: type, op: op, index: index }
+      switch (type) {
+        case 'teacher':
+          if (op === 'add') {
+            dialog.title = '添加老师'
+            home.addTeacher()
+          } else if (op === 'edit') {
+            dialog.title = '编辑老师'
+            home.editTeacher()
+          } else if (op === 'view') {
+            dialog.title = '查看老师'
+            home.viewTeacher()
+          }
+          break;
+
+        case 'student':
+          if (op === 'add') {
+            dialog.title = '添加学生'
+            home.addStudent()
+          } else if (op === 'edit') {
+            dialog.title = '编辑学生'
+            home.editStudent()
+          } else if (op === 'view') {
+            dialog.title = '查看学生'
+            home.viewStudent()
+          }
+          break;
+      }
+
+      this.dialog = dialog
       const bmmaskDom = this.$refs.bmmask
       bmmaskDom.show()
     },
