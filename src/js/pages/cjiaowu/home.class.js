@@ -115,18 +115,6 @@ export default class Home extends School {
     return teacherLists
   }
 
-  addTeacher () {
-    // this.log('addTeacher')
-  }
-
-  editTeacher () {
-    
-  }
-
-  viewTeacher () {
-
-  }
-
   delTeacher (index) {
     const tid = this.Vue.teacherLists[index].id
 
@@ -206,11 +194,11 @@ export default class Home extends School {
   }
 
   addStudent () {
-    
+
   }
 
   editStudent () {
-    
+
   }
 
   viewStudent () {

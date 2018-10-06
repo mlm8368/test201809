@@ -7,7 +7,7 @@
       title="教学管理" 
       text-color="#FFFFFF"
       :background-color="navBarBgColor"
-      :left-btn = "[{is: 'text', text: '校老师', key: 'teacher'}]"
+      :left-btn = "[{is: 'text', text: '本校老师', key: 'teacher'}]"
       :right-btn="[{is: 'text', text: '班级', key: 'classes'}]"
       @click="navbarClick" />
     <home class="warp" :style="{'top': homeTop}"></home>

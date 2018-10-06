@@ -6,6 +6,8 @@ import AmList from '../../components/am-list-card.vue'
 import AmListItem from '../../components/am-list-item.vue'
 import WxcPartLoading from '../../components/wxc-part-loading.vue'
 import TeacherAdd from './teacher-add.vue'
+import TeacherEdit from './teacher-edit.vue'
+import TeacherView from './teacher-view.vue'
 import Home from './home.class'
 
 const home = new Home()
@@ -14,7 +16,9 @@ export default {
   name: 'cjiaowuHome',
   components: {
     AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading,
-    'dialog-teacher-add': function (resolve) { resolve(TeacherAdd) }
+    'dialog-teacher-add': function (resolve) { resolve(TeacherAdd) },
+    'dialog-teacher-edit': function (resolve) { resolve(TeacherEdit) },
+    'dialog-teacher-view': function (resolve) { resolve(TeacherView) }
   },
   data () {
     return {
@@ -52,6 +56,7 @@ export default {
   mounted () {
     this.$nextTick(function () {
       this.$store.commit('setClassesid', 3)
+      this.openDialog('teacher', 'add') // test
     })
   },
   watch: {
