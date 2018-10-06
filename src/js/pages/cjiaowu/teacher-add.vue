@@ -6,16 +6,17 @@
       :barStyle="{width: 700}"
       @wxcSearchbarInputReturned="wxcSearchbarInputReturned"></wxc-searchbar>
     <text v-if="searchMsg" class="searchMsg">{{searchMsg}}</text>
-    <template v-if="searchTeachers.length > 0">
-      <am-list-radio
-        class="searchTeacher"
-        v-for="(one,index) in searchTeachers"
-        :key="index"
-        :thumb="one.avatar"
-        :title="one.truename"
-        :checked="searchTeacherIndex === index"
-        @change="searchTeacherIndex = index"></am-list-radio>
-    </template>
+    <scroller class="teacherInfo">
+      <div v-for="(one,index) in searchTeachers" :key="index">
+        <am-list-radio
+          class="teacherInfo-radio"
+          :thumb="one.avatar"
+          :title="one.truename"
+          :checked="searchTeacherIndex === index"
+          @change="searchTeacherIndex = index"></am-list-radio>
+      </div>
+      <text class="teacherInfo-title">老师信息</text>
+    </scroller>
   </div>
 </template>
 
@@ -26,9 +27,24 @@
   padding-left: @page-padding-spacing;
 }
 
-.searchTeacher {
-  margin-left: @page-padding-spacing;
-  margin-right: @page-padding-spacing;
+.teacherInfo {
+  width: 700px;
+  height: 400px;
+
+  &-radio {
+    margin-left: @page-padding-spacing;
+    margin-right: @page-padding-spacing;
+  }
+
+  &-title {
+    width: 660px;
+    height: @list-title-height;
+    line-height: @list-title-height;
+    color: @color-text-base-inverse;
+    background-color: @brand-primary;
+    margin-left: @page-padding-spacing;
+    padding-left: @page-padding-spacing;
+  }
 }
 </style>
 
