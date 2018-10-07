@@ -24,7 +24,7 @@
         v-if="showArrow"
         class="am-list-arrow"
         :type="arrow"
-        site="xxs"
+        size="xxs"
       ></am-icon>
     </div>
   </div>

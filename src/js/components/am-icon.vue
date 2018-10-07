@@ -38,7 +38,9 @@ export default {
         'right': '\ue7eb',
         'reload': '\ue788',
         'plus': '\ue7fe',
-        'close': '\ue7fc'
+        'close': '\ue7fc',
+        'close-circle': '\ue77d',
+        'search': '\ue7e3'
       }
     }
   },
@@ -66,7 +68,7 @@ export default {
     dom.addRule('fontFace', {
       'fontFamily': 'SchoolIconFont',
       //'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
-      'src': "url('https://at.alicdn.com/t/font_849649_c4tps1pxs0j.ttf')"
+      'src': "url('https://at.alicdn.com/t/font_849649_swtpeiwlpys.ttf')"
     })
   },
   methods: {

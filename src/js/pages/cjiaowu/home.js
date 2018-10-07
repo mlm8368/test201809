@@ -56,7 +56,7 @@ export default {
   mounted () {
     this.$nextTick(function () {
       this.$store.commit('setClassesid', 3)
-      this.openDialog('teacher', 'add') // test
+      // this.openDialog('teacher', 'add') // test
     })
   },
   watch: {

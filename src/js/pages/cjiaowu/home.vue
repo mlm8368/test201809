@@ -46,8 +46,7 @@
           :title="i.babyname" 
           :brief="i.age"
           arrow="empty"
-          @click="listClick('student', index)"
-          >
+          @click="listClick('student', index)">
             <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
           </am-list-item>
         </bui-swipe-cell>
@@ -63,9 +62,7 @@
             size="sm" />
         </div>
         <div class="dialog-body">
-          <keep-alive>
-            <component :is="currentDialogComponent"></component>
-          </keep-alive>
+          <component :is="currentDialogComponent"></component>
         </div>
       </bmpop>
     </bmmask>
