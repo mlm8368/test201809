@@ -7,9 +7,11 @@
       @wxcSearchbarInputReturned="wxcSearchbarInputReturned"></wxc-searchbar>
     <text v-if="searchMsg" class="searchMsg">{{searchMsg}}</text>
     <scroller class="teacherInfo">
-      <div v-for="(one,index) in searchTeachers" :key="index">
+      <div>
         <am-list-radio
           class="teacherInfo-radio"
+          v-for="(one,index) in searchTeachers"
+          :key="index"
           :thumb="one.avatar"
           :title="one.truename"
           :checked="searchTeacherIndex === index"
@@ -30,6 +32,8 @@
 .teacherInfo {
   width: 700px;
   height: 400px;
+  flex-direction: column;
+  align-items: flex-start;
 
   &-radio {
     margin-left: @page-padding-spacing;

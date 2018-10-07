@@ -107,11 +107,10 @@ export default {
 @import "../../css/variable.less";
 
 .am-radio {
-  margin-right: 8 * @hd;
+  position: absolute;
+  right: 8 * @hd;
   transform: rotate(45deg);
   &-inner {
-    // width: 7 * @hd;
-    // height: 14 * @hd;
     width: 8 * @hd;
     height: 16 * @hd;
     border-style: solid;
