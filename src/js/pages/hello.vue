@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
-		<text class="title">Hello Eros</text>		
-		<text class="desc">一套 Vue 代码，两端原生应用。</text>		
-	</div>
+		<text class="title">Hello Eros</text>
+		<text class="desc">一套 Vue 代码，两端原生应用。</text>
+   </div>
 </template>
 <script>
 	export default {
