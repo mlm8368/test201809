@@ -1,28 +1,36 @@
 import Vuex from 'vuex'
-import School from '../../class/school.class'
+import App from './app.class'
 
 Vue.use(Vuex)
 
-const school = new School()
+const app = new App()
 
 export default new Vuex.Store({
   state: {
     schoolid: 0,
-    classesid: 0
+    classesid: 0,
+    teacherLists: [],
+    studentLists: []
   },
   mutations: {
     init (state, Vue) {
-      school.setVue(Vue)
-      const schoolid = school.getStorage(school.appStorageKey.userid)
+      app.setVue(Vue)
+      const schoolid = app.getStorage(app.appStorageKey.userid)
       if (schoolid) state.schoolid = schoolid
-      const classesid = school.getStorage(school.appStorageKey.current_jiaowu_classesid)
+      const classesid = app.getStorage(app.appStorageKey.current_jiaowu_classesid)
       if (classesid) state.classesid = classesid
 
-      // school.log(state)
+      // app.log(state)
     },
     setClassesid (state, classesid) {
       state.classesid = classesid
-      school.setStorage(school.appStorageKey.current_jiaowu_classesid, classesid)
+      app.setStorage(app.appStorageKey.current_jiaowu_classesid, classesid)
+    },
+    setTeacherLists (state, teacherLists) {
+      state.teacherLists = teacherLists
+    },
+    setStudentLists (state, studentLists) {
+      state.studentLists = studentLists
     }
   }
 })

@@ -1,6 +1,6 @@
-import School from '../../class/school.class'
+import Home from './home.class'
 
-export default class TeacherAdd extends School {
+export default class TeacherAdd extends Home {
   constructor() {
     super()
     return this
