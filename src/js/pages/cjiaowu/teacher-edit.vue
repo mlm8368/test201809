@@ -3,6 +3,7 @@
 </template>
 
 <style lang="less" scoped>
+@import "../../../css/variable.less";
 
 </style>
 
@@ -15,10 +16,19 @@ const teacher = new TeacherEdit()
 export default {
   name: 'teacher-edit',
   components: { BuiListItem },
+  props: {
+    index: {
+      type: Number,
+      default: -1
+    }
+  },
   data () {
     return {
-      tt: 'ddd'
+      formData: { teacherpost: '' }
     }
+  },
+  computed: {
+    ...mapState(['teacherLists'])
   }
 }
 </script>

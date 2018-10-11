@@ -27,13 +27,17 @@ export default {
         { 'title': '编辑', 'bgcolor': '#3399ff' },
         { 'title': '删除', 'bgcolor': '#fa3300' }],
       classesName: '',
-      teacherLists: [],
-      studentLists: [],
       teacherListsLoading: false,
       studentListsLoading: false
     }
   },
   computed: {
+    teacherLists: function() {
+      return home.outTeacher(this.$store.state.teacherLists)
+    },
+    studentLists: function() {
+      return home.outStudent(this.$store.state.studentLists)
+    },
     totalTeacher: function() {
       return this.teacherLists.length
     },
@@ -108,7 +112,7 @@ export default {
       home.getTeacherByClassesid(this.classesid, (lists) => {
         this.teacherListsLoading = false
         if (lists.length === 0) return
-        this.teacherLists = home.outTeacher(lists)
+        this.$store.commit('setTeacherLists', lists)
       })
     },
     getStudentLists(op = null) {
@@ -118,7 +122,7 @@ export default {
       home.getStudentByClassesid(this.classesid, (lists) => {
         this.studentListsLoading = false
         if (lists.length === 0 || !lists[0].id) return
-        this.studentLists = home.outStudent(lists)
+        this.$store.commit('setStudentLists', lists)
       })
     },
     listActionClick(index, type, menuIndex) {

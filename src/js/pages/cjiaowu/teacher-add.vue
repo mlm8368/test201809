@@ -99,7 +99,7 @@ export default {
       if (this.searchTeacherIndex > -1) return this.searchTeachers[this.searchTeacherIndex]
       else return null
     },
-    ...mapState(['schoolid', 'classesid'])
+    ...mapState(['classesid'])
   },
   created () {
     teacher.setVue(this)
