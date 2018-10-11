@@ -1,5 +1,9 @@
 <template>
-  <div><text>teacher-edit{{tt}}</text></div>
+  <div>
+    <bui-list-item label="教师职务" >
+      <input slot="title" class="input" placeholder="请输入公司名称" />
+    </bui-list-item>
+  </div>
 </template>
 
 <style lang="less" scoped>
