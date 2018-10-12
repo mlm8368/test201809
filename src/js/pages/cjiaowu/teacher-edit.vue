@@ -1,7 +1,7 @@
 <template>
   <div>
     <bui-list-item label="教师职务" >
-      <input slot="title" class="input" placeholder="请输入公司名称" />
+      <input :value="formData.teacherpost" @input="" slot="title" class="input" placeholder="请输入公司名称" />
     </bui-list-item>
   </div>
 </template>
@@ -33,6 +33,14 @@ export default {
   },
   computed: {
     ...mapState(['teacherLists'])
+  },
+  created () {
+    teacher.setVue(this)
+  },
+  methods: {
+    onTeacherpost (e) {
+      this.formData.teacherpost = e.value
+    }
   }
 }
 </script>
