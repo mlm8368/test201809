@@ -1,18 +1,31 @@
 <template>
   <div>
-    <bui-list-item label="教师职务" >
-      <input :value="formData.teacherpost" @input="onTeacherpost" slot="title" class="input" placeholder="请输入公司名称" />
+    <bui-list-item label="职务" >
+      <input :value="formData.teacherpost" @input="onTeacherpost" slot="title" class="input" placeholder="例：语文老师" />
     </bui-list-item>
-    <div class="teacherInfo-button"><am-button width="500px" size="small" text="添加" @click="buttonClick"></am-button></div>
+    <div class="button"><am-button width="500px" size="small" text="修改" @click="buttonClick"></am-button></div>
   </div>
 </template>
 
 <style lang="less" scoped>
 @import "../../../css/variable.less";
 
+.input {
+  height: @input-font-size + 20px;
+  font-size: @input-font-size;
+  tint-color: @input-tint-color;
+} 
+.button {
+  width: 700px;
+  justify-content: center;
+  align-items: center;
+  margin-top: @v-spacing-md;
+  margin-bottom: @v-spacing-md;
+}
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import BuiListItem from '../../components/bui-list-item.vue'
 import AmButton from '../../components/am-button.vue'
 import TeacherEdit from './teacher-edit.class'
@@ -21,7 +34,7 @@ const teacher = new TeacherEdit()
 
 export default {
   name: 'teacher-edit',
-  components: { BuiListItem，AmButton },
+  components: { BuiListItem, AmButton },
   props: {
     index: {
       type: Number,
@@ -36,16 +49,24 @@ export default {
   computed: {
     ...mapState(['teacherLists'])
   },
-  created () {
-    teacher.setVue(this)
-  
-    const teacherInfo = this.teacherLists[this.index]
-    if (teacherInfo > 0) {
-       this.formData.id = teacherInfo.id
-       this.formData.teacherpost = teacherInfo.teacherpost
+  watch: {
+    index: function() {
+      this.setCurrentTeacherData()
     }
   },
+  created () {
+    teacher.setVue(this)
+
+    this.setCurrentTeacherData()
+  },
   methods: {
+    setCurrentTeacherData () {
+      const teacherInfo = this.teacherLists[this.index]
+      if (teacherInfo) {
+        this.formData.id = teacherInfo.id
+        this.formData.teacherpost = teacherInfo.teacherpost
+      }
+    },
     onTeacherpost (e) {
       this.formData.teacherpost = e.value
     },

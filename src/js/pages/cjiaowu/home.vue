@@ -62,7 +62,9 @@
             size="sm" />
         </div>
         <div class="dialog-body">
-          <component :is="currentDialogComponent" :index="dialog.index"></component>
+          <keep-alive>
+            <component :is="currentDialogComponent" :index="dialog.index"></component>
+          </keep-alive>
         </div>
       </bmpop>
     </bmmask>

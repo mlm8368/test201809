@@ -80,9 +80,12 @@ export default {
           if (op === 'add') {
             dialog.title = '添加老师'
           } else if (op === 'edit') {
-            dialog.title = '编辑老师'
+            const teacherInfo = this.teacherLists[index]
+            dialog.height = '280px'
+            dialog.title = `编辑 ${teacherInfo.truename} 老师信息`
           } else if (op === 'view') {
-            dialog.title = '查看老师'
+            dialog.height = '560px'
+            dialog.title = '老师信息'
           }
           break;
 

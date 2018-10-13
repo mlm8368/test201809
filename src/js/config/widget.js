@@ -1,6 +1,6 @@
 
 // 配置方法
-import '../../../node_modules/eros-widget/src/mixins.js'
+// import '../../../node_modules/eros-widget/src/mixins.js'
 
 import '../../../node_modules/eros-widget/src/font.js'
 // 弹窗
@@ -26,7 +26,7 @@ import '../../../node_modules/eros-widget/src/events.js'
 // 工具方法
 // import '../../../node_modules/eros-widget/src/tools.js'
 
-import '../../../node_modules/eros-widget/src/coms.js'
+// import '../../../node_modules/eros-widget/src/coms.js'
 
 // 路由
 import Router from '../../../node_modules/eros-widget/src/router.js'

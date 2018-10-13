@@ -20,6 +20,8 @@
 </template>
 
 <style lang="less" scoped>
+@import "../../css/variable.less";
+
 .bui-cell {
   height: 100px;
   position: relative;
@@ -34,6 +36,7 @@
 }
 .cell-title {
   flex: 1;
+  padding-left: 10px;
 }
 .has-desc {
   padding-bottom: 18px;
@@ -49,9 +52,10 @@
 }
 .cell-label-text {
   font-size: 30px;
-  color: #666666;
-  width: 100px;
+  color: @input-label-color;
+  width: 150px;
   margin-right: 10px;
+  text-align: right;
 }
 .cell-content {
   color: #333333;
