@@ -8,6 +8,9 @@ import WxcPartLoading from '../../components/wxc-part-loading.vue'
 import TeacherAdd from './teacher-add.vue'
 import TeacherEdit from './teacher-edit.vue'
 import TeacherView from './teacher-view.vue'
+import StudentAdd from './student-add.vue'
+import StudentEdit from './student-edit.vue'
+import StudentView from './student-view.vue'
 import Home from './home.class'
 
 const home = new Home()
@@ -18,7 +21,10 @@ export default {
     AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading,
     'dialog-teacher-add': function (resolve) { resolve(TeacherAdd) },
     'dialog-teacher-edit': function (resolve) { resolve(TeacherEdit) },
-    'dialog-teacher-view': function (resolve) { resolve(TeacherView) }
+    'dialog-teacher-view': function (resolve) { resolve(TeacherView) },
+    'dialog-student-add': function (resolve) { resolve(StudentAdd) },
+    'dialog-student-edit': function (resolve) { resolve(StudentEdit) },
+    'dialog-student-view': function (resolve) { resolve(StudentView) }
   },
   data () {
     return {
