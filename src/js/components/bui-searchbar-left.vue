@@ -6,10 +6,13 @@
             <am-icon class="bui-search-icon-delete" @click="onclear($event)" v-if="deletestatus" type="close-circle"></am-icon>
         </div>
         <text :class="['bui-search-search', 'bui-search-text-color']" @click="search()" v-if="searchstatus">搜索</text>
+        <slot></slot>
     </div>
 </template>
 
 <style lang="less" scoped>
+@import "../../css/variable.less";
+
 .flex-row {
   flex-direction: row;
 }
@@ -46,6 +49,7 @@
   height: 40;
   padding-left: 10;
   padding-right: 10;
+  tint-color: @input-tint-color;
 }
 .bui-search-search {
   font-size: 30;
