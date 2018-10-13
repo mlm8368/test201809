@@ -66,7 +66,7 @@ export default {
   mounted () {
     this.$nextTick(function () {
       this.$store.commit('setClassesid', 3)
-      this.openDialog('student', 'add') // test
+      // this.openDialog('student', 'add') // test
     })
   },
   watch: {
@@ -100,6 +100,7 @@ export default {
             dialog.title = '添加学生'
           } else if (op === 'edit') {
             const studentInfo = this.studentLists[index]
+            dialog.height = '380px'
             dialog.title = `编辑 ${studentInfo.babyname} 学生信息`
           } else if (op === 'view') {
             dialog.title = '学生信息'

@@ -5,9 +5,8 @@ export default class TeacherEdit extends Home {
     super()
     return this
   }
-  
+
   editTeacher() {
-  
     this.Vue.$notice.loading.show('正在提交...')
     this.Vue.$fetch({
       method: 'POST',
