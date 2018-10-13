@@ -98,6 +98,12 @@ export default {
     this.autofocusNew = this.autofocus;
     this.valueNew = this.value;
   },
+  watch: {
+    value: function(val) {
+      this.valueNew = val;
+      this.autofocusNew = true;
+    }
+  },
   methods: {
     //搜索框触发输入焦点
     onfocusFn(event) {

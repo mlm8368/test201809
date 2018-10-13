@@ -1,7 +1,7 @@
 <template>
   <div>
-    <bui-searchbar-left class="search-bar" @search="onSearch" placeholder="请输入(或扫码)宝宝ID号查询">
-      <am-icon type="scan" color="#ccc" size="lg" />
+    <bui-searchbar-left :value="searchKey" @search="onSearch" placeholder="请输入(或扫码)宝宝ID号查询">
+      <am-icon @click="openScan" type="scan" color="#ccc" size="lg" />
     </bui-searchbar-left>
     <text v-if="searchMsg" class="searchMsg">{{searchMsg}}</text>
     <scroller class="studentInfo">
@@ -63,6 +63,7 @@
 </style>
 
 <script>
+import '../../../../node_modules/eros-widget/src/tools.js'
 import { mapState } from 'vuex'
 import BuiListItem from '../../components/bui-list-item.vue'
 import BuiSearchbarLeft from '../../components/bui-searchbar-left.vue'
@@ -77,6 +78,7 @@ export default {
   components: { BuiListItem, BuiSearchbarLeft, AmIcon, AmButton },
   data () {
     return {
+      searchKey: '',
       searchMsg: '请家长提供下宝宝的ID号或二维码图片',
       studentInfo: null
     }
@@ -88,6 +90,11 @@ export default {
     student.setVue(this)
   },
   methods: {
+    openScan: function() {
+      this.$tools.scan().then((resData) => {
+        this.searchKey = resData
+      }, error => {})
+    },
     onSearch (value) {
       const keywords = value.trim()
       if (!keywords) {
