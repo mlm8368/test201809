@@ -7,7 +7,7 @@
       :left-btn = "[{is: 'text', text: `共 ${total} 班`, key: 'total'}]"
       :right-btn="[{is: 'text', text: '添加班级', key: 'add', onClick: () => { this.editIndex = -1 }}]"></am-nav-bar>
     <scroller class="list">
-      <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.classesname" @cellClick="chooseClasses(index)">
+      <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.classesname" :active-bg="true" @cellClick="chooseClasses(index)">
         <wxc-rich-text-tag v-if="classesid === one.id" slot="label" tag-value="当前" tag-theme="blue"></wxc-rich-text-tag>
         <am-button size="small" type="warning" text="编辑" @click="editIndex = index"></am-button>
       </bui-list-item>

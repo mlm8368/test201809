@@ -1,5 +1,5 @@
 <template>
-    <div :class="['bui-cell', hasTopBorder?'cell-top-border':'', hasBottomBorder?'cell-bottom-border':'', hasMargin?'cell-margin':'', desc?'has-desc':'']"
+    <div :class="['bui-cell', hasTopBorder?'cell-top-border':'', hasBottomBorder?'cell-bottom-border':'', hasMargin?'cell-margin':'', desc?'has-desc':'', activeBg?'bui-cell-active':'']"
             :style="Object.assign({}, cellStyle)"
             @click="_cellClick">
 
@@ -31,7 +31,7 @@
   padding-right: 24px;
   background-color: #ffffff;
 }
-.bui-cell:active {
+.bui-cell-active:active {
   background-color: @fill-tap;
 }
 .cell-margin {
@@ -100,6 +100,10 @@ export default {
     hasBottomBorder: {
       type: Boolean,
       default: true
+    },
+    activeBg: {
+      type: Boolean,
+      default: false
     },
     cellStyle: {
       type: Object,
