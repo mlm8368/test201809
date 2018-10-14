@@ -138,15 +138,15 @@ export default {
     buttonClick (op) {
       if (op === 'add' || op === 'edit') {
         if (!this.formData.classesname) {
-          this.school.alert('请填写班级名称')
+          this.$notice.alert({ message: '请填写班级名称' })
           return false
         }
         if (!this.formData.startdate) {
-          this.school.alert('请填写开始日期')
+          this.$notice.alert({ message: '请填写开始日期' })
           return false
         }
         if (!this.formData.enddate) {
-          this.school.alert('请填写结束日期')
+          this.$notice.alert({ message: '请填写结束日期' })
           return false
         }
         

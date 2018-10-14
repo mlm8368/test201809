@@ -1,6 +1,6 @@
 <template>
   <div :class="['am-nav-bar', `am-nav-bar-${mode}`]" :style="{ backgroundColor: backgroundColor }">
-    <div class="am-nav-bar-left">
+    <div v-if="leftBtn.length > 0" class="am-nav-bar-left">
       <slot name="left">
         <div
           v-for="(item, index) in left"
@@ -26,7 +26,7 @@
     <slot name="title">
       <text v-if="!!title" @click="handleClick({key: 'title'})" :class="['am-nav-bar-title', `am-nav-bar-${mode}-title`]" :style="{ color: textColor }">{{title}}</text>
     </slot>
-    <div class="am-nav-bar-right">
+    <div v-if="rightBtn.length > 0" class="am-nav-bar-right">
       <slot name="right">
         <div
           v-for="(item, index) in right"
