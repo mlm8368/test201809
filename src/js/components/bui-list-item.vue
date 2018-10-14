@@ -31,6 +31,9 @@
   padding-right: 24px;
   background-color: #ffffff;
 }
+.bui-cell:active {
+  background-color: @fill-tap;
+}
 .cell-margin {
   margin-bottom: 24px;
 }

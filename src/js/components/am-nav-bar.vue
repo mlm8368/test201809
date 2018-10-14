@@ -24,7 +24,7 @@
       </slot>
     </div>
     <slot name="title">
-      <text @click="handleClick({key: 'title'})" :class="['am-nav-bar-title', `am-nav-bar-${mode}-title`]" :style="{ color: textColor }">{{title}}</text>
+      <text v-if="!!title" @click="handleClick({key: 'title'})" :class="['am-nav-bar-title', `am-nav-bar-${mode}-title`]" :style="{ color: textColor }">{{title}}</text>
     </slot>
     <div class="am-nav-bar-right">
       <slot name="right">

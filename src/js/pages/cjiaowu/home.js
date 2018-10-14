@@ -65,7 +65,7 @@ export default {
   },
   mounted () {
     this.$nextTick(function () {
-      this.$store.commit('setClassesid', 3)
+      // this.$store.commit('setClassesid', 3)
       // this.openDialog('student', 'add') // test
     })
   },
@@ -122,7 +122,7 @@ export default {
       this.teacherListsLoading = true
       home.getTeacherByClassesid(this.classesid, (lists) => {
         this.teacherListsLoading = false
-        if (lists.length === 0) return
+        // if (lists.length === 0) return
         this.$store.commit('setTeacherLists', lists)
       })
     },
@@ -132,7 +132,7 @@ export default {
       this.studentListsLoading = true
       home.getStudentByClassesid(this.classesid, (lists) => {
         this.studentListsLoading = false
-        if (lists.length === 0 || !lists[0].id) return
+        // if (lists.length === 0 || !lists[0].id) return
         this.$store.commit('setStudentLists', lists)
       })
     },
