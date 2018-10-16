@@ -1,7 +1,7 @@
-// import Vuex from 'vuex'
+import Vuex from 'vuex'
 import App from './app.class'
 
-// Vue.use(Vuex)
+Vue.use(Vuex)
 
 const app = new App()
 
@@ -11,7 +11,6 @@ export default new Vuex.Store({
     schoolid: 0,
     classesid: 0,
     staffLists: [],
-    classesLists: [],
     teacherLists: [],
     studentLists: []
   },
@@ -36,9 +35,6 @@ export default new Vuex.Store({
     },
     setStaffLists (state, staffLists) {
       state.staffLists = staffLists
-    },
-    setClassesLists (state, classesLists) {
-      state.classesLists = classesLists
     },
     setTeacherLists (state, teacherLists) {
       state.teacherLists = teacherLists

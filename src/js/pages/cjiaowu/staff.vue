@@ -84,6 +84,7 @@ export default {
     openDialog(index) {
       const homedialog = { action: 'open', type: 'staff', op: 'edit', index: index }
       this.$store.commit('setHomeDialog', homedialog)
+      this.$emit('closePopup')
     }
   }
 }

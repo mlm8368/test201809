@@ -43,10 +43,10 @@ export default {
   },
   computed: {
     teacherLists: function() {
-      return home.outTeacher(this.$store.state.teacherLists)
+      return home.outTeacher(this.teacherLists)
     },
     studentLists: function() {
-      return home.outStudent(this.$store.state.studentLists)
+      return home.outStudent(this.studentLists)
     },
     totalTeacher: function() {
       return this.teacherLists.length
@@ -57,7 +57,7 @@ export default {
     currentDialogComponent: function () {
       return `dialog-${this.dialog.type}-${this.dialog.op}`
     },
-    ...mapState(['homedialog', 'schoolid', 'classesid'])
+    ...mapState(['homedialog', 'schoolid', 'classesid', 'staffLists', 'teacherLists', 'studentLists'])
   },
   created () {
     home.setVue(this)
