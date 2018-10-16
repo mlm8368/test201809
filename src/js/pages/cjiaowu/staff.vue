@@ -55,7 +55,6 @@ export default {
   data () {
     return {
       editStaff: false,
-      lists: [],
       staffListsLoading: false,
       searchStaff: null,
       searchMsg: ''
@@ -63,9 +62,12 @@ export default {
   },
   computed: {
     total: function() {
-      return this.lists.length
+      return this.staffLists.length
     },
-    ...mapState(['schoolid'])
+    lists: function() {
+      return staff.outStaff(this.staffLists)
+    },
+    ...mapState(['schoolid', 'staffLists'])
   },
   created () {
     staff.setVue(this)
@@ -74,7 +76,7 @@ export default {
       this.staffListsLoading = true
       staff.getStaffLists((lists) => {
         this.staffListsLoading = false
-        this.lists = staff.outStaff(lists)
+        this.$store.commit('setStaffLists', lists)
       })
     }
   },
