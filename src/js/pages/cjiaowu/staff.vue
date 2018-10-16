@@ -6,8 +6,12 @@
       :background-color="navBarBgColor"
       :left-btn = "[]"
       :right-btn="[]">
-      <text slot="title">tou</text>
-      </am-nav-bar>
+        <bui-searchbar-left slot="title" @search="onSearch" placeholder="请输入老师手机号查找"></bui-searchbar-left>
+    </am-nav-bar>
+    <text v-if="searchMsg" class="searchMsg">{{searchMsg}}</text>
+    <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.truename" :active-bg="true" @cellClick="chooseClasses(index)">
+      <am-button size="small" type="warning" text="添加" @click="editIndex = index"></am-button>
+    </bui-list-item>
     <div class="form-header">
       <text class="form-header-title">本校共 {{total}} 位教师</text>
       <am-icon @click="getTeacherLists('refresh')" class="form-header-reload" type="reload" size="sm" />
