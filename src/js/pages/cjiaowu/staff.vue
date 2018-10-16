@@ -21,7 +21,7 @@
       <div v-if="staffListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></div>
       <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.truename" :active-bg="true" @cellClick="chooseClasses(index)">
         <wxc-rich-text-tag v-if="classesid === one.id" slot="label" tag-value="当前" tag-theme="blue"></wxc-rich-text-tag>
-        <am-button size="small" type="warning" text="编辑" @click="editIndex = index"></am-button>
+        <am-button size="small" type="warning" text="编辑" @click="openDialog(index)"></am-button>
       </bui-list-item>
     </scroller>
   </div>
@@ -76,6 +76,12 @@ export default {
         this.staffListsLoading = false
         this.lists = staff.outStaff(lists)
       })
+    }
+  },
+  methods: {
+    openDialog(index) {
+      const homedialog = { action: 'open', type: 'staff', op: 'edit', index: index }
+      this.$store.commit('setHomeDialog', homedialog)
     }
   }
 }

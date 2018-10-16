@@ -47,11 +47,17 @@ export default class Home extends App {
     }
   }
 
-  getClassesName() {
+  getClassesName(callback) {
+    const classesid = this.Vue.classesid
+
     this.getClasses((lists) => {
       for (const one of lists) {
-        if (one.id === this.Vue.classesid) {
-          this.Vue.classesName = one.classesname
+        if (!classesid) {
+          this.Vue.$store.commit('setClassesid', one.id)
+          callback(one.classesname)
+          break
+        } else if (one.id === classesid) {
+          callback(one.classesname)
           break
         }
       }

@@ -11,6 +11,8 @@ import TeacherView from './teacher-view.vue'
 import StudentAdd from './student-add.vue'
 import StudentEdit from './student-edit.vue'
 import StudentView from './student-view.vue'
+import StaffEdit from './student-edit.vue'
+import StaffView from './student-view.vue'
 import Home from './home.class'
 
 const home = new Home()
@@ -24,7 +26,9 @@ export default {
     'dialog-teacher-view': function (resolve) { resolve(TeacherView) },
     'dialog-student-add': function (resolve) { resolve(StudentAdd) },
     'dialog-student-edit': function (resolve) { resolve(StudentEdit) },
-    'dialog-student-view': function (resolve) { resolve(StudentView) }
+    'dialog-student-view': function (resolve) { resolve(StudentView) },
+    'dialog-staff-edit': function (resolve) { resolve(StaffEdit) },
+    'dialog-staff-view': function (resolve) { resolve(StaffView) }
   },
   data () {
     return {
@@ -53,15 +57,16 @@ export default {
     currentDialogComponent: function () {
       return `dialog-${this.dialog.type}-${this.dialog.op}`
     },
-    ...mapState(['schoolid', 'classesid'])
+    ...mapState(['homedialog', 'schoolid', 'classesid'])
   },
   created () {
     home.setVue(this)
-    if (this.classesid) {
-      home.getClassesName()
+
+    home.getClassesName((classesname) => {
+      this.classesName = classesname
       this.getTeacherLists()
       this.getStudentLists()
-    }
+    })
   },
   mounted () {
     this.$nextTick(function () {
@@ -73,9 +78,15 @@ export default {
     classesid: function(classesid) {
       if (!classesid) return
 
-      home.getClassesName()
+      home.getClassesName((classesname) => {
+        this.classesName = classesname
+      })
       this.getTeacherLists()
       this.getStudentLists()
+    },
+    homedialog: function(homedialog) {
+      if (homedialog.action === 'open') this.openDialog(homedialog.type, homedialog.op, homedialog.index)
+      else if (homedialog.action === 'close') this.closeDialog()
     }
   },
   methods: {
@@ -104,6 +115,15 @@ export default {
             dialog.title = `编辑 ${studentInfo.babyname} 学生信息`
           } else if (op === 'view') {
             dialog.title = '学生信息'
+          }
+          break;
+        case 'staff':
+          if (op === 'edit') {
+            const studentInfo = this.studentLists[index]
+            dialog.height = '380px'
+            dialog.title = `编辑 ${studentInfo.babyname} 老师信息`
+          } else if (op === 'view') {
+            dialog.title = '老师信息'
           }
           break;
       }
@@ -166,7 +186,7 @@ export default {
           break;
       }
     },
-    listClick(type = 'teacher', index) {
+    listClick(type = 'teacher', index = 0) {
       // home.log('listClick' + index)
       this.openDialog(type, 'view', index)
     }

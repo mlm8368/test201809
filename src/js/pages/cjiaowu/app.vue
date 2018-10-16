@@ -9,7 +9,7 @@
       :left-btn = "[{is: 'text', text: '本校老师', key: 'staff'}]"
       :right-btn="[{is: 'text', text: '班级', key: 'classes'}]"
       @click="navbarClick"></am-nav-bar>
-    <home ref="home" class="warp" :style="{'top': homeTop}"></home>
+    <home class="warp" :style="{'top': homeTop}"></home>
     <am-popup
       :show.sync="popup.show"
       :position="popup.position"

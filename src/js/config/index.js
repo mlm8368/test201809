@@ -1,7 +1,10 @@
+import Vuex from 'vuex'
 import Widget from './widget'
 import apis from './apis'
 import routes from './routes'
 import './push'
+
+Vue.use(Vuex)
 
 new Widget({
     router: {

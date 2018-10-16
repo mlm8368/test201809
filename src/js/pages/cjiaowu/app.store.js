@@ -1,14 +1,17 @@
-import Vuex from 'vuex'
+// import Vuex from 'vuex'
 import App from './app.class'
 
-Vue.use(Vuex)
+// Vue.use(Vuex)
 
 const app = new App()
 
 export default new Vuex.Store({
   state: {
+    homedialog: { action: 'open/close', type: 'teacher', op: 'add', index: 0 },
     schoolid: 0,
     classesid: 0,
+    staffLists: [],
+    classesLists: [],
     teacherLists: [],
     studentLists: []
   },
@@ -24,9 +27,18 @@ export default new Vuex.Store({
 
       // app.log(state)
     },
+    setHomeDialog (state, homedialog) {
+      state.homedialog = homedialog
+    },
     setClassesid (state, classesid) {
       state.classesid = classesid
       app.setStorage(app.appStorageKey.current_jiaowu_classesid, classesid)
+    },
+    setStaffLists (state, staffLists) {
+      state.staffLists = staffLists
+    },
+    setClassesLists (state, classesLists) {
+      state.classesLists = classesLists
     },
     setTeacherLists (state, teacherLists) {
       state.teacherLists = teacherLists
