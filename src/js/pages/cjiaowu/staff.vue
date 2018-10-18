@@ -6,7 +6,7 @@
       :background-color="navBarBgColor"
       :left-btn = "[]"
       :right-btn="[]">
-        <bui-searchbar-left slot="title" @search="onSearch" placeholder="请输入老师手机号查找"></bui-searchbar-left>
+        <bui-searchbar-left class="searchbox" :background-color="navBarBgColor" search-text-color="#FFFFFF" slot="title" @search="onSearch" placeholder="请输入老师手机号查找"></bui-searchbar-left>
     </am-nav-bar>
     <text v-if="searchMsg" class="searchMsg">{{searchMsg}}</text>
     <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.truename" :active-bg="true" @cellClick="chooseClasses(index)">
@@ -30,6 +30,9 @@
 <style lang="less" scoped>
 @import "../../../css/variable.less";
 
+.searchbox {
+  width: 500px;
+}
 </style>
 
 <script>
@@ -37,6 +40,7 @@ import { mapState } from 'vuex'
 import AmIcon from '../../components/am-icon.vue'
 import AmNavBar from '../../components/am-nav-bar.vue'
 import BuiListItem from '../../components/bui-list-item.vue'
+import BuiSearchbarLeft from '../../components/bui-searchbar-left.vue'
 import AmButton from '../../components/am-button.vue'
 import WxcPartLoading from '../../components/wxc-part-loading.vue'
 import Staff from './staff.class'
@@ -45,7 +49,7 @@ const staff = new Staff()
 
 export default {
   name: 'staff',
-  components: { AmIcon, AmNavBar, BuiListItem, AmButton, WxcPartLoading },
+  components: { AmIcon, AmNavBar, BuiListItem, AmButton, WxcPartLoading, BuiSearchbarLeft },
   props: {
     navBarBgColor: {
       type: String,

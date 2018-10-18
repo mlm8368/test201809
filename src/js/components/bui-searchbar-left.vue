@@ -1,11 +1,11 @@
 <template>
-    <div :class="['flex-row', 'row-center-left', 'bui-searchbar', 'bui-search-bg']" @click="onfocusFn()">
+    <div :class="['flex-row', 'row-center-left', 'bui-searchbar']" :style="{ backgroundColor: backgroundColor }" @click="onfocusFn()">
         <div :class="['flex-row', 'row-center-left', 'span1', 'bui-input']">
             <am-icon type="search"></am-icon>
             <input ref="inputSearch"  class="span1 bui-search-input-text" @focus="onfocus($event)" @blur="onblur($event)" @input="oninput($event)" :value="valueNew" :autofocus="autofocusNew"  @return="search" return-key-type="search" type="text" :placeholder="placeholder"/>
             <am-icon class="bui-search-icon-delete" @click="onclear($event)" v-if="deletestatus" type="close-circle"></am-icon>
         </div>
-        <text :class="['bui-search-search', 'bui-search-text-color']" @click="search()" v-if="searchstatus">搜索</text>
+        <text :class="['bui-search-search']" @click="search()" :style="{ backgroundColor: searchTextColor }" v-if="searchstatus">搜索</text>
         <slot></slot>
     </div>
 </template>
@@ -84,6 +84,14 @@ export default {
     autofocus: {
       type: Boolean,
       default: false
+    },
+    backgroundColor: {
+      type: String,
+      default: '#f5f5f5'
+    },
+    searchTextColor: {
+      type: String,
+      default: '#657180'
     }
   },
   data() {
