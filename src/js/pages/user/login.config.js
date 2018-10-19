@@ -1,5 +1,14 @@
 export const appName = 'allapp' // allapp,school,student
 
+export const footBarDefault = [{
+  'pagePath': '/pages/hello.js',
+  'text': '首页',
+  'icon': 'bmlocal://assets/TabBar_Item1@2x.png',
+  'selectedIcon': 'bmlocal://assets/TabBar_Item1_Selected@2x.png',
+  'navShow': 'false',
+  'navTitle': '首页'
+}]
+
 export const footBarSchool = [{
   'pagePath': '/pages/cxiaowu/app.js',
   'text': '校务',

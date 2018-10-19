@@ -1,6 +1,6 @@
 import Abstract from '../../class/abstract'
 import { appStorageKey } from '../../class/enum'
-import { appName, footBarSchool } from './login.config'
+import { appName, footBarDefault, footBarSchool } from './login.config'
 
 const tabbar = weex.requireModule('bmTabbar')
 
@@ -67,6 +67,14 @@ export default class Login extends Abstract {
         else this.goPortalTeacher()
         break
     }
+  }
+
+  goPortalDefault() {
+    const footbar = tabbar.getInfo()
+    footbar.list = footBarDefault
+    tabbar.setInfo(footbar)
+
+    // this.Vue.$router.back({ type: 'PRESENT' })
   }
 
   goPortalSchool() {
