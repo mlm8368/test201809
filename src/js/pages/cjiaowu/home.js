@@ -11,8 +11,8 @@ import TeacherView from './teacher-view.vue'
 import StudentAdd from './student-add.vue'
 import StudentEdit from './student-edit.vue'
 import StudentView from './student-view.vue'
-import StaffEdit from './student-edit.vue'
-import StaffView from './student-view.vue'
+import StaffEdit from './staff-edit.vue'
+import StaffView from './staff-view.vue'
 import Home from './home.class'
 
 const home = new Home()
@@ -102,7 +102,7 @@ export default {
             dialog.title = `编辑 ${teacherInfo.truename} 老师信息`
           } else if (op === 'view') {
             dialog.height = '560px'
-            dialog.title = '老师信息'
+            dialog.title = '查看老师信息'
           }
           break;
 
@@ -114,16 +114,17 @@ export default {
             dialog.height = '380px'
             dialog.title = `编辑 ${studentInfo.babyname} 学生信息`
           } else if (op === 'view') {
-            dialog.title = '学生信息'
+            dialog.title = '查看学生信息'
           }
           break;
+
         case 'staff':
           if (op === 'edit') {
-            const studentInfo = this.studentLists[index]
+            const staffInfo = this.staffLists[index]
             dialog.height = '380px'
-            dialog.title = `编辑 ${studentInfo.babyname} 老师信息`
+            dialog.title = `编辑 ${staffInfo.truename} 老师信息`
           } else if (op === 'view') {
-            dialog.title = '老师信息'
+            dialog.title = '查看老师信息'
           }
           break;
       }

@@ -1,21 +1,23 @@
 <template>
   <div>
-    <bui-list-item :title="teacherInfo.truename" :desc="teacherInfo.teacherpost" label="姓名">
-      <image slot="action" :src="teacherInfo.avatar" class="teacherInfo-avatar"></image>
+    <bui-list-item :title="staffInfo.truename" label="姓名">
+      <image slot="action" :src="staffInfo.avatar" class="staffInfo-avatar"></image>
     </bui-list-item>
-    <bui-list-item :title="teacherInfo.mobile" label="电话">
+    <bui-list-item :title="staffInfo.mobile" label="电话">
       <am-button size="small" type="warning" text="拨打" @click="doCall"></am-button>
     </bui-list-item>
-    <bui-list-item :title="teacherInfo.gender" label="性别"></bui-list-item>
-    <bui-list-item :title="teacherInfo.wx" label="微信"></bui-list-item>
-    <bui-list-item :title="teacherInfo.qq" label="QQ"></bui-list-item>
+    <bui-list-item :title="staffInfo.gender" label="性别"></bui-list-item>
+    <bui-list-item :title="staffInfo.wx" label="微信"></bui-list-item>
+    <bui-list-item :title="staffInfo.qq" label="QQ"></bui-list-item>
+    <bui-list-item :title="staffInfo.agree" label="状态"></bui-list-item>
+    <bui-list-item :title="staffInfo.jointime" label="入职时间"></bui-list-item>
   </div>
 </template>
 
 <style lang="less" scoped>
 @import "../../../css/variable.less";
 
-.teacherInfo {
+.staffInfo {
 
   &-avatar {
     width: 80px;
@@ -48,28 +50,28 @@ export default {
   },
   data () {
     return {
-      teacherInfo: null
+      staffInfo: null
     }
   },
   computed: {
-    ...mapState(['teacherLists'])
+    ...mapState(['staffLists'])
   },
   watch: {
     index: function() {
-      this.setCurrentTeacherData()
+      this.setCurrentStaffData()
     }
   },
   created () {
-    teacher.setVue(this)
+    staff.setVue(this)
 
-    this.setCurrentTeacherData()
+    this.setCurrentStaffData()
   },
   methods: {
-    setCurrentTeacherData () {
-      this.teacherInfo = teacher.outTeacher(this.teacherLists[this.index])
+    setCurrentStaffData () {
+      this.staffInfo = staff.outStaff(this.staffLists[this.index])
     },
     doCall () {
-      this.$coms.call(this.teacherInfo.mobile)
+      this.$coms.call(this.staffInfo.mobile)
     }
   }
 }

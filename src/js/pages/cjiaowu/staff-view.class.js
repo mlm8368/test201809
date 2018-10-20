@@ -6,10 +6,9 @@ export default class StaffView extends Staff {
     return this
   }
 
-  outTeacher (one) {
+  outStaff (one) {
     const tmp = {}
     tmp['id'] = one.id
-    tmp['teacherpost'] = one.teacherpost
     tmp['userid'] = one.userid
     tmp['truename'] = one.truename
     tmp['avatar'] = this.getAvatar(one.avatar)
@@ -17,6 +16,15 @@ export default class StaffView extends Staff {
     tmp['mobile'] = one.mobile
     tmp['qq'] = one.qq
     tmp['wx'] = one.wx
+    tmp['jointime'] = one.jointime
+
+    if (one.agree === -1) {
+      tmp['agree'] = '已拒绝'
+    } else if (one.agree === 0) {
+      tmp['agree'] = '待确认'
+    } else if (one.agree === 1) {
+      tmp['agree'] = '已入职'
+    }
     return tmp
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <bui-list-item label="职务" >
-      <input :value="formData.teacherpost" @input="onTeacherpost" slot="title" class="input" placeholder="例：语文老师" />
+    <bui-list-item label="入职时间" >
+      <input :value="formData.jointime" @input="onInput('jointime', $event)" slot="title" class="input" type="date" placeholder="0000-00-00" />
     </bui-list-item>
     <div class="button"><am-button width="500px" size="small" text="修改" @click="buttonClick"></am-button></div>
   </div>
@@ -43,35 +43,35 @@ export default {
   },
   data () {
     return {
-      formData: { id: 0, teacherpost: '' }
+      formData: { id: 0, jointime: '' }
     }
   },
   computed: {
-    ...mapState(['teacherLists'])
+    ...mapState(['staffLists'])
   },
   watch: {
     index: function() {
-      this.setCurrentTeacherData()
+      this.setCurrentStaffData()
     }
   },
   created () {
-    teacher.setVue(this)
+    staff.setVue(this)
 
-    this.setCurrentTeacherData()
+    this.setCurrentStaffData()
   },
   methods: {
-    setCurrentTeacherData () {
-      const teacherInfo = this.teacherLists[this.index]
-      if (teacherInfo) {
-        this.formData.id = teacherInfo.id
-        this.formData.teacherpost = teacherInfo.teacherpost
+    setCurrentStaffData () {
+      const staffInfo = this.staffLists[this.index]
+      if (staffInfo) {
+        this.formData.id = staffInfo.id
+        this.formData.jointime = staffInfo.jointime
       }
     },
-    onTeacherpost (e) {
-      this.formData.teacherpost = e.value
+    onInput (key, e) {
+      this.formData[key] = e.value
     },
     buttonClick () {
-      teacher.editTeacher()
+      staff.editStaff()
     }
   }
 }

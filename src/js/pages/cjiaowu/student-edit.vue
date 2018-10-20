@@ -1,10 +1,10 @@
 <template>
   <div>
     <bui-list-item label="入学时间" >
-      <input :value="formData.startdate" @input="onStartdate" slot="title" class="input" placeholder="例：语文老师" />
+      <input :value="formData.startdate" @input="onStartdate" slot="title" class="input" type="date" placeholder="0000-00-00" />
     </bui-list-item>
     <bui-list-item label="离校毕业" >
-      <input :value="formData.enddate" @input="onEnddate" slot="title" class="input" placeholder="例：语文老师" />
+      <input :value="formData.enddate" @input="onEnddate" slot="title" class="input" type="date" placeholder="0000-00-00" />
     </bui-list-item>
     <div class="button"><am-button width="500px" size="small" text="修改" @click="buttonClick"></am-button></div>
   </div>

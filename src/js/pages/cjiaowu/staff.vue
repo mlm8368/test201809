@@ -6,24 +6,50 @@
       :background-color="navBarBgColor"
       :left-btn = "[]"
       :right-btn="[]">
-        <bui-searchbar-left class="searchbox" :background-color="navBarBgColor" search-text-color="#FFFFFF" slot="title" @search="onSearch" placeholder="请输入老师手机号查找"></bui-searchbar-left>
+        <bui-searchbar-left class="searchbox" :background-color="navBarBgColor" search-text-color="#FFFFFF" input-type="tel" slot="title" @search="onSearch" placeholder="请输入老师手机号查找"></bui-searchbar-left>
     </am-nav-bar>
     <text v-if="searchMsg" class="searchMsg">{{searchMsg}}</text>
-    <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.truename" :active-bg="true" @cellClick="chooseClasses(index)">
-      <am-button size="small" type="warning" text="添加" @click="editIndex = index"></am-button>
+    <bui-list-item v-if="searchStaff" :title="searchStaff.truename">
+      <image slot="label" :src="searchStaff.avatar" class="list-avatar"></image>
+      <am-button size="small" type="warning" text="添加" @click="addStaff"></am-button>
     </bui-list-item>
-    <div class="form-header">
-      <text class="form-header-title">本校共 {{total}} 位教师</text>
-      <am-icon @click="getTeacherLists('refresh')" class="form-header-reload" type="reload" size="sm" />
-      <am-icon @click="openDialog('teacher')" class="form-header-plus" type="plus" size="sm" />
-    </div>
-    <scroller class="list">
-      <div v-if="staffListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></div>
-      <bui-list-item v-for="(one, index) in lists" :key="index" :title="one.truename" :active-bg="true" @cellClick="chooseClasses(index)">
-        <wxc-rich-text-tag v-if="classesid === one.id" slot="label" tag-value="当前" tag-theme="blue"></wxc-rich-text-tag>
-        <am-button size="small" type="warning" text="编辑" @click="openDialog(index)"></am-button>
-      </bui-list-item>
-    </scroller>
+    <list class="list">
+      <template v-if="totalToAgree > 0">
+        <header class="list-header">
+          <text class="list-header-title">待老师确认</text>
+          <am-icon @click="getStaffLists('refresh')" class="list-header-reload" type="reload" size="sm" />
+        </header>
+        <cell v-for="(one, index) in lists" :key="index" v-if="one.agree === 0">
+          <bui-list-item :title="one.truename" :active-bg="true" @cellClick="openDialog(index, 'view')">
+            <image slot="label" :src="one.avatar" class="list-avatar"></image>
+            <am-button size="small" type="warning" text="删除" @click="delStaff(index)"></am-button>
+          </bui-list-item>
+        </cell>
+      </template>
+      <template v-if="totalNotAgree > 0">
+        <header class="list-header">
+          <text class="list-header-title">老师已拒绝</text>
+          <am-icon @click="getStaffLists('refresh')" class="list-header-reload" type="reload" size="sm" />
+        </header>
+        <cell v-for="(one, index) in lists" :key="index" v-if="one.agree === -1">
+          <bui-list-item :title="one.truename" :active-bg="true" @cellClick="openDialog(index, 'view')">
+            <image slot="label" :src="one.avatar" class="list-avatar"></image>
+            <am-button size="small" type="warning" text="删除" @click="delStaff(index)"></am-button>
+          </bui-list-item>
+        </cell>
+      </template>
+      <header class="list-header">
+        <text class="list-header-title">本校共 {{total}} 位教师</text>
+        <am-icon @click="getStaffLists('refresh')" class="list-header-reload" type="reload" size="sm" />
+      </header>
+      <div v-if="staffListsLoading" class="list-loading"><wxc-part-loading show="true"></wxc-part-loading></div>
+      <cell v-for="(one, index) in lists" :key="index" v-if="one.agree === 1">
+        <bui-list-item :title="one.truename" :active-bg="true" @cellClick="openDialog(index, 'view')">
+          <image slot="label" :src="one.avatar" class="list-avatar"></image>
+          <am-button size="small" type="primary" text="编辑" @click="openDialog(index, 'edit')"></am-button>
+        </bui-list-item>
+      </cell>
+    </list>
   </div>
 </template>
 
@@ -32,6 +58,52 @@
 
 .searchbox {
   width: 500px;
+}
+
+.searchMsg {
+  padding-left: @page-padding-spacing;
+}
+
+.list {
+  &-loading {
+    flex-direction: row;
+    justify-content: center;
+    background-color: @fill-base;
+  }
+
+  &-header {
+    flex-direction: row;
+    align-items: center;
+    background-color: @brand-primary;
+
+    &-title {
+      color: @color-text-base-inverse;
+      height: @list-title-height;
+      line-height: @list-title-height;
+    }
+
+    &-reload {
+      position: absolute;
+      right: @page-padding-spacing;
+      color: @color-text-base-inverse;
+      width: 70px;
+      height: @list-title-height;
+      line-height: @list-title-height;
+      text-align: center;
+    }
+    &-reload:active {
+      background-color: @fill-tap;
+    }
+  }
+
+  &-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: @border-color-base;
+  }
 }
 </style>
 
@@ -61,13 +133,13 @@ export default {
       editStaff: false,
       staffListsLoading: false,
       searchStaff: null,
-      searchMsg: ''
+      searchMsg: '',
+      total: 0,
+      totalToAgree: 0,
+      totalNotAgree: 0
     }
   },
   computed: {
-    total: function() {
-      return this.staffLists.length
-    },
     lists: function() {
       return staff.outStaff(this.staffLists)
     },
@@ -76,19 +148,41 @@ export default {
   created () {
     staff.setVue(this)
 
-    if (this.schoolid) {
+    if (this.schoolid) this.getStaffLists()
+  },
+  methods: {
+    openDialog(index, op='edit') {
+      const homedialog = { action: 'open', type: 'staff', op: op, index: index }
+      this.$store.commit('setHomeDialog', homedialog)
+      this.$emit('closePopup')
+    },
+    getStaffLists(op = null) {
+      if (op === 'refresh') staff.cache.remove(staff.appCacheKey.school_cjiaowu_staffs)
+
       this.staffListsLoading = true
       staff.getStaffLists((lists) => {
         this.staffListsLoading = false
         this.$store.commit('setStaffLists', lists)
       })
-    }
-  },
-  methods: {
-    openDialog(index) {
-      const homedialog = { action: 'open', type: 'staff', op: 'edit', index: index }
-      this.$store.commit('setHomeDialog', homedialog)
-      this.$emit('closePopup')
+    },
+    onSearch (value) {
+      const tel = value.trim()
+      if (!tel || !staff.checkMobile(tel)) {
+        this.$notice.alert({ message: '请输入老师手机号查找' })
+      } else {
+        staff.searchStaff(tel)
+      }
+    },
+    addStaff () {
+      staff.addStaff()
+    },
+    delStaff (index) {
+      this.$notice.confirm({
+        message: '确认要删除吗？',
+        okCallback() {
+          staff.delStaff(index)
+        }
+      })
     }
   }
 }
