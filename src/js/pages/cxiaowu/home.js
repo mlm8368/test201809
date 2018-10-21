@@ -1,10 +1,7 @@
-import AmNavBar from '../../components/am-nav-bar.vue'
-import AmPopup from '../../components/am-popup.vue'
-import AmButton from '../../components/am-button.vue'
-import { setFontFace } from '../../class/global'
+import { mapState } from 'vuex'
 import Home from './home.class'
 
-let home = null
+const home = new Home()
 
 export default {
   name: 'cxiaowuHome',

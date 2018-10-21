@@ -1,8 +1,8 @@
-import Abstract from '../../class/abstract'
+import App from './app.class'
 
-export default class Home extends Abstract {
-  constructor(Vue) {
-    super(Vue)
+export default class Home extends App {
+  constructor() {
+    super()
     return this
   }
 }
