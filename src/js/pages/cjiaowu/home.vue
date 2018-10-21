@@ -25,8 +25,7 @@
           :title="i.truename" 
           :brief="i.teacherpost"
           arrow="empty"
-          @click="listClick('teacher', index)"
-          >
+          @click="listClick('teacher', index)">
             <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
           </am-list-item>
         </bui-swipe-cell>

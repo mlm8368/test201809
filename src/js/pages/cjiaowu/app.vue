@@ -73,7 +73,7 @@ export default {
       })
     })
     
-    this.navbarClick('staff') // test
+    // this.navbarClick('staff') // test
   },
   methods: {
     navbarClick(key) {
