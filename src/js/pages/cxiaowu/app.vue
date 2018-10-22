@@ -45,6 +45,7 @@
 
 <style lang="less" scoped>
 @import "../../../css/variable.less";
+@import "../../../css/dialog.less";
 
 .warp {
   position: absolute;
@@ -55,48 +56,6 @@
   background-color: #ffffff;
 }
 
-.bmmask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  align-items: center;
-  justify-content: center;
-}
-.bmpop {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  background-color: @fill-base;
-}
-.dialog-header {
-  background-color: @brand-primary;
-  flex-direction: row;
-  align-content: center;
-  padding-left: @page-padding-spacing;
-
-  &-title,&-close {
-    color: @color-text-base-inverse;
-    height: @list-title-height;
-    line-height: @list-title-height;
-  }
-  &-close {
-    position: absolute;
-    right: 0;
-    width: 70px;
-    text-align: center;
-  }
-  &-close:active {
-    background-color: @fill-tap;
-  }
-}
-.dialog-body {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
 </style>
 
 <script>
