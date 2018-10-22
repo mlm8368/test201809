@@ -7,12 +7,8 @@ const app = new App()
 
 export default new Vuex.Store({
   state: {
-    homedialog: { action: 'open/close', type: 'teacher', op: 'add', index: 0 },
-    schoolid: 0,
-    classesid: 0,
-    staffLists: [],
-    teacherLists: [],
-    studentLists: []
+    appdialog: { action: 'open/close', type: 'teacher', op: 'add', index: 0 },
+    schoolid: 0
   },
   mutations: {
     init (state, Vue) {
@@ -20,27 +16,12 @@ export default new Vuex.Store({
       const schoolid = app.getStorage(app.appStorageKey.userid)
       if (schoolid) {
         state.schoolid = schoolid
-        const classesid = app.getStorage(app.appStorageKey.current_jiaowu_classesid)
-        if (classesid) state.classesid = classesid
       }
 
       // app.log(state)
     },
-    setHomeDialog (state, homedialog) {
-      state.homedialog = homedialog
-    },
-    setClassesid (state, classesid) {
-      state.classesid = classesid
-      app.setStorage(app.appStorageKey.current_jiaowu_classesid, classesid)
-    },
-    setStaffLists (state, staffLists) {
-      state.staffLists = staffLists
-    },
-    setTeacherLists (state, teacherLists) {
-      state.teacherLists = teacherLists
-    },
-    setStudentLists (state, studentLists) {
-      state.studentLists = studentLists
+    setAppDialog (state, appdialog) {
+      state.appdialog = appdialog
     }
   }
 })
