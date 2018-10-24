@@ -14,8 +14,6 @@
     </scroller>
     <div class="form-header">
       <text class="form-header-title">{{formTitle}}</text>
-      <am-icon @click="getTeacherLists('refresh')" class="form-header-reload" type="reload" size="sm" />
-      <am-icon @click="openDialog('teacher')" class="form-header-plus" type="plus" size="sm" />
     </div>
     <scroller class="form">
       <bui-list-item label="名称" >
