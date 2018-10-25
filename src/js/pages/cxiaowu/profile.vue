@@ -1,12 +1,11 @@
 <template>
-  <scroller>
-    <image class="" :src="" :placeholder="defaultAvatar"></image>
-    <div>阳光美稚</div>
-    <div class="banji-list-header">
-        <text class="banji-list-header-teacher">联系方式</text>
-        <am-icon @click="getTeacherLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
-        <am-icon @click="openDialog('teacher')" class="banji-list-header-plus" type="plus" size="sm" />
-      </div>
+  <scroller class="school">
+    <image class="school-avatar" :src="schoolInfo.gender" :placeholder="defaultAvatar"></image>
+    <text class="school-shortname">阳光美稚</text>
+    <div class="school-header">
+      <text class="school-header-title">联系方式</text>
+      <text class="school-header-edit">编辑</text>
+    </div>
     <bui-list-item :title="schoolInfo.gender" label="学校全称"></bui-list-item>
     <bui-list-item :title="schoolInfo.gender" label="学校地址"></bui-list-item>
     <bui-list-item :title="schoolInfo.gender" label="邮政编码"></bui-list-item>
@@ -24,16 +23,41 @@
 </template>
 
 <style lang="less" scoped>
+@import "../../../css/variable.less";
 
+.school {
+  width: 500px;
+
+  &-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  &-shortname {
+
+  }
+  &-header {
+
+    &-title {
+
+    }
+
+    &-edit {
+      
+    }
+  }
+}
 </style>
 
 <script>
+import BuiListItem from '../../components/bui-list-item.vue'
 import Profile from './profile.class'
 
 const profile = new Profile()
 
 export default {
   name: 'profile',
+  components: { BuiListItem },
   data () {
     return {
       schoolInfo: {}
