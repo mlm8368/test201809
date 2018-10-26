@@ -12,30 +12,32 @@
         <am-button size="small" type="warning" text="编辑" @click="editIndex = index"></am-button>
       </bui-list-item>
     </scroller>
-    <div class="form-header">
-      <text class="form-header-title">{{formTitle}}</text>
-    </div>
-    <scroller class="form">
-      <bui-list-item label="名称" >
-        <input :value="formData.classesname" @input="formData.classesname = $event.value" slot="title" class="form-input" placeholder="班级名称" />
-      </bui-list-item>
-      <bui-list-item label="排序" >
-        <input :value="formData.listorder" @input="formData.listorder = $event.value" type="number" slot="title" class="form-input" />
-      </bui-list-item>
-      <bui-list-item label="开始时间" >
-        <input :value="formData.startdate" @input="formData.startdate = $event.value" type="date" slot="title" class="form-input" placeholder="0000-00-00" />
-      </bui-list-item>
-      <bui-list-item label="结束时间" >
-        <input :value="formData.enddate" @input="formData.enddate = $event.value" type="date" slot="title" class="form-input" placeholder="0000-00-00" />
-      </bui-list-item>
-      <div class="form-button">
-        <am-button v-if="editIndex === -1" size="small" text="添加班级" @click="buttonClick('add')"></am-button>
-        <template v-else>
-          <am-button size="small" text="提交修改" @click="buttonClick('edit')"></am-button>
-          <am-button size="small" text="删除班级" type="warning" style="margin-left: 10px" @click="buttonClick('del')"></am-button>
-        </template>
+    <template v-if="editIndex > -2">
+      <div class="form-header">
+        <text class="form-header-title">{{formTitle}}</text>
       </div>
-    </scroller>
+      <scroller class="form">
+        <bui-list-item label="名称" >
+          <input :value="formData.classesname" @input="formData.classesname = $event.value" slot="title" class="form-input" placeholder="班级名称" />
+        </bui-list-item>
+        <bui-list-item label="排序" >
+          <input :value="formData.listorder" @input="formData.listorder = $event.value" type="number" slot="title" class="form-input" />
+        </bui-list-item>
+        <bui-list-item label="开始时间" >
+          <input :value="formData.startdate" @input="formData.startdate = $event.value" type="date" slot="title" class="form-input" placeholder="0000-00-00" />
+        </bui-list-item>
+        <bui-list-item label="结束时间" >
+          <input :value="formData.enddate" @input="formData.enddate = $event.value" type="date" slot="title" class="form-input" placeholder="0000-00-00" />
+        </bui-list-item>
+        <div class="form-button">
+          <am-button v-if="editIndex === -1" size="small" text="添加班级" @click="buttonClick('add')"></am-button>
+          <template v-else>
+            <am-button size="small" text="提交修改" @click="buttonClick('edit')"></am-button>
+            <am-button size="small" text="删除班级" type="warning" style="margin-left: 10px" @click="buttonClick('del')"></am-button>
+          </template>
+        </div>
+      </scroller>
+    </template>
   </div>
 </template>
 
@@ -46,7 +48,8 @@
   background-color: red;
 }
 .list {
-  height: 600px;
+  // height: 600px;
+  flex: 1;
 }
 .form {
   height: 400px;
@@ -101,7 +104,7 @@ export default {
   },
   data () {
     return {
-      editIndex: -1,
+      editIndex: -2,
       lists: [],
       formData: { id: 0, classesname: '', listorder: 0, startdate: '', enddate: '' }
     }
