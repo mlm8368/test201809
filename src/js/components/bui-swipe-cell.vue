@@ -7,7 +7,7 @@
               </div>
           </slot>
       </div>
-      <div @click="_click" @swipe="_swipe($event)" :style="{'height': height}" class="bui-list-swipe-main" ref="swipedom">
+      <div @click="_click" @swipe="_swipe($event)" @shouldStopPropagation="_shouldStopPropagation" :style="{'height': height}" class="bui-list-swipe-main" ref="swipedom">
           <slot name="content">
               <text class="bui-list-title" v-if="title">{{title}}</text>
           </slot>
@@ -71,6 +71,9 @@ export default {
     _click() {
       this.$emit("click")
       this.close()
+    },
+    _shouldStopPropagation() {
+      return false
     },
     close(fn) {
       let translate = "translate(0px, 0px)";

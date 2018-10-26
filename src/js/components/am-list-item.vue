@@ -1,5 +1,5 @@
 <template>
-  <div class="am-list-item" :class="itemClass" @click="handleClick">
+  <div class="am-list-item" :class="itemClass">
     <slot name="thumb">
       <image
         v-if="thumb"
@@ -9,9 +9,9 @@
       />
     </slot>
     <div class="am-list-line" :class="lineClass">
-      <div v-if="!!title" :class="['am-list-content', `am-list-content-text-${titleNumber}`]">
+      <div v-if="!!title" :class="['am-list-content']">
         <slot name="title">
-          <text class="am-list-content-text" :class="contentTextClass">{{title}}</text>
+          <text class="am-list-content-text" :class="[contentTextClass, `am-list-content-text-${titleNumber}`]" @click="handleClick">{{title}}</text>
         </slot>
         <slot name="brief">
           <text class="am-list-content-brief" v-if="brief">{{brief}}</text>
@@ -101,7 +101,7 @@ export default {
     },
     itemClass() {
       return makeClassList({
-        "am-list-item-tap": this.tapActive,
+        // "am-list-item-tap": this.tapActive,
         "am-list-item-first": !this.noBorder && this._isFirstChild,
         "am-list-item-last": !this.noBorder && this._isLastChild
       })
@@ -118,6 +118,7 @@ export default {
     },
     contentTextClass() {
       return makeClassList({
+        "am-list-item-tap": this.tapActive,
         "am-list-content-text-disabled": this.titleDisabled
       })
     }

@@ -23,6 +23,7 @@
         <am-list-item
           slot="content"
           :title="i.truename" 
+          title-number="6"
           :brief="i.teacherpost"
           arrow="empty"
           @click="listClick('teacher', index)">
@@ -43,6 +44,7 @@
           <am-list-item
           slot="content"
           :title="i.babyname" 
+          title-number="6"
           :brief="i.age"
           arrow="empty"
           @click="listClick('student', index)">
