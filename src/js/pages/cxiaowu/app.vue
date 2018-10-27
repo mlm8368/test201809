@@ -69,11 +69,12 @@ import Publish from './publish.vue'
 
 export default {
   name: 'cxiaowuApp',
+  store,
   components: { 
     AmIcon, AmNavBar, AmPopup,
-    'page-home': function (resolve) { resolve(Home) },
     'popup-profile': function (resolve) { resolve(Profile) },
-    'popup-publish': function (resolve) { resolve(Publish) }
+    'popup-publish': function (resolve) { resolve(Publish) },
+    'page-home': function (resolve) { resolve(Home) }
   },
   data () {
     return {
@@ -107,7 +108,7 @@ export default {
       })
     })
     
-    //this.navbarClick('publish') // test
+    //this.navbarClick('profile') // test
     //this.openDialog('student', 'add') // test
   },
   methods: {

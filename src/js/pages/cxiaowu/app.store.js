@@ -14,9 +14,7 @@ export default new Vuex.Store({
     init (state, Vue) {
       app.setVue(Vue)
       const schoolid = app.getStorage(app.appStorageKey.userid)
-      if (schoolid) {
-        state.schoolid = schoolid
-      }
+      if (schoolid) state.schoolid = schoolid
 
       // app.log(state)
     },

@@ -7,7 +7,8 @@ export const appCacheKey = {
   school_cjiaowu_classes: 401,
   school_cjiaowu_teachers: 402,
   school_cjiaowu_students: 403,
-  school_cjiaowu_staffs: 404
+  school_cjiaowu_staffs: 404,
+  school_cxiaowu_userinfo: 405
 }
 export const appStorageKey = {
   app: 'h000-007', // home

@@ -18,7 +18,7 @@ import Home from './home.class'
 const home = new Home()
 
 export default {
-  name: 'cjiaowuHome',
+  name: 'home',
   components: {
     AmIcon, AmButton, BuiSwipeCell, AmList, AmListItem, WxcPartLoading,
     'dialog-teacher-add': function (resolve) { resolve(TeacherAdd) },

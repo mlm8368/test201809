@@ -27,6 +27,8 @@
 
 .school {
   width: 500px;
+  flex: 1;
+  background-color: red;
 
   &-avatar {
     width: 80px;
