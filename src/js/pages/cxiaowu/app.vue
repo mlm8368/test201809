@@ -8,8 +8,8 @@
       :background-color="navBarBgColor"
       :left-btn = "['profile']"
       :right-btn="['home', {is: 'text', text: '发布', key: 'publish'}]"
-      @click="navbarClick" />
-    <div class="warp" :style="{'top': homeTop}">
+      @click="navbarClick"></am-nav-bar>
+    <div class="pagewarp" :style="{'top': homeTop}">
       <keep-alive>
         <component :is="currentPageComponent"></component>
       </keep-alive>
@@ -47,7 +47,7 @@
 @import "../../../css/variable.less";
 @import "../../../css/dialog.less";
 
-.warp {
+.pagewarp {
   position: absolute;
   top: 0;
   right: 0;
@@ -108,7 +108,7 @@ export default {
       })
     })
     
-    //this.navbarClick('profile') // test
+    this.navbarClick('profile') // test
     //this.openDialog('student', 'add') // test
   },
   methods: {

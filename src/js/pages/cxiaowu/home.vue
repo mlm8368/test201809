@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <scroller>
     <slider class="banner" interval="3000" auto-play="true" show-indicators="true">
       <div class="banner-frame" v-for="(img, index) in bannerImgList" :key="index">
         <image class="banner-frame-image" resize="cover" :src="img"></image>
@@ -15,7 +15,7 @@
       :data="gridList" 
       :column-num="4"
       :has-line="false"></am-grid>
-  </div>
+  </scroller>
 </template>
 
 <style lang="less" scoped>
@@ -94,10 +94,10 @@ export default {
     return {
       bannerImgList: [],
       gridList: [
-        { icon: 'bmlocal://assets/tmp/kh.png', text: '公告'},
-        { icon: 'bmlocal://assets/tmp/news.png', text: '新闻'},
+        { icon: 'bmlocal://assets/tmp/kh.png', text: '学校公告'},
+        { icon: 'bmlocal://assets/tmp/news.png', text: '学校新闻'},
         { icon: 'bmlocal://assets/tmp/news.png', text: '签到'},
-        { icon: 'bmlocal://assets/tmp/news.png', text: '菜谱'},
+        { icon: 'bmlocal://assets/tmp/news.png', text: '本周菜谱'}
       ]
     }
   },

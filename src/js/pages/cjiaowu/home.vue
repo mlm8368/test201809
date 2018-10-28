@@ -9,10 +9,12 @@
         <text class="banji-info-num">{{totalStudent}}人</text>
     </div>
     <list class="banji-list">
-      <header class="banji-list-header">
-        <text class="banji-list-header-teacher">班级老师</text>
-        <am-icon @click="getTeacherLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
-        <am-icon @click="openDialog('teacher')" class="banji-list-header-plus" type="plus" size="sm" />
+      <header>
+        <div class="banji-list-header">
+          <text class="banji-list-header-teacher">班级老师</text>
+          <am-icon @click="getTeacherLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
+          <am-icon @click="openDialog('teacher')" class="banji-list-header-plus" type="plus" size="sm" />
+        </div>
       </header>
       <cell v-if="teacherListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 
@@ -30,10 +32,12 @@
             <image slot="extra" :src="i.avatar" class="banji-list-avatar"></image>
           </am-list-item>
         </bui-swipe-cell>
-      <header class="banji-list-header">
-        <text class="banji-list-header-student">班级学生</text>
-        <am-icon @click="getStudentLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
-        <am-icon @click="openDialog('student')" class="banji-list-header-plus" type="plus" size="sm" />
+      <header>
+        <div class="banji-list-header">
+          <text class="banji-list-header-student">班级学生</text>
+          <am-icon @click="getStudentLists('refresh')" class="banji-list-header-reload" type="reload" size="sm" />
+          <am-icon @click="openDialog('student')" class="banji-list-header-plus" type="plus" size="sm" />
+        </div>
       </header>
       <cell v-if="studentListsLoading" class="banji-list-loading"><wxc-part-loading show="true"></wxc-part-loading></cell>
       <bui-swipe-cell 

@@ -1,7 +1,13 @@
 <template>
   <text
+    v-if="hasClick"
     @click="_click"
-    v-if="type"
+    class="am-icon"
+    :class="iconClass"
+    :style="iconStyle"
+  >{{Icon[type] || type}}</text>
+  <text
+    v-else
     class="am-icon"
     :class="iconClass"
     :style="iconStyle"
@@ -15,7 +21,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: null
+      default: 'home'
     },
     size: {
       type: [String, Number],
@@ -28,6 +34,10 @@ export default {
     fontFamily: {
       type: String,
       default: 'SchoolIconFont'
+    },
+    hasClick: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

@@ -10,6 +10,7 @@
         >
           <am-icon
             v-if="item.is === 'icon'"
+            :has-click="false"
             :type="item.type"
             :class="['am-nav-bar-btn-icon', `am-nav-bar-${mode}-btn-icon`]"
             :style="{ color: textColor }"
@@ -36,6 +37,7 @@
         >
           <am-icon
             v-if="item.is === 'icon'"
+            :has-click="false"
             :type="item.type"
             :class="['am-nav-bar-btn-icon', `am-nav-bar-${mode}-btn-icon`]"
             :style="{ color: textColor }"

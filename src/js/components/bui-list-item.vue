@@ -56,7 +56,7 @@
 .cell-label-text {
   font-size: 30px;
   color: @input-label-color;
-  width: 150px;
+  width: 160px;
   margin-right: 10px;
   text-align: right;
 }
