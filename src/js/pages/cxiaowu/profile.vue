@@ -3,6 +3,18 @@
     <div class="school-name">
       <image class="school-name-avatar" :src="schoolInfo.thumb" :placeholder="defaultAvatar"></image>
       <text class="school-name-shortname">{{schoolInfo.passport}}</text>
+      <div class="school-vip">
+        <text class="school-vip-label">普通会员</text>
+        <text class="school-vip-value school-vip-link" @click="goPage('grade')">升级为VIP</text>
+      </div>
+      <div class="school-vip">
+        <text class="school-vip-label">VIP会员</text>
+        <text class="school-vip-value">第 1 年</text>
+      </div>
+      <div class="school-edit">
+        <text class="school-edit-label" @click="goPage('profile-edit')">修改资料</text>
+        <text class="school-edit-value" @click="goPage('password-edit')">修改密码</text>
+      </div>
     </div>
     <list>
       <header>
@@ -10,13 +22,18 @@
           <text class="school-header-title">身份认证</text>
         </div>
       </header>
-      <cell><bui-list-item title="未认证" label="学校认证"></bui-list-item></cell>
-      <cell><bui-list-item title="未认证" label="手机认证"></bui-list-item></cell>
-      <cell><bui-list-item title="未认证" label="邮箱认证"></bui-list-item></cell>
+      <cell><bui-list-item label="学校认证">
+        <text slot="title" class="school-validate" @click="goPage('validate', 'school')">未认证</text>
+      </bui-list-item></cell>
+      <cell><bui-list-item label="手机认证">
+        <text slot="title" class="school-validate" @click="goPage('validate', 'mobile')">未认证</text>
+      </bui-list-item></cell>
+      <cell><bui-list-item label="邮箱认证">
+        <text slot="title" class="school-validate" @click="goPage('validate', 'email')">未认证</text>
+      </bui-list-item></cell>
       <header>
         <div class="school-header">
           <text class="school-header-title">联系方式</text>
-          <text class="school-header-edit">修改资料</text>
         </div>
       </header>
       <cell><bui-list-item :title="schoolInfo.company" label="学校全称"></bui-list-item></cell>
@@ -62,6 +79,43 @@
     }
   }
 
+  &-vip,&-edit {
+    width: 500px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: @v-spacing-xs;
+
+    &-label {
+      flex: 1;
+      padding-left: @h-spacing-md;
+      padding-right: @h-spacing-sm;
+      border-right-width: @border-width-lg;
+      border-right-style: solid;
+      border-right-color: @border-color-base;
+      text-align: right;
+    }
+    &-value {
+      flex: 1;
+      padding-left: @h-spacing-sm;
+      padding-right: @h-spacing-md;
+    }
+  }
+  
+  &-vip {
+    &-link:active {
+      background-color: @fill-tap;
+    }
+  }
+  &-edit {
+    &-label:active {
+      background-color: @fill-tap;
+    }
+    &-value:active {
+      background-color: @fill-tap;
+    }
+  }
+
   &-header {
     flex-direction: row;
     align-items: center;
@@ -74,19 +128,10 @@
       color: @color-text-base-inverse;
     }
 
-    &-edit {
-      color: @color-text-base-inverse;
-      position: absolute;
-      right: @page-padding-spacing;
-      width: 150px;
-      height: @list-title-height;
-      line-height: @list-title-height;
-      text-align: center;
-    }
+  }
 
-    &-edit:active {
-      background-color: @fill-tap;
-    }
+  &-validate:active {
+    background-color: @fill-tap;
   }
 }
 </style>
@@ -110,7 +155,7 @@ export default {
     defaultAvatar: function() {
       return profile.getAvatar()
     },
-    ...mapState(['schoolid'])
+    ...mapState(['schoolid', 'profileStatus'])
   },
   created() {
     profile.setVue(this)
@@ -118,6 +163,21 @@ export default {
     profile.getSchool((userinfo) => {
       this.schoolInfo = profile.outSchool(userinfo)
     })
+  },
+  watch: {
+    profileStatus: function() {
+      profile.getSchool((userinfo) => {
+        this.schoolInfo = profile.outSchool(userinfo)
+      })
+    }
+  },
+  methods: {
+    goPage(type, param) {
+      const apppage = { type: type, params: null }
+      if (param) apppage.params = { vkind: param }
+      this.$store.commit('setAppPage', apppage)
+      this.$emit('closePopup')
+    }
   }
 }
 </script>

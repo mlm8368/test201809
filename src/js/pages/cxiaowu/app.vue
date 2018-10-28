@@ -60,12 +60,17 @@
 
 <script>
 import store from './app.store'
+import { mapState } from 'vuex'
 import AmIcon from '../../components/am-icon.vue'
 import AmNavBar from '../../components/am-nav-bar.vue'
 import AmPopup from '../../components/am-popup.vue'
-import Home from './home.vue'
 import Profile from './profile.vue'
 import Publish from './publish.vue'
+import Home from './home.vue'
+import Grade from './grade.vue'
+import ProfileEdit from './profile-edit.vue'
+import PasswordEdit from './password-edit.vue'
+import Validate from './validate.vue'
 
 export default {
   name: 'cxiaowuApp',
@@ -74,13 +79,17 @@ export default {
     AmIcon, AmNavBar, AmPopup,
     'popup-profile': function (resolve) { resolve(Profile) },
     'popup-publish': function (resolve) { resolve(Publish) },
-    'page-home': function (resolve) { resolve(Home) }
+    'page-home': function (resolve) { resolve(Home) },
+    'page-grade': function (resolve) { resolve(Grade) },
+    'page-profile-edit': function (resolve) { resolve(ProfileEdit) },
+    'page-password-edit': function (resolve) { resolve(PasswordEdit) },
+    'page-validate': function (resolve) { resolve(Validate) }
   },
   data () {
     return {
       statusBarHeight: weex.config.eros.statusBarHeight,
       navBarBgColor: '#108ee9',
-      page: { type: 'home' },
+      page: { type: 'home', params: null },
       dialog: { width: '700px', height: '800px', title: '窗口', type: 'teacher', op: 'view', index: 0 },
       popup: { show: false, position: 'right', type: 'profile' },
       homeTop: 150
@@ -95,6 +104,16 @@ export default {
     },
     currentPopupComponent: function () {
       return `popup-${this.popup.type}`
+    },
+    ...mapState(['apppage', 'appdialog'])
+  },
+  watch: {
+    apppage: function(apppage) {
+      this.page = apppage
+    },
+    appdialog: function(appdialog) {
+      if (appdialog.action === 'open') this.openDialog(appdialog.type, appdialog.op, appdialog.index)
+      else if (appdialog.action === 'close') this.closeDialog()
     }
   },
   created () {
@@ -108,7 +127,7 @@ export default {
       })
     })
     
-    this.navbarClick('profile') // test
+    //this.navbarClick('profile') // test
     //this.openDialog('student', 'add') // test
   },
   methods: {

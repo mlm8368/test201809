@@ -7,8 +7,10 @@ const app = new App()
 
 export default new Vuex.Store({
   state: {
+    apppage: { type: 'home', params: null },
     appdialog: { action: 'open/close', type: 'teacher', op: 'add', index: 0 },
-    schoolid: 0
+    schoolid: 0,
+    profileStatus: 0
   },
   mutations: {
     init (state, Vue) {
@@ -18,8 +20,14 @@ export default new Vuex.Store({
 
       // app.log(state)
     },
+    setAppPage (state, apppage) {
+      state.apppage = apppage
+    },
     setAppDialog (state, appdialog) {
       state.appdialog = appdialog
+    },
+    updateProfileStatus (state) {
+      state.profileStatus++
     }
   }
 })
