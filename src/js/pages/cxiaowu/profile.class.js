@@ -25,6 +25,7 @@ export default class Profile extends App {
     tmp['mobile'] = one.mobile
     tmp['qq'] = one.qq
     tmp['wx'] = one.wx
+    tmp['vip'] = one.vip
     return tmp
   }
 }

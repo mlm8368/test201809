@@ -17,7 +17,6 @@
       </div>
     </div>
     <list>
-      <template v-if="schoolInfo.vip">
       <header>
         <div class="school-header header">
           <text class="school-header-title header-cell">VIP信息</text>
@@ -25,12 +24,11 @@
         </div>
       </header>
       <cell><bui-list-item label="VIP级别">
-        <image slot="title" class="school-validate"></image>
+        <image slot="title" :src="defaultAvatar"></image>
       </bui-list-item></cell>
-      <cell><bui-list-item label="服务开始" :title="schoolInfo.vip.startdate"></bui-list-item></cell>
-      <cell><bui-list-item label="服务结束" :title="schoolInfo.vip.enddate"></bui-list-item></cell>
-      <cell><bui-list-item label="剩余天数" :title="schoolInfo.vip.leftday"></bui-list-item></cell>
-      </template>
+      <cell><bui-list-item :title="schoolInfo.vip.startdate" label="服务开始"></bui-list-item></cell>
+      <cell><bui-list-item :title="schoolInfo.vip.enddate" label="服务结束"></bui-list-item></cell>
+      <cell><bui-list-item :title="schoolInfo.vip.leftday" label="剩余天数"></bui-list-item></cell>
       <header>
         <div class="school-header header">
           <text class="school-header-title header-cell">身份认证</text>
@@ -116,7 +114,7 @@
     }
     
     &-edit {
-      width: 70px;
+      width: 150px;
       text-align: center;
     }
 

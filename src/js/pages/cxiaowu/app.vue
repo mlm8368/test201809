@@ -127,7 +127,7 @@ export default {
       })
     })
     
-    //this.navbarClick('profile') // test
+    this.navbarClick('profile') // test
     //this.openDialog('student', 'add') // test
   },
   methods: {
