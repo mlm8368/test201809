@@ -20,7 +20,7 @@
       <header>
         <div class="school-header header">
           <text class="school-header-title header-cell">VIP信息</text>
-          <text class="school-header-edit header-cell right link" @click="goPage('vip')">服务续费</text>
+          <text class="school-header-edit header-cell right link" @click="goPage('grade')">服务续费</text>
         </div>
       </header>
       <cell><bui-list-item label="VIP级别">
