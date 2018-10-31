@@ -4,8 +4,28 @@
   background-color: @fill-tap;
 }
 
-.listHeader() {
+.right {
+  position: absolute;
+  right: @page-padding-spacing;
+}
+
+.header() {
   flex-direction: row;
   align-items: center;
   background-color: @brand-primary;
+  
+  &-cell {
+    height: @list-title-height;
+    line-height: @list-title-height;
+    color: @color-text-base-inverse;
+  }
 }
+
+.avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border-width: @border-width-sm;
+      border-style: solid;
+      border-color: @border-color-base;
+    }

@@ -1,27 +1,27 @@
 <template>
   <div class="school">
     <div class="school-name">
-      <image class="school-name-avatar" :src="schoolInfo.thumb" :placeholder="defaultAvatar"></image>
+      <image class="avatar" :src="schoolInfo.thumb" :placeholder="defaultAvatar"></image>
       <text class="school-name-shortname">{{schoolInfo.passport}}</text>
       <div class="school-vip">
         <text class="school-vip-label">普通会员</text>
-        <text class="school-vip-value school-vip-link" @click="goPage('grade')">升级为VIP</text>
+        <text class="school-vip-value link" @click="goPage('grade')">升级为VIP</text>
       </div>
       <div class="school-vip">
         <text class="school-vip-label">VIP会员</text>
         <text class="school-vip-value">第 1 年</text>
       </div>
       <div class="school-edit">
-        <text class="school-edit-label" @click="goPage('profile-edit')">修改资料</text>
-        <text class="school-edit-value" @click="goPage('password-edit')">修改密码</text>
+        <text class="school-edit-label link" @click="goPage('profile-edit')">修改资料</text>
+        <text class="school-edit-value link" @click="goPage('password-edit')">修改密码</text>
       </div>
     </div>
     <list>
       <template v-if="schoolInfo.vip">
       <header>
-        <div class="school-header">
-          <text class="school-header-title">VIP信息</text>
-          <text class="school-header-edit link" @click="goPage('vip')">服务续费</text>
+        <div class="school-header header">
+          <text class="school-header-title header-cell">VIP信息</text>
+          <text class="school-header-edit header-cell right link" @click="goPage('vip')">服务续费</text>
         </div>
       </header>
       <cell><bui-list-item label="VIP级别">
@@ -32,22 +32,22 @@
       <cell><bui-list-item label="剩余天数" :title="schoolInfo.vip.leftday"></bui-list-item></cell>
       </template>
       <header>
-        <div class="school-header">
-          <text class="school-header-title">身份认证</text>
+        <div class="school-header header">
+          <text class="school-header-title header-cell">身份认证</text>
         </div>
       </header>
       <cell><bui-list-item label="学校认证">
-        <text slot="title" class="school-validate" @click="goPage('validate', 'school')">未认证</text>
+        <text slot="title" class="link" @click="goPage('validate', 'school')">未认证</text>
       </bui-list-item></cell>
       <cell><bui-list-item label="手机认证">
-        <text slot="title" class="school-validate" @click="goPage('validate', 'mobile')">未认证</text>
+        <text slot="title" class="link" @click="goPage('validate', 'mobile')">未认证</text>
       </bui-list-item></cell>
       <cell><bui-list-item label="邮箱认证">
-        <text slot="title" class="school-validate" @click="goPage('validate', 'email')">未认证</text>
+        <text slot="title" class="link" @click="goPage('validate', 'email')">未认证</text>
       </bui-list-item></cell>
       <header>
-        <div class="school-header">
-          <text class="school-header-title">联系方式</text>
+        <div class="school-header header">
+          <text class="school-header-title header-cell">联系方式</text>
         </div>
       </header>
       <cell><bui-list-item :title="schoolInfo.company" label="学校全称"></bui-list-item></cell>
@@ -68,6 +68,7 @@
 
 <style lang="less" scoped>
 @import "../../../css/variable.less";
+@import "../../../css/common.less";
 
 .school {
   width: 500px;
@@ -80,14 +81,6 @@
     padding-top: 20px;
     padding-bottom: 20px;
 
-    &-avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border-width: @border-width-sm;
-      border-style: solid;
-      border-color: @border-color-base;
-    }
     &-shortname {
       margin-top: @v-spacing-xs;
     }
@@ -115,37 +108,18 @@
       padding-right: @h-spacing-md;
     }
   }
-  
-  &-vip {
-    &-link:active {
-      background-color: @fill-tap;
-    }
-  }
-  &-edit {
-    &-label:active {
-      background-color: @fill-tap;
-    }
-    &-value:active {
-      background-color: @fill-tap;
-    }
-  }
 
   &-header {
-    flex-direction: row;
-    align-items: center;
-    background-color: @brand-primary;
 
     &-title {
-      height: @list-title-height;
-      line-height: @list-title-height;
       padding-left: @page-padding-spacing;
-      color: @color-text-base-inverse;
+    }
+    
+    &-edit {
+      width: 70px;
+      text-align: center;
     }
 
-  }
-
-  &-validate:active {
-    background-color: @fill-tap;
   }
 }
 </style>
