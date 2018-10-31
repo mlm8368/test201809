@@ -1,5 +1,9 @@
 @import "./variable.less";
 
+.page-left-padded {
+  padding-left: @page-padding-spacing;
+}
+
 .link:active {
   background-color: @fill-tap;
 }
@@ -29,3 +33,9 @@
   border-style: solid;
   border-color: @border-color-base;
 }
+
+.input {
+  height: @input-font-size + 20px;
+  font-size: @input-font-size;
+  tint-color: @input-tint-color;
+} 
