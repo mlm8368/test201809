@@ -42,7 +42,6 @@
 </style>
 
 <script>
-import { mapState } from 'vuex'
 import FormMixins from '../../class/form.mixins'
 import BuiListItem from '../../components/bui-list-item.vue'
 import AmButton from '../../components/am-button.vue'
@@ -54,12 +53,6 @@ export default {
   name: 'password-edit',
   components: { BuiListItem, AmButton },
   mixins: [FormMixins],
-  computed: {
-    defaultAvatar: function() {
-      return password.getAvatar()
-    },
-    ...mapState(['schoolid', 'profileStatus'])
-  },
   data () {
     return {
       formData: {password: '', newpassword: '', newpassword1: ''}
