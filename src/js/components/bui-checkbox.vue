@@ -85,6 +85,10 @@
                 type: String,
                 default:"check-square"
             },
+            "keyName": {
+                type: String,
+                default:""
+            }
         },
         mounted(){
         },
@@ -168,7 +172,7 @@
                     }
                     //this.$emit('selected', this.value , this.newItems.filter(item => item.selected));
                     //this.$emit('input', this.value, this.newItems.filter(item => item.selected));
-                    this.$emit("change", this.value, this.newItems.filter(item => item.selected));
+                    this.$emit("change", this.value, this.newItems.filter(item => item.selected), this.keyName);
                 }
             },
             //筛选时数据渲染

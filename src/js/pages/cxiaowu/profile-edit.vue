@@ -31,7 +31,7 @@
         <input  :value="formData.thumb" @input="onInput('thumb', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
       </bui-list-item></cell>
       <cell><bui-list-item label="经营模式" >
-        <bui-checkbox slot="title" v-model="formData.mode" :items="modeItems" @change="onModeChange"></bui-checkbox>
+        <bui-checkbox slot="title" key-name="mode" v-model="checkbox.mode.value" :items="checkbox.mode.items" @change="onCheckboxChange"></bui-checkbox>
       </bui-list-item></cell>
       <cell><bui-list-item label="学校规模" >
         <input  :value="formData.size" @input="onInput('size', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
@@ -153,7 +153,7 @@ export default {
         type: '', 
         catid: 0, 
         business: '',
-        mode: '2'
+        mode: ''
       },
       picker: {
         key: '',
@@ -162,15 +162,18 @@ export default {
         data: [],
         value: []
       },
+      checkbox: {
+        mode: {
+          value: [],
+          items: PickerData.mode
+        }
+      },
       catname: ''
     }
   },
   computed: {
     defaultAvatar: function() {
       return password.getAvatar()
-    },
-    modeItems: function() {
-      return PickerData.mode
     },
     ...mapState(['schoolid'])
   },
@@ -195,9 +198,15 @@ export default {
       this.formData[this.picker.key] = values[0]
       if (this.picker.key === 'catid') this.catname = labels[0]
     },
-    onModeChange (value, item) {
-      profile.log(value)
-      profile.log(item)
+    onCheckboxChange (value, item, key) {
+      if (item.length > 0) {
+        let _value = []
+
+        item.forEach(one => {
+          _value.push(one.title)
+        })
+        this.formData[key] = _value.join()
+      }
     }
   }
 }
