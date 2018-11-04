@@ -52,7 +52,9 @@ export default {
         'close-circle': '\ue77d',
         'search': '\ue7e3',
         'scan': '\ue7d4',
-        'notification': '\ue7da'
+        'notification': '\ue7da',
+        'check-square': '\ue7a8',
+        'check-square-fill': '\ue84b'
       }
     }
   },
@@ -80,7 +82,7 @@ export default {
     dom.addRule('fontFace', {
       'fontFamily': 'SchoolIconFont',
       //'src': "url('bmlocal://iconfont/iconfont-school.ttf')"
-      'src': "url('https://at.alicdn.com/t/font_849649_2u90wlud0bb.ttf')"
+      'src': "url('https://at.alicdn.com/t/font_849649_fpcat7wscqg.ttf')"
     })
   },
   methods: {
