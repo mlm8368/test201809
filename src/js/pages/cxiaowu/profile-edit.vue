@@ -34,10 +34,17 @@
         <bui-checkbox slot="title" key-name="mode" v-model="checkbox.mode.value" :items="checkbox.mode.items" @change="onCheckboxChange"></bui-checkbox>
       </bui-list-item></cell>
       <cell><bui-list-item label="学校规模" >
-        <input  :value="formData.size" @input="onInput('size', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
+        <div slot="title" @click="showPicker('size', '学校规模')">
+          <text v-if="formData.size">{{formData.size}}</text>
+          <text v-else>请选择</text>
+        </div>
       </bui-list-item></cell>
       <cell><bui-list-item label="注册资本" >
-        <input  :value="formData.regunit" @input="onInput('regunit', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
+        <div slot="title" @click="showPicker('regunit', '注册资本')">
+          <text v-if="formData.regunit">{{formData.regunit}}</text>
+          <text v-else>请选择</text>
+          <input  :value="formData.capital" @input="onInput('capital', $event)" class="input" type="number" placeholder="需6位以上" />
+        </div>
       </bui-list-item></cell>
       <cell><div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
       <header>
@@ -136,7 +143,7 @@ import BuiListItem from '../../components/bui-list-item.vue'
 import AmPicker from '../../components/am-picker.vue'
 import BuiCheckbox from '../../components/bui-checkbox.vue'
 import AmButton from '../../components/am-button.vue'
-import { PickerData } from './profile-edit.config'
+import { PickerData, CheckboxData } from './profile-edit.config'
 import ProfileEdit from './profile-edit.class'
 
 const tool = weex.requireModule('bmTool')
@@ -153,7 +160,10 @@ export default {
         type: '', 
         catid: 0, 
         business: '',
-        mode: ''
+        mode: '',
+        size: '',
+        regunit: '',
+        capital: 0
       },
       picker: {
         key: '',
@@ -165,7 +175,7 @@ export default {
       checkbox: {
         mode: {
           value: [],
-          items: PickerData.mode
+          items: CheckboxData.mode
         }
       },
       catname: ''

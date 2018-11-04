@@ -19,6 +19,30 @@ export const PickerData = {
       { label: '画画培训班', value: 13 }
     ]
   ],
+  size: [
+    [
+      { label: '1-9人', value: '1-9人' },
+      { label: '10-29人', value: '10-29人' },
+      { label: '30-49人', value: '30-49人' },
+      { label: '50-99人', value: '50-99人' },
+      { label: '100-300人', value: '100-300人' },
+      { label: '300-500人', value: '300-500人' },
+      { label: '500-1000人', value: '500-1000人' },
+      { label: '1000人以上', value: '1000人以上' }
+    ]
+  ],
+  regunit: [
+    [
+      { label: '人民币', value: '人民币' },
+      { label: '港元', value: '港元' },
+      { label: '美元', value: '美元' },
+      { label: '欧元', value: '欧元' },
+      { label: '英镑', value: '英镑' }
+    ]
+  ]
+}
+
+export const CheckboxData = {
   mode: [
     { value: '1', title: '全日制教学' },
     { value: '2', title: '培训班' },
