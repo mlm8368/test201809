@@ -129,7 +129,7 @@ export default {
     
     //this.navbarClick('profile') // test
     //this.openDialog('student', 'add') // test
-    this.page.type = 'password-edit'
+    this.page.type = 'profile-edit'
   },
   methods: {
     navbarClick(key) {

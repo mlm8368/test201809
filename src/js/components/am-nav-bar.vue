@@ -62,11 +62,11 @@ export default {
   props: {
     backgroundColor: {
       type: String,
-      default: '#FFC900'
+      default: '#108ee9'
     },
     textColor: {
       type: String,
-      default: '#3D3D3D'
+      default: '#ffffff'
     },
     mode: {
       type: String,

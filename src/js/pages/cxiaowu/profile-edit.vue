@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile">
     <image class="avatar"></image>
     <text>阳光美稚</text>
     <list>
@@ -9,8 +9,11 @@
         </div>
       </header>
       <cell><bui-list-item label="学校全称" title="北京阳光雅稚幼儿园" ></bui-list-item></cell>
-      <cell><bui-list-item label="学校类型" >
-        <input  :value="formData.type" @input="onInput('type', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
+      <cell><bui-list-item label="学校类型">
+        <div slot="title" @click="showPicker('type', '学校类型')">
+          <text v-if="formData.type">{{formData.type}}</text>
+          <text v-else>请选择</text>
+        </div>
       </bui-list-item></cell>
       <cell><bui-list-item label="主营行业" >
         <input  :value="formData.catid" @input="onInput('catid', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
@@ -108,6 +111,12 @@
       </bui-list-item></cell>
       <cell><div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
     </list>
+    <am-picker
+      :show.sync="picker.show"
+      :title="picker.title"
+      :data="picker.data"
+      v-model="picker.value"
+      @ok="onPickerOK"></am-picker>
   </div>
 </template>
 
@@ -121,14 +130,16 @@
 import { mapState } from 'vuex'
 import FormMixins from '../../class/form.mixins'
 import BuiListItem from '../../components/bui-list-item.vue'
+import AmPicker from '../../components/am-picker.vue'
 import AmButton from '../../components/am-button.vue'
+import { PickerData } from './profile-edit.config'
 import ProfileEdit from './profile-edit.class'
 
 const profile = new ProfileEdit()
 
 export default {
   name: 'profile-edit',
-  components: { BuiListItem, AmButton },
+  components: { BuiListItem, AmPicker, AmButton },
   mixins: [FormMixins],
   computed: {
     defaultAvatar: function() {
@@ -138,7 +149,18 @@ export default {
   },
   data () {
     return {
-      formData: {password: '', newpassword: '', newpassword1: ''}
+      formData: {
+        type: '', 
+        newpassword: '', 
+        newpassword1: ''
+      },
+      picker: {
+        key: '',
+        show: false,
+        title: '请选择',
+        data: [],
+        value: []
+      }
     }
   },
   created() {
@@ -147,6 +169,19 @@ export default {
   methods: {
     buttonClick () {
       profile.log(this.formData)
+    },
+    showPicker (key, title) {
+      this.picker.key = key
+      this.picker.title = title
+      this.picker.data = PickerData[key]
+      this.picker.value = []
+      if (this.formData[key]) this.picker.value.push(this.formData[key])
+      this.picker.show = true
+      //profile.log(this.pickerShow)
+    },
+    onPickerOK (values) {
+      profile.log(values)
+      this.formData[this.picker.key] = values[0]
     }
   }
 }
