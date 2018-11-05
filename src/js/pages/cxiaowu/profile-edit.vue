@@ -54,6 +54,12 @@
         </div>
       </header>
       <cell><bui-list-item label="学校地址" >
+        <div slot="title" @click="showPicker('areaid', '所在地区')">
+          <text v-if="formData.areaid">{{formData.areaid}}</text>
+          <text v-else>请选择</text>
+          <input  :value="formData.capital" @input="onInput('capital', $event)" class="input" type="number" placeholder="需6位以上" />
+          <text>万</text>
+        </div>
         <input :value="formData.address" @input="onInput('address', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
       </bui-list-item></cell>
       <cell><bui-list-item label="学校电话" >
@@ -161,13 +167,15 @@ export default {
   data () {
     return {
       formData: {
-        type: '', 
-        catid: 0, 
-        business: '',
-        mode: '',
-        size: '',
-        regunit: '',
-        capital: 0
+        type: '',  //公立学校,私立学校,培训机构,其他
+        catid: 0,  //幼教启蒙班,幼教小班,英语培训班,舞蹈培训班,武术培训班
+        business: '', //教学 培训 一对一培训
+        regyear: 2018,
+        mode: '', //全日制教学,培训班,一对一教学
+        size: '', //1-9人,10-29人
+        regunit: '', //人民币,美元
+        capital: 0, //万,
+        areaid: 0
       },
       picker: {
         key: '',

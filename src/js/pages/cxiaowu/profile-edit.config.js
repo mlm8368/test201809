@@ -45,6 +45,12 @@ export const PickerData = {
       { label: '男', value: 1 },
       { label: '女', value: 2 }
     ]
+  ],
+  areaid: [
+    [
+      { label: '北京', value: 1 },
+      { label: '上海', value: 2 }
+    ]
   ]
 }
 
