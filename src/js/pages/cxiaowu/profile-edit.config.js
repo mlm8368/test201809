@@ -39,6 +39,12 @@ export const PickerData = {
       { label: '欧元', value: '欧元' },
       { label: '英镑', value: '英镑' }
     ]
+  ],
+  gender: [
+    [
+      { label: '男', value: 1 },
+      { label: '女', value: 2 }
+    ]
   ]
 }
 
