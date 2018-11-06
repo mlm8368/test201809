@@ -1,4 +1,4 @@
-import { district } from '../../../json/district.json'
+import district from '../../../json/district.json'
 
 export const PickerData = {
   type: [

@@ -57,10 +57,8 @@
         <div slot="title" @click="showPicker('areaid', '所在地区')">
           <text v-if="formData.areaid">{{formData.areaid}}</text>
           <text v-else>请选择</text>
-          <input  :value="formData.capital" @input="onInput('capital', $event)" class="input" type="number" placeholder="需6位以上" />
-          <text>万</text>
+          <input :value="formData.address" @input="onInput('address', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
         </div>
-        <input :value="formData.address" @input="onInput('address', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
       </bui-list-item></cell>
       <cell><bui-list-item label="学校电话" >
         <input  :value="formData.telephone" @input="onInput('telephone', $event)" slot="title" class="input" type="number" placeholder="需6位以上" />
