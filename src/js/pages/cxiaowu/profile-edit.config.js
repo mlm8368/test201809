@@ -1,3 +1,5 @@
+import { district } from '../../../json/district.json'
+
 export const PickerData = {
   type: [
     [
@@ -46,12 +48,7 @@ export const PickerData = {
       { label: '女', value: 2 }
     ]
   ],
-  areaid: [
-    [
-      { label: '北京', value: 1 },
-      { label: '上海', value: 2 }
-    ]
-  ]
+  areaid: district
 }
 
 export const CheckboxData = {
