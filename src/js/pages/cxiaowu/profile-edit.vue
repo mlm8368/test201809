@@ -55,7 +55,7 @@
       </header>
       <cell><bui-list-item label="学校地址" >
         <div slot="title" @click="showPicker('areaid', '所在地区')">
-          <text v-if="formData.areaid">{{formData.areaid}}</text>
+          <text v-if="formData.areaid.length > 0">{{areaname}}</text>
           <text v-else>请选择</text>
           <input :value="formData.address" @input="onInput('address', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
         </div>
@@ -173,7 +173,7 @@ export default {
         size: '', //1-9人,10-29人
         regunit: '', //人民币,美元
         capital: 0, //万,
-        areaid: 0
+        areaid: []
       },
       picker: {
         key: '',
@@ -188,7 +188,8 @@ export default {
           items: CheckboxData.mode
         }
       },
-      catname: ''
+      catname: '',
+      areaname: ''
     }
   },
   computed: {
@@ -209,14 +210,20 @@ export default {
       this.picker.title = title
       this.picker.data = PickerData[key]
       this.picker.value = []
-      if (this.formData[key]) this.picker.value.push(this.formData[key])
+      if (key === 'areaid' && this.formData[key].length > 0) this.picker.value = this.formData[key]
+      else this.picker.value.push(this.formData[key])
       this.picker.show = true
 
       tool.resignKeyboard()
     },
     onPickerOK (values, labels) {
       this.formData[this.picker.key] = values[0]
-      if (this.picker.key === 'catid') this.catname = labels[0]
+      if (this.picker.key === 'catid') {
+        this.catname = labels[0]
+      } else if (this.picker.key === 'areaid') {
+        this.formData.areaid = values
+        this.areaname = labels[0] + labels[1] 
+      } 
     },
     onCheckboxChange (value, item, key) {
       if (item.length > 0) {
