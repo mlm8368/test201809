@@ -211,7 +211,7 @@ export default {
       this.picker.data = PickerData[key]
       this.picker.value = []
       if (key === 'areaid' && this.formData[key].length > 0) this.picker.value = this.formData[key]
-      else this.picker.value.push(this.formData[key])
+      else if(this.formData[key]) this.picker.value.push(this.formData[key])
       this.picker.show = true
 
       tool.resignKeyboard()
