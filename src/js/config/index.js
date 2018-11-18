@@ -11,8 +11,9 @@ new Widget({
         routes
     },
     ajax: {
-        baseUrl: 'http://v7.dog1314.com/appdata/1.1',
-        /**
+        baseUrl: 'http://localhost/appdata/1.1',
+	   //baseUrl: 'http://v7.dog1314.com/appdata/1.1',
+	/**
          * 接口别名
          */
         apis,

@@ -1,7 +1,9 @@
 <template>
   <div class="profile">
-    <image class="avatar"></image>
-    <text>阳光美稚</text>
+    <div class="profile-header">
+    	<image class="avatar"></image>
+    	<text>阳光美稚</text>
+    </div>
     <list>
       <header>
         <div class="header">
@@ -15,11 +17,8 @@
           <text v-else>请选择</text>
         </div>
       </bui-list-item></cell>
-      <cell><bui-list-item label="主营行业" >
-        <div slot="title" @click="showPicker('catid', '主营行业')">
-          <text v-if="formData.catid">{{catname}}</text>
-          <text v-else>请选择</text>
-        </div>
+      <cell><bui-list-item label="开设班级" class="profile-catid" >
+        <bui-checkbox slot="title" key-name="catid" v-model="checkbox.catid.value" :items="checkbox.catid.items" @change="onCheckboxChange"></bui-checkbox>
       </bui-list-item></cell>
       <cell><bui-list-item label="主营范围" >
         <input  :value="formData.business" @input="onInput('business', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
@@ -40,14 +39,14 @@
         </div>
       </bui-list-item></cell>
       <cell><bui-list-item label="注册资本" >
-        <div slot="title" @click="showPicker('regunit', '注册资本')">
+        <div slot="title" @click="showPicker('regunit', '注册资本')" class="profile-capital">
           <text v-if="formData.regunit">{{formData.regunit}}</text>
           <text v-else>请选择</text>
-          <input  :value="formData.capital" @input="onInput('capital', $event)" class="input" type="number" placeholder="需6位以上" />
-          <text>万</text>
         </div>
+        <input  :value="formData.capital" @input="onInput('capital', $event)" class="input" type="number" placeholder="需6位以上" />
+        <text>万</text>
       </bui-list-item></cell>
-      <cell><div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
+      <cell><div class="button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
       <header>
         <div class="header">
           <text class="header-cell page-left-padded">联系方式</text>
@@ -75,10 +74,10 @@
       <cell><bui-list-item label="微信公众号" >
         <input  :value="formData.gzh" @input="onInput('gzh', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
       </bui-list-item></cell>
-      <cell><bui-list-item label="公众号二维码" >
+      <cell><bui-list-item label="二维码" >
         <input  :value="formData.gzhqr" @input="onInput('gzhqr', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
       </bui-list-item></cell>
-      <cell><div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
+      <cell><div class="button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
       <header>
         <div class="header">
           <text class="header-cell page-left-padded">学校简介</text>
@@ -87,7 +86,7 @@
       <cell><bui-list-item label="学校简介" >
         <textarea :value="formData.password" @input="onInput('password', $event)" slot="title" class="textarea" placeholder="需6位以上"></textarea>
       </bui-list-item></cell>
-      <cell><div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
+      <cell><div class="button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
       <header>
         <div class="header">
           <text class="header-cell page-left-padded">管理员</text>
@@ -121,7 +120,7 @@
       <cell><bui-list-item label="微信" >
         <input  :value="formData.wx" @input="onInput('wx', $event)" slot="title" class="input" type="text" placeholder="需6位以上" />
       </bui-list-item></cell>
-      <cell><div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
+      <cell><div class="button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
     </list>
     <am-picker
       :show.sync="picker.show"
@@ -136,6 +135,25 @@
 @import "../../../css/variable.less";
 @import "../../../css/common.less";
 
+.profile {
+  &-header {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  &-catid {
+    height: 100px;
+  }
+  &-capital {
+    width: 100px;
+    background-color: red;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
 </style>
 
 <script>
@@ -180,9 +198,12 @@ export default {
         mode: {
           value: [],
           items: CheckboxData.mode
+        },
+        catid: {
+          value: [],
+          items: CheckboxData.catid
         }
       },
-      catname: '',
       areaname: ''
     }
   },
@@ -212,9 +233,7 @@ export default {
     },
     onPickerOK (values, labels) {
       this.formData[this.picker.key] = values[0]
-      if (this.picker.key === 'catid') {
-        this.catname = labels[0]
-      } else if (this.picker.key === 'areaid') {
+      if (this.picker.key === 'areaid') {
         this.formData.areaid = values
         this.areaname = labels[0] + labels[1] 
       } 
