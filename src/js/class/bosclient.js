@@ -2,10 +2,10 @@
 npm i bce-sdk-js
 npm i async-es
 */
-import { BosClient } from 'bce-sdk-js'
-import mapLimit from 'async/mapLimit'
+import { BosClient, Q } from 'bce-sdk-js'
+import MapLimit from 'async/mapLimit'
 
-export default class BosClient {
+export default class BceClient {
 	client = null
 	bucket = null
 	object = null
@@ -17,13 +17,13 @@ export default class BosClient {
 		const config = {
 			endpoint: 'http://bos.bj.baidubce.com',
 			credentials: {
-				ak: '您的ak',
-				sk: '您的sk'
+				ak: '8ddad138f79e4e149462f84b6ef3cad0',
+				sk: 'f92ca45e214a41e5a10407cb1a084e5e'
 			}
 		}
 
-		this.bucket = 'my-bucket'
-		this.object = 'hello.js'
+		this.bucket = 'dogquan'
+		this.object = 'test.txt'
 		this.client = new BosClient(config)
 
 		return this
@@ -37,7 +37,7 @@ export default class BosClient {
 			.then(function(response) {
 				const parts = response.body.parts || [] // 已上传的分块列表。如果是新上传，则为空数组
 
-				const deferred = sdk.Q.defer()
+				const deferred = Q.defer()
 				const tasks = this.getTasks(file, parts)
 				const state = {
 					lengthComputable: true,
@@ -50,7 +50,7 @@ export default class BosClient {
 
 				// 为了管理分块上传，使用了async（https://github.com/caolan/async）库来进行异步处理
 				const THREADS = 2 // 同时上传的分块数量
-				mapLimit(tasks, THREADS, this.uploadPartFile(state), function(err, results) {
+				MapLimit(tasks, THREADS, this.uploadPartFile(state), function(err, results) {
 					if (err) {
 						deferred.reject(err)
 					} else {
