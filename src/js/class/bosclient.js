@@ -132,7 +132,7 @@ export default class BosClient {
 	*/
 	getEtag(partNumber, parts) {
 		// 从已上传part列表中找出特定partNumber的part的eTag
-		for (const i = 0, l = parts.length i < l i++) {
+		for (let i = 0, l = parts.length; i < l; i++) {
 			if (parts[i].partNumber === partNumber) {
 				return parts[i].eTag
 			}
@@ -140,9 +140,9 @@ export default class BosClient {
 		return null
 	}
 	getTasks(file, parts) {
-		const leftSize = file.size
-		const offset = 0
-		const partNumber = 1
+		let leftSize = file.size
+		let offset = 0
+		let partNumber = 1
 
 		const tasks = []
 
