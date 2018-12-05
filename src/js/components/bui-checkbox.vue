@@ -126,6 +126,7 @@
                     opacity: disabled ? 0.5 : 1,
                     paddingTop : '15px',
                     paddingBottom : '15px',
+                    paddingRight: '25px'
                 }
             },
             changeDirection(){

@@ -32,8 +32,8 @@ export const PickerData = {
   ],
   gender: [
     [
-      { label: '男', value: 1 },
-      { label: '女', value: 2 }
+      { label: '男', value: '1' },
+      { label: '女', value: '2' }
     ]
   ],
   areaid: district
@@ -46,13 +46,13 @@ export const CheckboxData = {
     { value: '3', title: '一对一教学' }
   ],
   catid: [
-      { title: '幼教启蒙班', value: 3 },
-      { title: '幼教小班', value: 7 },
-      { title: '幼教中班', value: 8 },
-      { title: '幼教大班', value: 9 },
-      { title: '英语培训班', value: 10 },
-      { title: '舞蹈培训班', value: 11 },
-      { title: '武术培训班', value: 12 },
-      { title: '画画培训班', value: 13 }
+      { title: '幼教启蒙班', value: '3' },
+      { title: '幼教小班', value: '7' },
+      { title: '幼教中班', value: '8' },
+      { title: '幼教大班', value: '9' },
+      { title: '英语培训班', value: '10' },
+      { title: '舞蹈培训班', value: '11' },
+      { title: '武术培训班', value: '12' },
+      { title: '画画培训班', value: '13' }
   ]
 }

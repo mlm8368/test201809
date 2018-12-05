@@ -1,16 +1,17 @@
 /* 
+npm i babel-preset-env
 npm i bce-sdk-js
 npm i async-es
 */
 import { BosClient, Q } from 'bce-sdk-js'
 import MapLimit from 'async/mapLimit'
 
-export default class BceClient {
+export default class MyBosClient {
 	client = null
 	bucket = null
 	object = null
 	chunkSize = 5 * 1024 * 1024 // 分块大小
-  chunkKey = null
+    chunkKey = null
 	uploadId = null
 
 	constructor() {
@@ -132,7 +133,7 @@ export default class BceClient {
 	*/
 	getEtag(partNumber, parts) {
 		// 从已上传part列表中找出特定partNumber的part的eTag
-		for (const i = 0, l = parts.length; i < l; i++) {
+		for (let i = 0, l = parts.length; i < l; i++) {
 			if (parts[i].partNumber === partNumber) {
 				return parts[i].eTag
 			}
