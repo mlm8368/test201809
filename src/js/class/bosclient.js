@@ -8,6 +8,7 @@ import MapLimit from 'async/mapLimit'
 
 export default class MyBosClient {
 	client = null
+	file=null
 	bucket = null
 	object = null
 	chunkSize = 5 * 1024 * 1024 // 分块大小
@@ -23,23 +24,34 @@ export default class MyBosClient {
 			}
 		}
 
-		this.bucket = 'dogquan'
-		this.object = 'test.txt'
 		this.client = new BosClient(config)
-
 		return this
+	}
+	
+	setFile(one) {
+		this.file = one.file
+		this.bucket = one.bucket
+		this.object = one.object 
+	}
+	
+	cleanFile() {
+		this.file = null
+		this.bucket = null
+		this.object = null
 	}
 
 	/* 
 	上传文件
 	*/
-	doUpload() {
-		this._initiateMultipartUpload(file)
+	doUpload(succeedCB, errorCB, doneCB) {
+		if(this.file === null ) return false
+		
+		this._initiateMultipartUpload()
 			.then(function(response) {
 				const parts = response.body.parts || [] // 已上传的分块列表。如果是新上传，则为空数组
 
 				const deferred = Q.defer()
-				const tasks = this.getTasks(file, parts)
+				const tasks = this.getTasks(parts)
 				const state = {
 					lengthComputable: true,
 					loaded: parts.length, // 已上传的分块数
@@ -77,10 +89,15 @@ export default class MyBosClient {
 			})
 			.then(function(res) {
 				// 上传完成
+				if(succeedCB) succeedCB(res)
+				if(doneCB) doneCB()
+				cleanFile() 
 			})
 			.catch(function(err) {
 				// 上传失败，添加您的代码
-				console.error(err)
+				if(errorCB) errorCB(err)
+				if(doneCB) doneCB() 
+				cleanFile() 
 			})
 	}
 
@@ -89,9 +106,9 @@ export default class MyBosClient {
 	如果已经存在此文件的uploadId，那么跳过initiateMultipartUpload()方法，改为调用listParts()来获取已上传分块信息；
 	如果没有此文件的uploadId，那么调用initiateMultipartUpload()方法获得新的uploadId，并将这个uploadId保存在localStorage中。
 	*/
-	_initiateMultipartUpload(file) {
+	_initiateMultipartUpload() {
 		// 根据文件生成localStorage的key
-		this.chunkKey = this.generateLocalKey(file)
+		this.chunkKey = this.generateLocalKey()
 
 		// 获取对应的`uploadId`
 		this.uploadId = this.getUploadId(this.chunkKey)
@@ -124,8 +141,8 @@ export default class MyBosClient {
 	在保存uploadId时，我们需要为它指定一个key，让不同的文件、不同的上传过程区分开。
 	本示例采用文件名、文件大小、分区大小、bucket名称、object名称组合成这个key
 	*/
-	generateLocalKey(file) {
-		return [file.name, file.size, this.chunkSize, this.bucket, this.object].join('&')
+	generateLocalKey() {
+		return [this.file.name, this.file.size, this.chunkSize, this.bucket, this.object].join('&')
 	}
 
 	/* 
@@ -140,8 +157,8 @@ export default class MyBosClient {
 		}
 		return null
 	}
-	getTasks(file, parts) {
-		let leftSize = file.size
+	getTasks(parts) {
+		let leftSize = this.file.size
 		let offset = 0
 		let partNumber = 1
 
@@ -150,7 +167,7 @@ export default class MyBosClient {
 		while (leftSize > 0) {
 			const partSize = Math.min(leftSize, this.chunkSize)
 			const task = {
-				file: file,
+				file: this.file,
 				uploadId: this.uploadId,
 				bucket: this.bucket,
 				object: this.object,
@@ -208,12 +225,12 @@ export default class MyBosClient {
 	存储方式我们选择localStorage
 	*/
 	getUploadId(key) {
-		return localStorage.getItem(key)
+		//return localStorage.getItem(key)
 	}
 	setUploadId(key, _uploadId) {
-		return localStorage.setItem(key, _uploadId)
+		//return localStorage.setItem(key, _uploadId)
 	}
 	removeUploadId(key) {
-		return localStorage.removeItem(key)
+		//return localStorage.removeItem(key)
 	}
 }

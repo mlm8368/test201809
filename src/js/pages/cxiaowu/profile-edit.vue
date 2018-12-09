@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <div class="profile-header">
-    	<image class="avatar" :src="formData.thumb"></image>
+    	<image class="avatar" :src="formData.thumb" @click="pickAvatar"></image>
     	<text>{{formData.passport}}</text>
     </div>
     <list>
@@ -161,7 +161,8 @@ import AmButton from '../../components/am-button.vue'
 import { PickerData, CheckboxData } from './profile-edit.config'
 import ProfileEdit from './profile-edit.class'
 
-const tool = weex.requireModule('bmTool')
+const bmTool = weex.requireModule('bmTool')
+const bmImage = weex.requireModule('bmImage')
 
 const profile = new ProfileEdit()
 
@@ -239,7 +240,7 @@ export default {
       this.picker.value = this.formData[key]
       
       this.picker.show = true
-      tool.resignKeyboard()
+      bmTool.resignKeyboard()
     },
     onPickerOK (values, labels) {
       //profile.log(values)
@@ -271,8 +272,20 @@ export default {
       } else {
         this.formDataEdit[key] = value
       }
-      tool.resignKeyboard()
-    }
+      bmTool.resignKeyboard()
+    },
+    pickAvatar() {
+		bmImage.uploadImage({
+    	url: 'https:xxx.com/img',
+    	maxCount: 1,
+    	imageWidth: 1000,
+    	allowCrop: true,
+    	params: {},
+    	header: {}
+		},function(res){
+profile.log(res)
+		})
+	}
   }
 }
 </script>
