@@ -23,11 +23,11 @@ var path = require('path');
 var u = require('underscore');
 var Q = require('q');
 
-var H = require('./headers');
-var strings = require('./strings');
-var HttpClient = require('./http_client');
-var BceBaseClient = require('./bce_base_client');
-var MimeType = require('./mime.types');
+var H = require('../bce/headers');
+var strings = require('../bce/strings');
+var HttpClient = require('../bce/http_client');
+var BceBaseClient = require('../bce/bce_base_client');
+var MimeType = require('../bce/mime.types');
 
 // var MIN_PART_SIZE = 1048576;                // 1M
 // var THREAD = 2;
