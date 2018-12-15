@@ -160,6 +160,7 @@ import BuiCheckbox from '../../components/bui-checkbox.vue'
 import AmButton from '../../components/am-button.vue'
 import { PickerData, CheckboxData } from './profile-edit.config'
 import ProfileEdit from './profile-edit.class'
+import MyBosClient from '../../class/bosclient'
 
 const bmTool = weex.requireModule('bmTool')
 const bmImage = weex.requireModule('bmImage')
@@ -230,6 +231,8 @@ export default {
     profile.getBosAck((resData) => {
         this.bosPolicy = resData
     })
+    
+    
   },
   methods: {
     onInput (key, e) {

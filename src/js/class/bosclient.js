@@ -3,7 +3,9 @@ npm i babel-preset-env
 npm i bce-sdk-js
 npm i async-es
 */
-import { BosClient, Q } from 'bce-sdk-js'
+//import { BosClient, Q } from 'bce-sdk-js'
+//import BosClient from '../bce/bos_client'
+import Q from 'q'
 import MapLimit from 'async/mapLimit'
 
 export default class MyBosClient {
