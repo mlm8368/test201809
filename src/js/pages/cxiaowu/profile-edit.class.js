@@ -1,3 +1,4 @@
+//import { Auth } from 'bce-sdk-js'
 import App from './app.class'
 
 export default class ProfileEdit extends App {
@@ -7,7 +8,7 @@ export default class ProfileEdit extends App {
   }
   
   outFormdata (one) {
-    this.log(one)
+    //this.log(one)
     /*
     this.log(one)
     const tmp = {
@@ -49,8 +50,10 @@ export default class ProfileEdit extends App {
         this.Vue.formData.areaid = one.areaid
         this.Vue.areaname = one.areaname
       }
+      else if(key === 'thumb') this.Vue.formData.thumb = this.getAvatar(one.thumb) 
       else this.Vue.formData[key] = one[key]
     }
-    this.log(this.Vue.formData)
+    //this.log(this.Vue.formData)
   }
+  
 }

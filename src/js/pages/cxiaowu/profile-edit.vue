@@ -172,6 +172,7 @@ export default {
   mixins: [FormMixins],
   data () {
     return {
+      bosPolicy: null,
       formData: {
         company: '',
         username: '',
@@ -225,6 +226,10 @@ export default {
     profile.getSchool((schoolinfo) => {
       profile.outFormdata(schoolinfo)
     })
+    
+    profile.getBosAck((resData) => {
+        this.bosPolicy = resData
+    })
   },
   methods: {
     onInput (key, e) {
@@ -275,15 +280,27 @@ export default {
       bmTool.resignKeyboard()
     },
     pickAvatar() {
+        const key = profile.getBosObjectKey('avatar', 'jpg')
 		bmImage.uploadImage({
-    	url: 'https:xxx.com/img',
+		url: profile.config.bos.endpoint,
     	maxCount: 1,
     	imageWidth: 1000,
     	allowCrop: true,
-    	params: {},
+    	params: {
+			accessKey: this.bosPolicy.accessKey,
+			policy: this.bosPolicy.policy,
+			signature: this.bosPolicy.signature,
+			key: key
+		},
     	header: {}
 		},function(res){
-profile.log(res)
+		        profile.log(res)
+		if(res.status === 0) {
+			profile.outFormdata({thumb: profile.config.bos.imgHost + '/' + key})
+		} else {
+			
+		}
+//profile.log(res)
 		})
 	}
   }
