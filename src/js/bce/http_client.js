@@ -20,13 +20,14 @@
 
 var http = require('http');
 var https = require('https');
+//var axios = weex.requireModule('bmAxios');
 var util = require('util');
 var stream = require('stream');
 var EventEmitter = require('events').EventEmitter;
 
 var u = require('underscore');
 var Q = require('q');
-var debug = require('debug')('bce-sdk:HttpClient');
+//var debug = require('debug')('bce-sdk:HttpClient');
 
 var H = require('./headers');
 var Auth = require('./auth');
@@ -73,8 +74,8 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
     httpMethod = httpMethod.toUpperCase();
     var requestUrl = this._getRequestUrl(path, params);
     var options = require('url').parse(requestUrl);
-    debug('httpMethod = %s, requestUrl = %s, options = %j',
-        httpMethod, requestUrl, options);
+    //debug('httpMethod = %s, requestUrl = %s, options = %j',
+    //    httpMethod, requestUrl, options);
 
     // Prepare the request headers.
     var defaultHeaders = {};
@@ -82,7 +83,7 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
         defaultHeaders[H.USER_AGENT] = navigator.userAgent;
     }
     else {
-        defaultHeaders[H.USER_AGENT] = util.format('bce-sdk-nodejs/%s/%s/%s', require('../package.json').version,
+        defaultHeaders[H.USER_AGENT] = util.format('bce-sdk-nodejs/%s/%s/%s', '1.0.0-rc.5',
             process.platform, process.version);
     }
     defaultHeaders[H.X_BCE_DATE] = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
@@ -127,7 +128,7 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
                 if (xbceDate) {
                     headers[H.X_BCE_DATE] = xbceDate;
                 }
-                debug('options = %j', options);
+                //debug('options = %j', options);
                 return client._doRequest(options, body, outputStream);
             });
         }
@@ -142,7 +143,7 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
         headers[H.AUTHORIZATION] = createSignature(this.config.credentials, httpMethod, path, params, headers);
     }
 
-    debug('options = %j', options);
+    //debug('options = %j', options);
     return client._doRequest(options, body, outputStream);
 };
 
@@ -301,11 +302,11 @@ HttpClient.prototype._recvResponse = function (res) {
         var responseBody = null;
 
         try {
-            debug('responseHeaders = %j', responseHeaders);
+            //debug('responseHeaders = %j', responseHeaders);
             responseBody = parseHttpResponseBody(raw);
         }
         catch (e) {
-            debug('statusCode = %s, Parse response body error = %s', statusCode, e.message);
+            //debug('statusCode = %s, Parse response body error = %s', statusCode, e.message);
             deferred.reject(failure(statusCode, e.message));
             return;
         }

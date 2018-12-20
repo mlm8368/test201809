@@ -4,6 +4,7 @@ npm i bce-sdk-js
 npm i async-es
 */
 import BosClient from './bosclient'
+//import {BosClient} from 'bce-sdk-js'
 import Q from 'q'
 import MapLimit from 'async/mapLimit'
 
@@ -132,7 +133,7 @@ export default class MyBosClient {
 
 					// 为了下次能使用断点续传，我们需要把新生成的`uploadId`保存下来
 					this.setUploadId(this.chunkKey, response.body.uploadId)
-          this.chunkKey = response.body.uploadId
+          		  this.chunkKey = response.body.uploadId
 					return response
 				})
 		}

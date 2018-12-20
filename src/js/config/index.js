@@ -2,6 +2,7 @@ import Widget from './widget'
 import apis from './apis'
 import routes from './routes'
 import './push'
+import * as Sentry from '@sentry/browser'
 
 new Widget({
     router: {
@@ -11,8 +12,8 @@ new Widget({
         routes
     },
     ajax: {
-       //baseUrl: 'http://localhost/appdata/1.1',
-	   baseUrl: 'http://v7.dog1314.com/appdata/1.1',
+       baseUrl: 'http://localhost/appdata/1.1',
+	   //baseUrl: 'http://v7.dog1314.com/appdata/1.1',
 	/**
          * 接口别名
          */
@@ -48,4 +49,9 @@ new Widget({
             }
         }
     }
+})
+
+Sentry.init({
+  dsn: 'https://dd6bf20e589e4c3f86cd192f63187249@sentry.io/1355818',
+  integrations: [new Sentry.Integrations.Vue({ Vue })]
 })
