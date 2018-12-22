@@ -17,11 +17,11 @@
 /* eslint-env node */
 /* eslint max-params:[0,10] */
 
-//var util = require('util');
+// var util = require('util');
 var util = require('../../../node_modules/util/util.js');
 var u = require('underscore');
 
-//var debug = require('debug')('bce-sdk:auth');
+// var debug = require('debug')('bce-sdk:auth');
 
 var H = require('./headers');
 var strings = require('./strings');
@@ -53,11 +53,10 @@ function Auth(ak, sk) {
  */
 Auth.prototype.generateAuthorization = function (method, resource, params,
                                                  headers, timestamp, expirationInSeconds, headersToSign) {
-
     var now = timestamp ? new Date(timestamp * 1000) : new Date();
     var rawSessionKey = util.format('bce-auth-v1/%s/%s/%d',
         this.ak, now.toISOString().replace(/\.\d+Z$/, 'Z'), expirationInSeconds || 1800);
-    //debug('rawSessionKey = %j', rawSessionKey);
+    // debug('rawSessionKey = %j', rawSessionKey);
     var sessionKey = this.hash(rawSessionKey, this.sk);
 
     var canonicalUri = this.uriCanonicalization(resource);
@@ -66,15 +65,15 @@ Auth.prototype.generateAuthorization = function (method, resource, params,
     var rv = this.headersCanonicalization(headers || {}, headersToSign);
     var canonicalHeaders = rv[0];
     var signedHeaders = rv[1];
-    //debug('canonicalUri = %j', canonicalUri);
-    //debug('canonicalQueryString = %j', canonicalQueryString);
-    //debug('canonicalHeaders = %j', canonicalHeaders);
-    //debug('signedHeaders = %j', signedHeaders);
+    // debug('canonicalUri = %j', canonicalUri);
+    // debug('canonicalQueryString = %j', canonicalQueryString);
+    // debug('canonicalHeaders = %j', canonicalHeaders);
+    // debug('signedHeaders = %j', signedHeaders);
 
     var rawSignature = util.format('%s\n%s\n%s\n%s',
         method, canonicalUri, canonicalQueryString, canonicalHeaders);
-    //debug('rawSignature = %j', rawSignature);
-    //debug('sessionKey = %j', sessionKey);
+    // debug('rawSignature = %j', rawSignature);
+    // debug('sessionKey = %j', sessionKey);
     var signature = this.hash(rawSignature, sessionKey);
 
     if (signedHeaders.length) {
@@ -123,7 +122,7 @@ Auth.prototype.headersCanonicalization = function (headers, headersToSign) {
     if (!headersToSign || !headersToSign.length) {
         headersToSign = [H.HOST, H.CONTENT_MD5, H.CONTENT_LENGTH, H.CONTENT_TYPE];
     }
-    //debug('headers = %j, headersToSign = %j', headers, headersToSign);
+    // debug('headers = %j, headersToSign = %j', headers, headersToSign);
 
     var headersMap = {};
     headersToSign.forEach(function (item) {

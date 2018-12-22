@@ -5,7 +5,7 @@ import { config } from '../config/app'
 export default class Abstract {
   Vue = null
 
-  constructor () {
+  constructor() {
     this.appStorageKey = appStorageKey
     this.appCacheKey = appCacheKey
     this.cache = new Cache()
@@ -135,7 +135,7 @@ export default class Abstract {
       month = 12 + month;
     }
 
-    year = year + (endArr[1] - beginArr[1]);b7
+    year = year + (endArr[1] - beginArr[1]);
 
     var yearString = year > 0 ? year + '岁' : '';
     var mnthString = month > 0 ? month + '月' : '';
@@ -170,7 +170,7 @@ export default class Abstract {
     return result;
     */
   }
-  getFormatDate () {
+  getFormatDate() {
     const date = new Date()
     const seperator1 = '-'
     const month = date.getMonth() + 1
@@ -187,62 +187,62 @@ export default class Abstract {
     const mobileReg = /^1[0-9]{10}$/
     return mobileReg.test(mobile)
   }
-  
+
   getFileExt(fileName) {
-  	return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()
+    return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()
   }
- 
+
   uuid(len, radix) {
-  let chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
-  let uuid = []
-  let i
-  radix = radix || chars.length
-  if (radix > chars.length) radix = chars.length
- 
-  if (len) {
-    for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix]
-  } else {
-    let r
- 
-    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-'
-    uuid[14] = '4'
- 
-    for (i = 0; i < 36; i++) {
-      if (!uuid[i]) {
-        r = 0 | Math.random() * 16
-        uuid[i] = chars[(i === 19) ? (r & 0x3) | 0x8 : r]
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
+    const uuid = []
+    let i
+    radix = radix || chars.length
+    if (radix > chars.length) radix = chars.length
+
+    if (len) {
+      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix]
+    } else {
+      let r
+
+      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-'
+      uuid[14] = '4'
+
+      for (i = 0; i < 36; i++) {
+        if (!uuid[i]) {
+          r = 0 | Math.random() * 16
+          uuid[i] = chars[(i === 19) ? (r & 0x3) | 0x8 : r]
+        }
       }
     }
+    return uuid.join('')
   }
-  return uuid.join('')
-}
 
-getBosAck(callback){
-this.Vue.$fetch({
-    url: config.bos.ackUrl,
-    method: 'GET',   
-    data: {
+  getBosAck(callback) {
+    this.Vue.$fetch({
+      url: config.bos.ackUrl,
+      method: 'GET',
+      data: {
         policy: 'dogquan'
-    }
-}).then(resData => {
-    // 成功回调
-    //profile.log(resData)
-    if(callback) callback(resData)
-}, error => {
-    // 错误回调
-    //profile.log(error)
-})
-}
+      }
+    }).then(resData => {
+      // 成功回调
+      // profile.log(resData)
+      if (callback) callback(resData)
+    }, error => {
+      // 错误回调
+      // profile.log(error)
+    })
+  }
 
-getBosObjectKey(type, ext) {
-  const _uuid = this.uuid(8);
+  getBosObjectKey(type, ext) {
+    const _uuid = this.uuid(8);
 
-  const date = new Date();
-  const year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  if (month < 10) month = '0' + month;
-  const key = type +  '/' + year + '/' + month + '/' + _uuid + '.' + ext;
-  
-  return key
-}
+    const date = new Date();
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    if (month < 10) month = '0' + month;
+    const key = type + '/' + year + '/' + month + '/' + _uuid + '.' + ext;
+
+    return key
+  }
 }

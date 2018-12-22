@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http:// www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
@@ -18,16 +18,17 @@
 /* eslint max-params:[0,10] */
 /* globals ArrayBuffer */
 
-var http = require('../../../node_modules/stream-http/index.js');
-//var https = require('https');
-//var axios = weex.requireModule('bmAxios');
+// var http = require('../../../node_modules/stream-http/index.js');
+var http = require('http');
+//  var https = require('https');
+//  var axios = weex.requireModule('bmAxios');
 var util = require('../../../node_modules/util/util.js');
-//var stream = require('../../../node_modules/readable-stream/readable.js');
+var stream = require('../../../node_modules/readable-stream/readable.js');
 var EventEmitter = require('../../../node_modules/events/events.js').EventEmitter;
 
 var u = require('underscore');
 var Q = require('q');
-//var debug = require('debug')('bce-sdk:HttpClient');
+//  var debug = require('debug')('bce-sdk:HttpClient');
 
 var H = require('./headers');
 var Auth = require('./auth');
@@ -74,15 +75,15 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
     httpMethod = httpMethod.toUpperCase();
     var requestUrl = this._getRequestUrl(path, params);
     var options = require('../../../node_modules/url/url.js').parse(requestUrl);
-    //debug('httpMethod = %s, requestUrl = %s, options = %j',
-    //    httpMethod, requestUrl, options);
+    // debug('httpMethod = %s, requestUrl = %s, options = %j',
+    //     httpMethod, requestUrl, options);
+    console.log(options)
 
-    // Prepare the request headers.
+    //  Prepare the request headers.
     var defaultHeaders = {};
     if (typeof navigator === 'object') {
         defaultHeaders[H.USER_AGENT] = navigator.userAgent;
-    }
-    else {
+    } else {
         defaultHeaders[H.USER_AGENT] = util.format('bce-sdk-nodejs/%s/%s/%s', '1.0.0-rc.5',
             process.platform, process.version);
     }
@@ -93,16 +94,16 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
 
     headers = u.extend({}, defaultHeaders, headers);
 
-    // if (!headers.hasOwnProperty(H.X_BCE_REQUEST_ID)) {
-    //    headers[H.X_BCE_REQUEST_ID] = this._generateRequestId();
-    // }
+    //  if (!headers.hasOwnProperty(H.X_BCE_REQUEST_ID)) {
+    //     headers[H.X_BCE_REQUEST_ID] = this._generateRequestId();
+    //  }
 
-    // Check the content-length
+    //  Check the content-length
     if (!headers.hasOwnProperty(H.CONTENT_LENGTH)) {
         var contentLength = this._guessContentLength(body);
         if (!(contentLength === 0 && /GET|HEAD/i.test(httpMethod))) {
-            // 如果是 GET 或 HEAD 请求，并且 Content-Length 是 0，那么 Request Header 里面就不要出现 Content-Length
-            // 否则本地计算签名的时候会计算进去，但是浏览器发请求的时候不一定会有，此时导致 Signature Mismatch 的情况
+            //  如果是 GET 或 HEAD 请求，并且 Content-Length 是 0，那么 Request Header 里面就不要出现 Content-Length
+            //  否则本地计算签名的时候会计算进去，但是浏览器发请求的时候不一定会有，此时导致 Signature Mismatch 的情况
             headers[H.CONTENT_LENGTH] = contentLength;
         }
     }
@@ -111,13 +112,13 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
     options.method = httpMethod;
     options.headers = headers;
 
-    // 通过browserify打包后，在Safari下并不能有效处理server的content-type
-    // 参考ISSUE：https://github.com/jhiesey/stream-http/issues/8
+    //  通过browserify打包后，在Safari下并不能有效处理server的content-type
+    //  参考ISSUE：https:// github.com/jhiesey/stream-http/issues/8
     options.mode = 'prefer-fast';
 
-    // rejectUnauthorized: If true, the server certificate is verified against the list of supplied CAs.
-    // An 'error' event is emitted if verification fails.
-    // Verification happens at the connection level, before the HTTP request is sent.
+    //  rejectUnauthorized: If true, the server certificate is verified against the list of supplied CAs.
+    //  An 'error' event is emitted if verification fails.
+    //  Verification happens at the connection level, before the HTTP request is sent.
     options.rejectUnauthorized = false;
 
     if (typeof signFunction === 'function') {
@@ -128,22 +129,20 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
                 if (xbceDate) {
                     headers[H.X_BCE_DATE] = xbceDate;
                 }
-                //debug('options = %j', options);
+                // debug('options = %j', options);
                 return client._doRequest(options, body, outputStream);
             });
-        }
-        else if (typeof promise === 'string') {
+        } else if (typeof promise === 'string') {
             headers[H.AUTHORIZATION] = promise;
-        }
-        else {
+        } else {
             throw new Error('Invalid signature = (' + promise + ')');
         }
-    }
-    else {
+    } else {
         headers[H.AUTHORIZATION] = createSignature(this.config.credentials, httpMethod, path, params, headers);
     }
 
-    //debug('options = %j', options);
+    // debug('options = %j', options);
+    console.log(options);
     return client._doRequest(options, body, outputStream);
 };
 
@@ -166,8 +165,7 @@ HttpClient.prototype._doRequest = function (options, body, outputStream) {
     var client = this;
 
     var req = client._req = api.request(options, function (res) {
-        if (client._isValidStatus(res.statusCode) && outputStream) {
-            //&& outputStream instanceof stream.Writable) {
+        if (client._isValidStatus(res.statusCode) && outputStream && outputStream instanceof stream.Writable) {
             res.pipe(outputStream);
             outputStream.on('finish', function () {
                 deferred.resolve(success(client._fixHeaders(res.headers), {}));
@@ -194,8 +192,7 @@ HttpClient.prototype._doRequest = function (options, body, outputStream) {
 
     try {
         client._sendRequest(req, body);
-    }
-    catch (ex) {
+    } catch (ex) {
         deferred.reject(ex);
     }
     return deferred.promise;
@@ -218,11 +215,9 @@ HttpClient.prototype._generateRequestId = function () {
 HttpClient.prototype._guessContentLength = function (data) {
     if (data == null) {
         return 0;
-    }
-    else if (typeof data === 'string') {
+    } else if (typeof data === 'string') {
         return Buffer.byteLength(data);
-    }
-    else if (typeof data === 'object') {
+    } else if (typeof data === 'object') {
         if (typeof Blob !== 'undefined' && data instanceof Blob) {
             return data.size;
         }
@@ -236,8 +231,7 @@ HttpClient.prototype._guessContentLength = function (data) {
          if (typeof FormData !== 'undefined' && data instanceof FormData) {
          }
          */
-    }
-    else if (Buffer.isBuffer(data)) {
+    } else if (Buffer.isBuffer(data)) {
         return data.length;
     }
 
@@ -272,9 +266,7 @@ HttpClient.prototype._recvResponse = function (res) {
 
         if (!raw.length) {
             return {};
-        }
-        else if (contentType
-            && /(application|text)\/json/.test(contentType)) {
+        } else if (contentType && /(application|text)\/json/.test(contentType)) {
             return JSON.parse(raw.toString());
         }
         return raw;
@@ -289,7 +281,7 @@ HttpClient.prototype._recvResponse = function (res) {
             payload.push(chunk);
         }
         else {
-            // xhr2返回的内容是 string，不是 Buffer，导致 Buffer.concat 的时候报错了
+            //  xhr2返回的内容是 string，不是 Buffer，导致 Buffer.concat 的时候报错了
             payload.push(new Buffer(chunk));
         }
     });
@@ -302,24 +294,21 @@ HttpClient.prototype._recvResponse = function (res) {
         var responseBody = null;
 
         try {
-            //debug('responseHeaders = %j', responseHeaders);
+            // debug('responseHeaders = %j', responseHeaders);
             responseBody = parseHttpResponseBody(raw);
-        }
-        catch (e) {
-            //debug('statusCode = %s, Parse response body error = %s', statusCode, e.message);
+        } catch (e) {
+            // debug('statusCode = %s, Parse response body error = %s', statusCode, e.message);
             deferred.reject(failure(statusCode, e.message));
             return;
         }
 
         if (statusCode >= 100 && statusCode < 200) {
             deferred.reject(failure(statusCode, 'Can not handle 1xx http status code.'));
-        }
-        else if (statusCode < 100 || statusCode >= 300) {
+        } else if (statusCode < 100 || statusCode >= 300) {
             if (responseBody.requestId) {
                 deferred.reject(failure(statusCode, responseBody.message,
                     responseBody.code, responseBody.requestId, responseHeaders.date));
-            }
-            else {
+            } else {
                 deferred.reject(failure(statusCode, responseBody));
             }
         }
@@ -358,9 +347,7 @@ HttpClient.prototype._sendRequest = function (req, data) {
     if (Buffer.isBuffer(data) || isXHR2Compatible(data)) {
         req.write(data);
         req.end();
-    }
-    /*
-    else if (data instanceof stream.Readable) {
+    } else if (data instanceof stream.Readable) {
         if (!data.readable) {
             throw new Error('stream is not readable');
         }
@@ -371,16 +358,14 @@ HttpClient.prototype._sendRequest = function (req, data) {
         data.on('end', function () {
             req.end();
         });
-    }
-    */
-    else {
+    } else {
         throw new Error('Invalid body type = ' + typeof data);
     }
 };
 
 HttpClient.prototype.buildQueryString = function (params) {
     var urlEncodeStr = require('../../../node_modules/querystring/index.js').stringify(params);
-    // https://en.wikipedia.org/wiki/Percent-encoding
+    //  https:// en.wikipedia.org/wiki/Percent-encoding
     return urlEncodeStr.replace(/[()'!~.*\-_]/g, function (char) {
         return '%' + char.charCodeAt().toString(16);
     });
@@ -424,4 +409,3 @@ function failure(statusCode, message, code, requestId, xBceDate) {
 }
 
 module.exports = HttpClient;
-

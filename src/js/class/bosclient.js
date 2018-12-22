@@ -25,9 +25,12 @@ var Q = require('q');
 
 var H = require('../bce/headers');
 var strings = require('../bce/strings');
-var HttpClient = require('../bce/http_client');
-var BceBaseClient = require('../bce/bce_base_client');
 var MimeType = require('../bce/mime.types');
+var config = require('../bce/config');
+
+var Auth = require('../bce/auth');
+var HttpClient = require('../bce/http_client');
+// var BceBaseClient = require('../bce/bce_base_client');
 
 // var MIN_PART_SIZE = 1048576;                // 1M
 // var THREAD = 2;
@@ -43,15 +46,20 @@ var MAX_USER_METADATA_SIZE = 2048; // 2 * 1024
  * @param {Object} config The bos client configuration.
  * @extends {BceBaseClient}
  */
-function BosClient(config) {
-    BceBaseClient.call(this, config, 'bos', true);
+function BosClient(clientConfig) {
+    // BceBaseClient.call(this, config, 'bos', true);
 
+    this.config = u.extend({}, config.DEFAULT_CONFIG, clientConfig);
+    this.serviceId = 'bos';
+    this.regionSupported = true;
+
+    this.config.endpoint = this._computeEndpoint();
     /**
      * @type {HttpClient}
      */
     this._httpAgent = null;
 }
-util.inherits(BosClient, BceBaseClient);
+// util.inherits(BosClient, BceBaseClient);
 
 // --- B E G I N ---
 BosClient.prototype.completeMultipartUpload = function (bucketName, key, uploadId, partList, options) {
@@ -62,9 +70,9 @@ BosClient.prototype.completeMultipartUpload = function (bucketName, key, uploadI
   return this.sendRequest('POST', {
       bucketName: bucketName,
       key: key,
-      body: JSON.stringify({parts: partList}),
+      body: JSON.stringify({ parts: partList }),
       headers: options.headers,
-      params: {uploadId: uploadId},
+      params: { uploadId: uploadId },
       config: options.config
   });
 };
@@ -99,7 +107,7 @@ BosClient.prototype.initiateMultipartUpload = function (bucketName, key, options
   return this.sendRequest('POST', {
       bucketName: bucketName,
       key: key,
-      params: {uploads: ''},
+      params: { uploads: '' },
       headers: options.headers,
       config: options.config
   });
@@ -161,8 +169,7 @@ BosClient.prototype._prepareObjectHeaders = function (options) {
   var headers = u.pick(options, function (value, key) {
       if (allowedHeaders.indexOf(key) !== -1) {
           return true;
-      }
-      else if (/^x\-bce\-meta\-/.test(key)) {
+      } else if (/^x\-bce\-meta\-/.test(key)) {
           metaSize += Buffer.byteLength(key) + Buffer.byteLength('' + value);
           return true;
       }
@@ -176,10 +183,8 @@ BosClient.prototype._prepareObjectHeaders = function (options) {
       var contentLength = headers[H.CONTENT_LENGTH];
       if (contentLength < 0) {
           throw new TypeError('content_length should not be negative.');
-      }
-      else if (contentLength > MAX_PUT_OBJECT_LENGTH) { // 5G
-          throw new TypeError('Object length should be less than ' + MAX_PUT_OBJECT_LENGTH
-              + '. Use multi-part upload instead.');
+      } else if (contentLength > MAX_PUT_OBJECT_LENGTH) { // 5G
+          throw new TypeError('Object length should be less than ' + MAX_PUT_OBJECT_LENGTH + '. Use multi-part upload instead.');
       }
   }
 
@@ -228,6 +233,7 @@ BosClient.prototype.sendHTTPRequest = function (httpMethod, resource, args, conf
 
   function doRequest() {
       var agent = this._httpAgent = new HttpClient(config);
+      console.log(agent)
 
       var httpContext = {
           httpMethod: httpMethod,
@@ -256,17 +262,45 @@ BosClient.prototype.sendHTTPRequest = function (httpMethod, resource, args, conf
       return promise;
   }
 
-
   return doRequest.call(client).catch(function(err) {
       var serverTimestamp = new Date(err[H.X_BCE_DATE]).getTime();
 
-      BceBaseClient.prototype.timeOffset = serverTimestamp - Date.now();
+      BosClient.prototype.timeOffset = serverTimestamp - Date.now();
 
       if (err[H.X_STATUS_CODE] === 403 && err[H.X_CODE] === 'RequestTimeTooSkewed') {
           return doRequest.call(client);
       }
 
       return Q.reject(err);
+  });
+};
+
+BosClient.prototype._computeEndpoint = function () {
+  if (this.config.endpoint) {
+      return this.config.endpoint;
+  }
+
+  if (this.regionSupported) {
+      return util.format('%s://%s.%s.%s',
+          this.config.protocol,
+          this.serviceId,
+          this.config.region,
+          config.DEFAULT_SERVICE_DOMAIN);
+  }
+  return util.format('%s://%s.%s',
+      this.config.protocol,
+      this.serviceId,
+      config.DEFAULT_SERVICE_DOMAIN);
+};
+
+BosClient.prototype.createSignature = function (credentials, httpMethod, path, params, headers) {
+  var revisionTimestamp = Date.now() + (this.timeOffset || 0);
+
+  headers[H.X_BCE_DATE] = new Date(revisionTimestamp).toISOString().replace(/\.\d+Z$/, 'Z');
+
+  return Q.fcall(function () {
+      var auth = new Auth(credentials.ak, credentials.sk);
+      return auth.generateAuthorization(httpMethod, path, params, headers, revisionTimestamp / 1000);
   });
 };
 
