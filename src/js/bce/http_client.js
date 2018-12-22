@@ -18,12 +18,12 @@
 /* eslint max-params:[0,10] */
 /* globals ArrayBuffer */
 
-var http = require('http');
-var https = require('https');
+var http = require('../../../node_modules/stream-http/index.js');
+//var https = require('https');
 //var axios = weex.requireModule('bmAxios');
-var util = require('util');
-var stream = require('stream');
-var EventEmitter = require('events').EventEmitter;
+var util = require('../../../node_modules/util/util.js');
+//var stream = require('../../../node_modules/readable-stream/readable.js');
+var EventEmitter = require('../../../node_modules/events/events.js').EventEmitter;
 
 var u = require('underscore');
 var Q = require('q');
@@ -73,7 +73,7 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
                                              signFunction, outputStream) {
     httpMethod = httpMethod.toUpperCase();
     var requestUrl = this._getRequestUrl(path, params);
-    var options = require('url').parse(requestUrl);
+    var options = require('../../../node_modules/url/url.js').parse(requestUrl);
     //debug('httpMethod = %s, requestUrl = %s, options = %j',
     //    httpMethod, requestUrl, options);
 
@@ -162,12 +162,12 @@ HttpClient.prototype._isValidStatus = function (statusCode) {
 
 HttpClient.prototype._doRequest = function (options, body, outputStream) {
     var deferred = Q.defer();
-    var api = options.protocol === 'https:' ? https : http;
+    var api = options.protocol === 'https:' ? http : http;
     var client = this;
 
     var req = client._req = api.request(options, function (res) {
-        if (client._isValidStatus(res.statusCode) && outputStream
-            && outputStream instanceof stream.Writable) {
+        if (client._isValidStatus(res.statusCode) && outputStream) {
+            //&& outputStream instanceof stream.Writable) {
             res.pipe(outputStream);
             outputStream.on('finish', function () {
                 deferred.resolve(success(client._fixHeaders(res.headers), {}));
@@ -359,6 +359,7 @@ HttpClient.prototype._sendRequest = function (req, data) {
         req.write(data);
         req.end();
     }
+    /*
     else if (data instanceof stream.Readable) {
         if (!data.readable) {
             throw new Error('stream is not readable');
@@ -371,13 +372,14 @@ HttpClient.prototype._sendRequest = function (req, data) {
             req.end();
         });
     }
+    */
     else {
         throw new Error('Invalid body type = ' + typeof data);
     }
 };
 
 HttpClient.prototype.buildQueryString = function (params) {
-    var urlEncodeStr = require('querystring').stringify(params);
+    var urlEncodeStr = require('../../../node_modules/querystring/index.js').stringify(params);
     // https://en.wikipedia.org/wiki/Percent-encoding
     return urlEncodeStr.replace(/[()'!~.*\-_]/g, function (char) {
         return '%' + char.charCodeAt().toString(16);

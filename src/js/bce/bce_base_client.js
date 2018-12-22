@@ -16,8 +16,8 @@
 
 /* eslint-env node */
 
-var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+var util = require('../../../node_modules/util/util.js');
+var EventEmitter = require('../../../node_modules/events/events.js').EventEmitter;
 
 var Q = require('q');
 var u = require('underscore');

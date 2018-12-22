@@ -17,8 +17,8 @@
 /* eslint-env node */
 /* eslint max-params:[0,10] */
 
-var util = require('util');
-var path = require('path');
+var util = require('../../../node_modules/util/util.js');
+var path = require('../../../node_modules/path/path.js');
 
 var u = require('underscore');
 var Q = require('q');
