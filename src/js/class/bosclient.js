@@ -233,7 +233,7 @@ BosClient.prototype.sendHTTPRequest = function (httpMethod, resource, args, conf
 
   function doRequest() {
       var agent = this._httpAgent = new HttpClient(config);
-      console.log(agent)
+      //console.log(agent)
 
       var httpContext = {
           httpMethod: httpMethod,
@@ -263,6 +263,7 @@ BosClient.prototype.sendHTTPRequest = function (httpMethod, resource, args, conf
   }
 
   return doRequest.call(client).catch(function(err) {
+    console.log(err)
       var serverTimestamp = new Date(err[H.X_BCE_DATE]).getTime();
 
       BosClient.prototype.timeOffset = serverTimestamp - Date.now();

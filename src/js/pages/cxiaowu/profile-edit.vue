@@ -160,13 +160,11 @@ import BuiCheckbox from '../../components/bui-checkbox.vue'
 import AmButton from '../../components/am-button.vue'
 import { PickerData, CheckboxData } from './profile-edit.config'
 import ProfileEdit from './profile-edit.class'
-import MyBosClient from '../../class/mybosclient'
 
 const bmTool = weex.requireModule('bmTool')
 const bmImage = weex.requireModule('bmImage')
 
 const profile = new ProfileEdit()
-const myBosClient = new MyBosClient()
 
 export default {
   name: 'profile-edit',
@@ -239,17 +237,7 @@ export default {
       this.formDataEdit[key] = e.value
     },
     buttonClick () {
-      //profile.log(this.formDataEdit)
-      
-      myBosClient.setFile({file: 'dd', bucket: 'dogquan', object: '123.txt'})
-    myBosClient.doUpload((res)=>{
-		profile.log(res)
-	},(err)=>{
-		profile.log(err)
-		profile.log('err')
-	})
-	profile.log(myBosClient)
-	
+      profile.log(this.formDataEdit)
     },
     showPicker (key, title) {
       this.picker.key = key

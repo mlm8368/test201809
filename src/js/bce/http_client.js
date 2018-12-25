@@ -18,12 +18,11 @@
 /* eslint max-params:[0,10] */
 /* globals ArrayBuffer */
 
-// var http = require('../../../node_modules/stream-http/index.js');
-var http = require('http');
+var http = require('../../../node_modules/stream-http/index.js');
+//var http = require('http');
 //  var https = require('https');
-//  var axios = weex.requireModule('bmAxios');
 var util = require('../../../node_modules/util/util.js');
-var stream = require('../../../node_modules/readable-stream/readable.js');
+var stream = require('../../../node_modules/stream-browserify/index.js');
 var EventEmitter = require('../../../node_modules/events/events.js').EventEmitter;
 
 var u = require('underscore');
@@ -77,7 +76,7 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
     var options = require('../../../node_modules/url/url.js').parse(requestUrl);
     // debug('httpMethod = %s, requestUrl = %s, options = %j',
     //     httpMethod, requestUrl, options);
-    console.log(options)
+    //console.log(options)
 
     //  Prepare the request headers.
     var defaultHeaders = {};
@@ -142,7 +141,7 @@ HttpClient.prototype.sendRequest = function (httpMethod, path, body, headers, pa
     }
 
     // debug('options = %j', options);
-    console.log(options);
+    //console.log(options);
     return client._doRequest(options, body, outputStream);
 };
 
@@ -163,7 +162,7 @@ HttpClient.prototype._doRequest = function (options, body, outputStream) {
     var deferred = Q.defer();
     var api = options.protocol === 'https:' ? http : http;
     var client = this;
-
+console.log(options)
     var req = client._req = api.request(options, function (res) {
         if (client._isValidStatus(res.statusCode) && outputStream && outputStream instanceof stream.Writable) {
             res.pipe(outputStream);

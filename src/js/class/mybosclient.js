@@ -3,8 +3,8 @@ npm i babel-preset-env
 npm i bce-sdk-js
 npm i async-es
 */
-// import BosClient from './bosclient'
-import { BosClient } from 'bce-sdk-js'
+import BosClient from './bosclient'
+//import { BosClient } from 'bce-sdk-js'
 import Q from 'q'
 import MapLimit from 'async/mapLimit'
 
@@ -19,13 +19,13 @@ export default class MyBosClient {
 
   constructor() {
     const config = {
-      // endpoint: 'http://bos.bj.baidubce.com',
-      endpoint: 'http://dogquan.bj.bcebos.com',
+      endpoint: 'http://bos.bj.baidubce.com',
+      //endpoint: 'http://dogquan.bj.bcebos.com',
       credentials: {
-        ak: '431b74ed05d011e9899221149f7b9b42',
-        sk: '1ac07d15b54f464586694d685d3a5b8a'
+        ak: '50c26363e0da4c84be42265e8f8632e5',
+        sk: '6a59c5b7538943efac7343c18f75c452'
       },
-      sessionToken: 'MjUzZjQzNTY4OTE0NDRkNjg3N2E4YzJhZTc4YmU5ZDh8AAAAAH0CAADYyizin6uWmHdzE6/u76NEzAcr8yQMYdlhc7+6Hwz6jxy7FqgsYhLmtj/XhKybz+jvKgcT+ZWm+VGQnded9IFmQ/B5pmYtZYPcA5HU9/ycjXdzv0E7G0EfyBEw0l4T24BZVFXdFMZDDOySvkHSAKoqLalR6N/gSqIW14nnvvFrcFPw55LYrY5pt5HdRiOIBDiJh8KwwOlZldn9AOg8rZqs85mKKhLgE8EyGNarWZBMw7v7I8Fu9/nRUSXLqLfTldkcGsvLpmSfrhS8wZeRT844iC0glzL+plg1/7byZ1u6XeTMZQ6hc7WVYfL11+vAUt+sRDdTxQjUkFsGfQiRmX5NFclJPkA1Z9L4S/8qoKQwJGT1vSA+CpbnQbN8dX4rOkSKZFuUYrLpAakXHod43St38V6ZYMtEoKHum0x3ET1JzS1VeKa9Yz2dVp7LMwaZsV0mmQDjeB5tFT6Ql0ElzyYu'
+      //sessionToken: 'MjUzZjQzNTY4OTE0NDRkNjg3N2E4YzJhZTc4YmU5ZDh8AAAAAH0CAACSDn5VGDkRG/d3Lk0hsnWRWqSxeK8DsZ/KbBHAIhz+PAjK6TlT3HUEgZBocp42j3Ba/TLTJNPFGXGeYnsZeS6yffP/PfMBLaaBPk7ezdnkZzdfowbhkn7fMicxSUBOeq6BxMLYfz6xpSGmzw31sd8RuZ3kpvPdrdzF+uNyuYKakr9OEph2kN5Xyn1mxGJ+qm/+6vgWIYUgKgzYd0VjkTjmkn413fUDdk4b8bEO36r8eEUoBuyM+VWQj8yf7KrnLs93vk5xHzmbLFaLemCrqMOblT//gaQwU4yk+KBxEGFfEuHCzsAg2SJ5iKTxV/Yi3LAA5gW1Y8V5Dy9HgbE8YZ8HmPauyQz3tkSWXyzuxTqFrees2162lSoRkojdoiacno0pMs/RJ6rQz0AoFWXGkgBaPurSPKvkuVqqtCexpI4leGvL1ycdJ4nMxlVd5+RzbSu1i67vPmgilLX4DdW22Sxc'
     }
 
     this.client = new BosClient(config)

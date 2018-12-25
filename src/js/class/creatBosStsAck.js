@@ -17,7 +17,7 @@ var stsClient = new STS({
 stsClient.getSessionToken(6000 * 10, {
   accessControlList: [{
     service: 'bce:bos',
-    resource: ['dogquan'],
+    resource: ['dogquan', 'dogquan/*'],
     region: '*',
     effect: 'Allow',
     permission: ['READ', 'WRITE']
@@ -27,14 +27,16 @@ stsClient.getSessionToken(6000 * 10, {
 
   // 这是需要提交的数据
   var content = qs.stringify(result.body);
+  var _get = qs.stringify({action: 'setbosacests'});
 
   var options = {
     hostname: '127.0.0.1',
     port: 80,
-    path: '/appdata/1.1/index.php?action=addsts',
+    path: '/appdata/1.1/index.php?action=setbosacests',
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Content-Length': content.length
     }
   };
 

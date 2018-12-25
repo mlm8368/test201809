@@ -155,8 +155,9 @@ Auth.prototype.headersCanonicalization = function (headers, headersToSign) {
 };
 
 Auth.prototype.hash = function (data, key) {
-    var crypto = require('crypto');
-    var sha256Hmac = crypto.createHmac('sha256', key);
+    //var crypto = require('crypto');
+    var createHmac = require('../../../node_modules/create-hmac/browser.js');
+    var sha256Hmac = createHmac('sha256', key);
     sha256Hmac.update(data);
     return sha256Hmac.digest('hex');
 };
