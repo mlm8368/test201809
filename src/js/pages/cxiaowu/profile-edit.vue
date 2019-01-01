@@ -71,9 +71,6 @@
       <cell><bui-list-item label="微信公众号" >
         <input  :value="formData.gzh" @input="onInput('gzh', $event)" slot="title" class="input" type="text" placeholder="学校公众号名称" />
       </bui-list-item></cell>
-      <cell><bui-list-item label="二维码" >
-        <input  :value="formData.gzhqr" @input="onInput('gzhqr', $event)" slot="title" class="input" type="password" placeholder="上传二维码图片" />
-      </bui-list-item></cell>
       <cell><div class="button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
       <header>
         <div class="header">
@@ -81,7 +78,7 @@
         </div>
       </header>
       <cell><bui-list-item label="学校简介" :cell-style="{height: 220}" >
-        <textarea :value="formData.content" @input="onInput('content', $event)" slot="title" class="input textarea" placeholder="详细介绍"></textarea>
+        <textarea rows="5" :value="formData.content" @input="onInput('content', $event)" slot="title" class="input textarea" placeholder="详细介绍"></textarea>
       </bui-list-item></cell>
       <cell><div class="button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div></cell>
       <header>
@@ -148,6 +145,9 @@
 .textarea {
   height: 200px;
   color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  border-color: @border-color-base;
 }
 </style>
 
@@ -194,7 +194,6 @@ export default {
         mail: '',
         homepage: '',
         gzh: '',
-        gzhqr: '',
         content: '',
         mobile: '',
         truename: '',
@@ -230,14 +229,14 @@ export default {
     profile.getBosAck((resData) => {
         this.bosPolicy = resData
     })
-
   },
   methods: {
     onInput (key, e) {
       this.formDataEdit[key] = e.value
     },
     buttonClick () {
-      profile.log(this.formDataEdit)
+      //profile.log(this.formDataEdit)
+      if(!profile.isEmptyObject(this.formDataEdit)) profile.editProfile()
     },
     showPicker (key, title) {
       this.picker.key = key
@@ -263,7 +262,7 @@ export default {
       }
     },
     onCheckboxChange (value, item, key) {
-      profile.log(value)
+      //profile.log(value)
       if (key === 'mode') {
       if (item.length > 0) {
         let _value = []
@@ -275,12 +274,20 @@ export default {
       } else {
         this.formDataEdit[key] = ''
       }
-      } else {
-        this.formDataEdit[key] = value
+      } else if (key === 'catid') {
+      	if (item.length > 0) {
+        	this.formDataEdit[key] = ',' + value.join() + ','
+        }else{
+			this.formDataEdit[key] = ''
+		}
       }
       bmTool.resignKeyboard()
     },
     pickAvatar() {
+    	if (this.bosPolicy === null) {
+			this.$notice.toast({ message: '上传失败了' })
+			return false
+		}
         const key = profile.getBosObjectKey('avatar', 'jpg')
 		bmImage.uploadImage({
 		url: profile.config.bos.endpoint,
@@ -294,14 +301,16 @@ export default {
 			key: key
 		},
     	header: {}
-		},function(res){
-		        profile.log(res)
-		if(res.status === 0) {
-			profile.outFormdata({thumb: profile.config.bos.imgHost + '/' + key})
-		} else {
-			
-		}
-//profile.log(res)
+		},(res) => {
+		        //profile.log(res)
+			if(res.status === 0) {
+				const imgUrl = profile.config.bos.imgHost + '/' + key
+				this.formDataEdit['thumb'] = imgUrl
+				profile.editProfile()
+				profile.outFormdata({thumb: imgUrl})
+			} else {
+				this.$notice.toast({ message: '上传失败了' })
+			}
 		})
 	}
   }

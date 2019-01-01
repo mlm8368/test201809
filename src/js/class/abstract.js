@@ -33,6 +33,9 @@ export default class Abstract {
     // console.log(str);
     this.Vue.$notice.alert({ message: str, okTitle: '确定', title: 'DEBUG' })
   }
+  isEmptyObject (obj) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  }
   byId(id) {
     return document.getElementById(id)
   }
@@ -101,7 +104,7 @@ export default class Abstract {
 
   ajaxHeader(appacctoken = true) {
     const header = { 'Content-Type': 'application/x-www-form-urlencoded' }
-    if (appacctoken) header['APPACCTOKEN'] = this.getStorage(appStorageKey.accessToken)
+    //if (appacctoken) header['APPACCTOKEN'] = this.getStorage(appStorageKey.accessToken)
     return header
   }
   getGender(gender, typeid = 0) {
@@ -236,8 +239,13 @@ export default class Abstract {
 
   getBosObjectKey(type, ext) {
     const _uuid = this.uuid(8);
-
+    
     const date = new Date();
+    if(type === 'avatar') {
+        const hour = date.getHours()
+        const minute = date.getMinutes()
+		return 'avatar/' + _uuid + hour + minute + '.' + ext;
+	}
     const year = date.getFullYear();
     let month = date.getMonth() + 1;
     if (month < 10) month = '0' + month;

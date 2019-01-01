@@ -9,7 +9,7 @@ export default class App extends School {
   getSchool (callback) {
     const userinfo = this.cacheSchool('get')
     if (userinfo !== null) {
-      callback(userinfo)
+      if(callback) callback(userinfo)
       return
     }
 
@@ -20,7 +20,7 @@ export default class App extends School {
       header: this.ajaxHeader()
     }).then(ret => {
       if (ret.status === 1) {
-        callback(ret.userinfo)
+        if(callback) callback(ret.userinfo)
         this.cacheSchool('set', ret.userinfo)
       }
     }, error => {

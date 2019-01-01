@@ -1,4 +1,3 @@
-//import { Auth } from 'bce-sdk-js'
 import App from './app.class'
 
 export default class ProfileEdit extends App {
@@ -50,10 +49,35 @@ export default class ProfileEdit extends App {
         this.Vue.formData.areaid = one.areaid
         this.Vue.areaname = one.areaname
       }
+      else if (key === 'gender') {
+        this.Vue.formData.gender = one.gender
+        this.Vue.gendername = this.getGender(one.gender)
+      }
       else if(key === 'thumb') this.Vue.formData.thumb = this.getAvatar(one.thumb) 
       else this.Vue.formData[key] = one[key]
     }
     //this.log(this.Vue.formData)
+  }
+  
+  editProfile() {
+    this.Vue.$notice.loading.show('正在提交...')
+    this.Vue.$fetch({
+      method: 'POST',
+      name: 'modules.member',
+      params: { query: '&action=setcompanyinfo' },
+      header: this.ajaxHeader(),
+      data: this.Vue.formDataEdit
+    }).then(ret => {
+      this.Vue.$notice.loading.hide()
+
+      if (ret.status === 1) {
+        this.Vue.$store.commit('updateProfileStatus')
+        this.Vue.$notice.toast({ message: '修改成功'})
+      } else {
+        this.Vue.$notice.alert({ message: ret.msg })
+      }
+    }, error => {
+    })
   }
   
 }

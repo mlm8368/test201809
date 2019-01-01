@@ -10,7 +10,7 @@ export default class StaffEdit extends Staff {
     this.Vue.$notice.loading.show('正在提交...')
     this.Vue.$fetch({
       method: 'POST',
-      name: 'modules.school',
+      name: 'modules.member',
       params: { query: '&action=staff&op=edit' },
       header: this.ajaxHeader(),
       data: this.Vue.formData
@@ -18,12 +18,8 @@ export default class StaffEdit extends Staff {
       this.Vue.$notice.loading.hide()
 
       if (ret.status === 1) {
-        this.getStaffLists((lists) => {
-          this.$store.commit('setStaffLists', lists)
-        })
-
         this.Vue.$notice.alert({ message: '修改成功', callback: () => {
-          this.Vue.$parent.closeDialog()
+          //this.Vue.$parent.closeDialog()
         } })
       } else {
         this.Vue.$notice.alert({ message: ret.msg })
