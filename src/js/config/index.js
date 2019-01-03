@@ -49,7 +49,10 @@ new Widget({
         // console.log(`invoke error message: ${errorMsg}`)
         reject(resData)
       } else {
-        // 自定义请求逻辑
+        // 未登录或登录失效
+        if (data.status === -999) {
+          return false
+        }
         resolve(data)
       }
     }
