@@ -1,6 +1,7 @@
 import Abstract from '../../class/abstract'
 import { appStorageKey } from '../../class/enum'
-import { appName, footBarDefault, footBarSchool } from './login.config'
+import { footBarDefault, footBarSchool } from './login.config'
+import { config } from '../../config/app'
 
 const tabbar = weex.requireModule('bmTabbar')
 
@@ -52,7 +53,7 @@ export default class Login extends Abstract {
   }
 
   goPortal() {
-    switch (appName) {
+    switch (config.appName) {
       case 'student':
         if (this.getStorage(appStorageKey.groupid) === 5) this.goPortalStudent()
         break
@@ -89,24 +90,5 @@ export default class Login extends Abstract {
   }
   goPortalStudent() {
     this.log('goPortalStudent')
-  }
-
-  setLoginData(userInfo, updateAccessToken = true) {
-    this.setStorage(appStorageKey.userid, userInfo.userid)
-    this.setStorage(appStorageKey.username, userInfo.username)
-    if (updateAccessToken) this.setStorage(appStorageKey.accessToken, userInfo.accessToken)
-    this.setStorage(appStorageKey.groupid, userInfo.groupid)
-    this.setStorage(appStorageKey.area, userInfo.area)
-    this.setStorage(appStorageKey.areaid, userInfo.areaid)
-    this.setStorage(appStorageKey.userInfo, userInfo)
-  }
-  clearLoginData() {
-    this.rmStorage(appStorageKey.userid)
-    this.rmStorage(appStorageKey.username)
-    this.rmStorage(appStorageKey.accessToken)
-    this.rmStorage(appStorageKey.groupid)
-    this.rmStorage(appStorageKey.area)
-    this.rmStorage(appStorageKey.areaid)
-    this.rmStorage(appStorageKey.userInfo)
   }
 }

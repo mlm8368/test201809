@@ -1,4 +1,5 @@
 export const config = {
+	appName: 'allapp', // allapp,school,student
 	site:{
 		apiUrl: 'http://localhost/appdata/1.1'
 		//apiUrl: 'http://v7.dog1314.com/appdata/1.1'

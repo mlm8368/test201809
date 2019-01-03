@@ -4,17 +4,17 @@
     <scroller>
       <header>
         <div class="header">
-          <text class="header-cell page-left-padded">设置新密码</text>
+          <text class="header-cell page-left-padded">设置登录密码</text>
         </div>
       </header>
       <bui-list-item label="现有密码" >
-        <input :value="formData.password" @input="onInput('password', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
+        <input :value="formData.oldpassword" @input="onInput('oldpassword', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
       </bui-list-item>
       <bui-list-item label="新登录密码" >
-        <input  :value="formData.newpassword" @input="onInput('newpassword', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
+        <input  :value="formData.password" @input="onInput('password', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
       </bui-list-item>
       <bui-list-item label="重复新密码" >
-        <input  :value="formData.newpassword1" @input="onInput('newpassword1', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
+        <input  :value="formData.cpassword" @input="onInput('cpassword', $event)" slot="title" class="input" type="password" placeholder="需6位以上" />
       </bui-list-item>
       <div class="password-button"><am-button width="500px" size="small" text="确认修改" @click="buttonClick"></am-button></div>
     </scroller>
@@ -55,7 +55,7 @@ export default {
   mixins: [FormMixins],
   data () {
     return {
-      formData: {password: '', newpassword: '', newpassword1: ''}
+      formData: {oldpassword: '', password: '', cpassword: ''}
     }
   },
   created() {
@@ -63,7 +63,14 @@ export default {
   },
   methods: {
     buttonClick () {
-      password.log(this.formData)
+      //password.log(this.formData)
+      if(this.formData.oldpassword === ''
+			|| this.formData.password === ''
+			|| this.formData.cpassword === '') {
+			this.$notice.alert({ message: '请填写完整密码' })
+			return false
+		}
+      password.editPassword()
     }
   }
 }

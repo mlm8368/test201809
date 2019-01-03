@@ -64,7 +64,7 @@ export default class ProfileEdit extends App {
     this.Vue.$fetch({
       method: 'POST',
       name: 'modules.member',
-      params: { query: '&action=setcompanyinfo' },
+      params: { query: '&action=setuserinfo&type=company' },
       header: this.ajaxHeader(),
       data: this.Vue.formDataEdit
     }).then(ret => {

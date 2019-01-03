@@ -1,15 +1,15 @@
 <template>
   <div class="school">
     <div class="school-name">
-      <image class="avatar" :src="schoolInfo.thumb" :placeholder="defaultAvatar"></image>
+      <image class="avatar" :src="schoolInfo.thumb"></image>
       <text class="school-name-shortname">{{schoolInfo.passport}}</text>
-      <div class="school-vip">
+      <div v-if="schoolInfo.vip && schoolInfo.havedays" class="school-vip">
+        <text class="school-vip-label">VIP会员</text>
+        <text class="school-vip-value link" @click="goPage('grade')">第 {{schoolInfo.vipyear}} 年</text>
+      </div>
+      <div v-else class="school-vip">
         <text class="school-vip-label">普通会员</text>
         <text class="school-vip-value link" @click="goPage('grade')">升级为VIP</text>
-      </div>
-      <div class="school-vip">
-        <text class="school-vip-label">VIP会员</text>
-        <text class="school-vip-value">第 1 年</text>
       </div>
       <div class="school-edit">
         <text class="school-edit-label link" @click="goPage('profile-edit')">修改资料</text>
@@ -17,18 +17,20 @@
       </div>
     </div>
     <list>
+      <template v-if="schoolInfo.vip && schoolInfo.havedays">
       <header>
         <div class="school-header header">
           <text class="school-header-title header-cell">VIP信息</text>
-          <text class="school-header-edit header-cell right link" @click="goPage('grade')">服务续费</text>
+          <text class="school-header-edit header-cell right link" @click="goPage('grade')">我要续费</text>
         </div>
       </header>
       <cell><bui-list-item label="VIP级别">
         <image slot="title" :src="defaultAvatar"></image>
       </bui-list-item></cell>
-      <cell><bui-list-item label="服务开始" :title="schoolInfo.vip.startdate"></bui-list-item></cell>
-      <cell><bui-list-item label="服务结束" :title="schoolInfo.vip.enddate"></bui-list-item></cell>
-      <cell><bui-list-item label="剩余天数" :title="schoolInfo.vip.leftday"></bui-list-item></cell>
+      <cell><bui-list-item label="服务开始" :title="schoolInfo.fromtime"></bui-list-item></cell>
+      <cell><bui-list-item label="服务结束" :title="schoolInfo.totime"></bui-list-item></cell>
+      <cell><bui-list-item label="剩余天数" :title="schoolInfo.havedays"></bui-list-item></cell>
+      </template>
       <header>
         <div class="school-header header">
           <text class="school-header-title header-cell">身份认证</text>
@@ -50,12 +52,10 @@
       </header>
       <cell><bui-list-item :title="schoolInfo.company" label="学校全称"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.address" label="学校地址"></bui-list-item></cell>
-      <cell><bui-list-item :title="schoolInfo.postcode" label="邮政编码"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.telephone" label="学校电话"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.mail" label="电子邮箱"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.homepage" label="学校网站"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.gzh" label="微信公众号"></bui-list-item></cell>
-      <cell><bui-list-item :title="schoolInfo.gzhqr" label="二维码"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.truename" label="管理员"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.mobile" label="手机号码"></bui-list-item></cell>
       <cell><bui-list-item :title="schoolInfo.qq" label="QQ"></bui-list-item></cell>
@@ -134,13 +134,14 @@ export default {
   components: { BuiListItem },
   data () {
     return {
-      schoolInfo: {}
+      schoolInfo: {
+		vip: 1,
+		havedays: 1,
+		thumb: profile.getAvatar()
+	  }
     }
   },
   computed: {
-    defaultAvatar: function() {
-      return profile.getAvatar()
-    },
     ...mapState(['schoolid', 'profileStatus'])
   },
   created() {

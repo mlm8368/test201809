@@ -23,7 +23,7 @@ export default {
     if (abstract.isLogin() === 0) {
       setTimeout(() => {
         this.$router.open({ name: 'login', type: 'PRESENT' })
-      }, 1000)
+      }, 100)
     }
     this.bindEvent()
   },

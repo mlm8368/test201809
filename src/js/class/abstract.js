@@ -4,6 +4,7 @@ import { config } from '../config/app'
 
 export default class Abstract {
   Vue = null
+  DATE_TIME = new Date()
 
   constructor() {
     this.appStorageKey = appStorageKey
@@ -101,10 +102,30 @@ export default class Abstract {
     return 0 // test
     // return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
   }
+  
+  setLoginData(userInfo, updateAccessToken = true) {
+    this.setStorage(appStorageKey.userid, userInfo.userid)
+    this.setStorage(appStorageKey.username, userInfo.username)
+    if (updateAccessToken) this.setStorage(appStorageKey.accessToken, userInfo.accessToken)
+    this.setStorage(appStorageKey.groupid, userInfo.groupid)
+    this.setStorage(appStorageKey.area, userInfo.area)
+    this.setStorage(appStorageKey.areaid, userInfo.areaid)
+    this.setStorage(appStorageKey.userInfo, userInfo)
+  }
+  
+  clearLoginData() {
+    this.rmStorage(appStorageKey.userid)
+    this.rmStorage(appStorageKey.username)
+    this.rmStorage(appStorageKey.accessToken)
+    this.rmStorage(appStorageKey.groupid)
+    this.rmStorage(appStorageKey.area)
+    this.rmStorage(appStorageKey.areaid)
+    this.rmStorage(appStorageKey.userInfo)
+  }
 
   ajaxHeader(appacctoken = true) {
     const header = { 'Content-Type': 'application/x-www-form-urlencoded' }
-    //if (appacctoken) header['APPACCTOKEN'] = this.getStorage(appStorageKey.accessToken)
+    if (appacctoken) header['APPACCTOKEN'] = this.getStorage(appStorageKey.accessToken)
     return header
   }
   getGender(gender, typeid = 0) {
@@ -173,8 +194,8 @@ export default class Abstract {
     return result;
     */
   }
-  getFormatDate() {
-    const date = new Date()
+  getFormatDate(date) {
+    if(!date) date= this.DATE_TIME
     const seperator1 = '-'
     const month = date.getMonth() + 1
     let month2 = ''

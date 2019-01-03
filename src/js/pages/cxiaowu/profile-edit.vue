@@ -257,6 +257,8 @@ export default {
           this.areaname += labels[1]
           this.formDataEdit[this.picker.key] = values[1]
         }
+        this.formData['address'] = ''
+        this.formDataEdit['address'] = ''
       } else if (this.picker.key === 'gender') {
         this.gendername = labels[0]
       }
