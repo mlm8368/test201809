@@ -12,14 +12,14 @@
 // 我们不建议在这里存储大量的数据 这里仅仅希望用作一个中介者 来提供给其他页面实例来通信 他无法替代storage 读取速度也远远慢与storage
 import Abstract from '../class/abstract'
 
-let abstract = null
+const abstract = new Abstract()
 
 export default {
   data() {
     return {}
   },
   created() {
-    abstract = new Abstract(this)
+    abstract.setVue(this)
     if (abstract.isLogin() === 0) {
       setTimeout(() => {
         this.$router.open({ name: 'login', type: 'PRESENT' })
