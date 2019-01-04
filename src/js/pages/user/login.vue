@@ -66,7 +66,6 @@ export default {
   },
   created () {
     login.setVue(this)
-    login.goPortalDefault()
   },
   methods: {
     submit() {

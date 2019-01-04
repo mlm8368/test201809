@@ -40,9 +40,9 @@ export default class Login extends Abstract {
       this.Vue.loadShow = false
       if (ret.status === 1) {
         this.setLoginData(ret.userInfo)
-        // const that = this
+
         this.Vue.$notice.alert({ message: '登录成功', callback: () => {
-          this.goPortal()
+          this.Vue.$router.back({ type: 'PRESENT' })
         } })
       } else {
         this.Vue.$notice.alert({ message: ret.msg })
@@ -50,45 +50,5 @@ export default class Login extends Abstract {
     }, error => {
       this.Vue.loadShow = false
     })
-  }
-
-  goPortal() {
-    switch (config.appName) {
-      case 'student':
-        if (this.getStorage(appStorageKey.groupid) === 5) this.goPortalStudent()
-        break
-      case 'school':
-        if (this.getStorage(appStorageKey.groupid) === 6) this.goPortalSchool()
-        else if (this.getStorage(appStorageKey.groupid) === 5) this.goPortalTeacher()
-        break
-      case 'allapp':
-        if (this.getStorage(appStorageKey.groupid) >= 6) this.goPortalSchool()
-        else if (this.getStorage(appStorageKey.userInfo).student) this.goPortalStudent()
-        else if (this.getStorage(appStorageKey.groupid) === 5) this.goPortalTeacher()
-        else this.goPortalTeacher()
-        break
-    }
-  }
-
-  goPortalDefault() {
-    const footbar = tabbar.getInfo()
-    footbar.list = footBarDefault
-    tabbar.setInfo(footbar)
-
-    // this.Vue.$router.back({ type: 'PRESENT' })
-  }
-
-  goPortalSchool() {
-    const footbar = tabbar.getInfo()
-    footbar.list = footBarSchool
-    tabbar.setInfo(footbar)
-
-    this.Vue.$router.back({ type: 'PRESENT' })
-  }
-  goPortalTeacher() {
-    this.log('goPortalTeacher')
-  }
-  goPortalStudent() {
-    this.log('goPortalStudent')
   }
 }
