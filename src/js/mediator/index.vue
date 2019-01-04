@@ -16,23 +16,33 @@
 
 export default {
   data() {
-    return {}
+    return {
+      count: 0
+    }
+  },
+  watch: {
+    count (newVal, oldVal) {
+      // 每当值改变的时候都会推送给订阅 store 变化的事件
+      this.$event.emit('store.change', {
+        newVal,
+        oldVal
+      })
+    }
   },
   created() {
-    //abstract.setVue(this)
-    //abstract.clearLoginData()
-    //abstract.log('qqqqq123')
-    //if (abstract.isLogin() === 0) {
-      setTimeout(() => {
-        this.$router.open({ name: 'login', type: 'PRESENT' })
-        //abstract.openLoginPage()
-      }, 1000)
-    //}
-    //this.bindEvent()
+    abstract.setVue(this)
+    this.bindEvent()
   },
   methods: {
     bindEvent() {
-      //abstract.log('bindEvent')
+      this.$event.on('store.count.add', resData => {
+        console.log(this.count)
+        this.count++
+      })
+      //
+      this.$event.on('refresh', resData => {
+        this.$router.refresh()
+      })
     }
   }
 };
