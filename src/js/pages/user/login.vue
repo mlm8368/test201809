@@ -1,4 +1,3 @@
-<script lang="js" src="./login.js"></script>
 <template>
   <div class="Container" :style="{'height':pageHeight}">
     <wxc-loading
@@ -31,6 +30,7 @@
       <text :class="['login',pressed?'pressed':'']"   @click="submit">登录</text>
   </div>
 </template>
+
 <style scoped>
   .Container{background-color: #FFFFFF;align-items: center;}
   .imgBox{text-align: center;align-items: center;margin-top:300px;margin-bottom:100px}
@@ -46,3 +46,32 @@
     margin-top:60px;
   }
 </style>
+
+<script>
+import { WxcLoading } from 'weex-ui';
+import Login from './login.class'
+
+const login = new Login()
+
+export default {
+  name: 'userLogin',
+  components: { WxcLoading },
+  data () {
+    return {
+      loadShow: false,
+      pageHeight: weex.config.env.deviceHeight,
+      mobile: '18600360004',
+      password: '147258'
+    }
+  },
+  created () {
+    login.setVue(this)
+    login.goPortalDefault()
+  },
+  methods: {
+    submit() {
+      login.doLogin()
+    }
+  }
+}
+</script>
