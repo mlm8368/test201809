@@ -3,10 +3,11 @@ import apis from './apis'
 import routes from './routes'
 import './push'
 import { config } from './app'
-import Abstract from '../class/abstract'
+//import Abstract from '../class/abstract'
 // import * as Sentry from '@sentry/browser'
 
-const abstract = new Abstract()
+//const abstract = new Abstract()
+const dddd='dddddfffff'
 
 new Widget({
   router: {
@@ -50,26 +51,34 @@ new Widget({
         reject(resData)
       } else {
         // 未登录或登录失效
+        /*
         if (data.status === -999) {
+          abstract.openLoginPage()
           return false
         }
+        */
         resolve(data)
       }
     }
   }
 })
+//abstract.setVue(new Vue())
+//abstract.openLoginPage()
+//abstract.clearLoginData()
 /*
 Sentry.init({
   dsn: 'https://dd6bf20e589e4c3f86cd192f63187249@sentry.io/1355818',
   integrations: [new Sentry.Integrations.Vue({ Vue })]
 })
 */
-
+/*
 Vue.config.errorHandler = function (err, vm, info) {
+	
   if (abstract.Vue === null) abstract.setVue(vm)
   abstract.log('err')
   abstract.log(err)
   abstract.log(info)
+  
 
   vm.$fetch({
     url: config.site.apiUrl + '/index.php?action=errorlog',
@@ -82,10 +91,12 @@ Vue.config.errorHandler = function (err, vm, info) {
 }
 
 Vue.config.warnHandler = function (msg, vm, trace) {
+	
   if (abstract.Vue === null) abstract.setVue(vm)
   abstract.log('err')
   abstract.log(msg)
   abstract.log(trace)
+  
 
   vm.$fetch({
     url: config.site.apiUrl + '/index.php?action=errorlog',
@@ -96,3 +107,4 @@ Vue.config.warnHandler = function (msg, vm, trace) {
     }
   }).then(resData => { }, error => { })
 }
+*/

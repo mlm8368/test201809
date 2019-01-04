@@ -20,7 +20,7 @@ export default class PasswordEdit extends App {
       if (ret.status === 1) {
         this.Vue.$notice.alert({ title: '密码修改成功', message: '请使用新密码重新登录', okTitle: '确定', callback(){
             this.clearLoginData()
-			this.$router.open({ name: 'login', type: 'PRESENT' })
+            this.openLoginPage()
 		}})
       } else {
         this.Vue.$notice.alert({ message: ret.msg })

@@ -10,26 +10,29 @@
 // 住： 不能再app退出的时候来持久化存储，退出时间很短，无法保证存储成功
 
 // 我们不建议在这里存储大量的数据 这里仅仅希望用作一个中介者 来提供给其他页面实例来通信 他无法替代storage 读取速度也远远慢与storage
-import Abstract from '../class/abstract'
+//import Abstract from '../class/abstract'
 
-const abstract = new Abstract()
+//const abstract = new Abstract()
 
 export default {
   data() {
     return {}
   },
   created() {
-    abstract.setVue(this)
-    if (abstract.isLogin() === 0) {
+    //abstract.setVue(this)
+    //abstract.clearLoginData()
+    //abstract.log('qqqqq123')
+    //if (abstract.isLogin() === 0) {
       setTimeout(() => {
         this.$router.open({ name: 'login', type: 'PRESENT' })
-      }, 100)
-    }
-    this.bindEvent()
+        //abstract.openLoginPage()
+      }, 1000)
+    //}
+    //this.bindEvent()
   },
   methods: {
     bindEvent() {
-      abstract.log('bindEvent')
+      //abstract.log('bindEvent')
     }
   }
 };

@@ -5,8 +5,18 @@
    </div>
 </template>
 <script>
-	export default {
+import Abstract from '../class/abstract'
 
+const abstract = new Abstract()
+	export default {
+		data() {
+    return {}
+  },
+  created() {
+    abstract.setVue(this)
+    //  abstract.log('dddd123')
+    abstract.log(dddd)
+    }
 	}
 </script>
 <style scoped>

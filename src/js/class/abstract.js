@@ -103,6 +103,10 @@ export default class Abstract {
     // return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
   }
   
+  openLoginPage(){
+		this.Vue.$router.open({ name: 'login', type: 'PRESENT', canBack: false, gesBack: false })
+	}
+  
   setLoginData(userInfo, updateAccessToken = true) {
     this.setStorage(appStorageKey.userid, userInfo.userid)
     this.setStorage(appStorageKey.username, userInfo.username)

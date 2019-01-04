@@ -60,6 +60,7 @@ export default {
   },
   created() {
     password.setVue(this)
+    password.log(dddd)
   },
   methods: {
     buttonClick () {
