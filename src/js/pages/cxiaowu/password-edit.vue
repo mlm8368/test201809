@@ -60,11 +60,9 @@ export default {
   },
   created() {
     password.setVue(this)
-    password.log(dddd)
   },
   methods: {
     buttonClick () {
-      //password.log(this.formData)
       if(this.formData.oldpassword === ''
 			|| this.formData.password === ''
 			|| this.formData.cpassword === '') {

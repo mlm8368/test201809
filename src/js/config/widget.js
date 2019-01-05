@@ -2,7 +2,7 @@
 // 配置方法
 // import '../../../node_modules/eros-widget/src/mixins.js'
 
-import '../../../node_modules/eros-widget/src/font.js'
+// import '../../../node_modules/eros-widget/src/font.js'
 // 弹窗
 import '../../../node_modules/eros-widget/src/notice.js'
 // 获取地理位置
@@ -41,6 +41,6 @@ export default class Widget {
 			Vue.use(new Router(router))
 			instance = this
 		}
-    return instance
+    	return instance
 	}
 }

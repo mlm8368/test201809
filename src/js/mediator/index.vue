@@ -10,23 +10,20 @@
 // 住： 不能再app退出的时候来持久化存储，退出时间很短，无法保证存储成功
 
 // 我们不建议在这里存储大量的数据 这里仅仅希望用作一个中介者 来提供给其他页面实例来通信 他无法替代storage 读取速度也远远慢与storage
-//import Abstract from '../class/abstract'
+import Abstract from '../class/abstract'
 
-//const abstract = new Abstract()
+const abstract = new Abstract()
 
 export default {
   data() {
     return {
-      count: 0
+      loginupdate: 1,
+      loginstatus: 'done'
     }
   },
   watch: {
-    count (newVal, oldVal) {
-      // 每当值改变的时候都会推送给订阅 store 变化的事件
-      this.$event.emit('store.change', {
-        newVal,
-        oldVal
-      })
+    loginupdate (newVal, oldVal) {
+		this.$event.emit('login.update')
     }
   },
   created() {
@@ -35,15 +32,19 @@ export default {
   },
   methods: {
     bindEvent() {
-      this.$event.on('store.count.add', resData => {
-        console.log(this.count)
-        this.count++
+      this.$event.on('login.update.add', resData => {
+        this.loginstatus = 'done'
+        this.loginupdate++
+        abstract.log(this.loginupdate)
       })
-      //
-      this.$event.on('refresh', resData => {
-        this.$router.refresh()
+      this.$event.on('login.openpage', resData => {
+        abstract.log(this.loginstatus)
+        if(this.loginstatus !== 'doing'){
+        	this.loginstatus = 'doing'
+        	abstract.openLoginPage()
+        }
       })
     }
   }
-};
+}
 </script>

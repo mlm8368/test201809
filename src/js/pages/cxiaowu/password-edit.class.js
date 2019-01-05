@@ -18,9 +18,10 @@ export default class PasswordEdit extends App {
       this.Vue.$notice.loading.hide()
 
       if (ret.status === 1) {
-        this.Vue.$notice.alert({ title: '密码修改成功', message: '请使用新密码重新登录', okTitle: '确定', callback(){
-            this.clearLoginData()
-            this.openLoginPage()
+        const that = this
+        this.Vue.$notice.alert({ title: '你的登录密码已修改成功', message: '请使用新密码重新登录', okTitle: '确定', callback(){
+            that.clearLoginData()
+            that.openLoginPage()
 		}})
       } else {
         this.Vue.$notice.alert({ message: ret.msg })

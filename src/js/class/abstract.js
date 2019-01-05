@@ -18,6 +18,9 @@ export default class Abstract {
     this.cache.setVue(Vue)
   }
   log(str) {
+    console.log("#debug# ",str)
+	return false
+	
     const myarraylist = str;
     if (typeof str === 'object') {
       if (Array.isArray(str)) {
@@ -99,8 +102,8 @@ export default class Abstract {
   }
 
   isLogin() {
-    return 0 // test
-    // return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
+    //return 0 // test
+    return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
   }
   
   openLoginPage(){
