@@ -1,6 +1,6 @@
 
 // 配置方法
-// import '../../../node_modules/eros-widget/src/mixins.js'
+import '../../../node_modules/eros-widget/src/mixins.js'
 
 // import '../../../node_modules/eros-widget/src/font.js'
 // 弹窗

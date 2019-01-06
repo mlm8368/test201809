@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div :style="{'height': statusBarHeight, 'background-color': navBarBgColor}"></div>
     <am-nav-bar 
       ref="amnavbar"
@@ -9,7 +9,7 @@
       :left-btn = "['profile']"
       :right-btn="['home', {is: 'text', text: '发布', key: 'publish'}]"
       @click="navbarClick"></am-nav-bar>
-    <div class="pagewarp" :style="{'top': homeTop}">
+    <div class="pagewarp">
       <keep-alive>
         <component :is="currentPageComponent"></component>
       </keep-alive>
@@ -47,13 +47,16 @@
 @import "../../../css/variable.less";
 @import "../../../css/dialog.less";
 
+.wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #cccccc;
+  }
 .pagewarp {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #ffffff;
+ flex:1;
 }
 
 </style>
@@ -92,7 +95,7 @@ export default {
       page: { type: 'home', params: null },
       dialog: { width: '700px', height: '800px', title: '窗口', type: 'teacher', op: 'view', index: 0 },
       popup: { show: false, position: 'right', type: 'profile' },
-      homeTop: 150
+      pageReload: false
     }
   },
   computed: {
@@ -118,20 +121,29 @@ export default {
   },
   created () {
     this.$store.commit('init', this)
+    this.bindEvent()
   },
   mounted () {
-    this.$nextTick(function () {
-      const dom = weex.requireModule('dom')
-      dom.getComponentRect(this.$refs.amnavbar, option => {
-        this.homeTop = option.size.bottom
-      })
-    })
-    
     //this.navbarClick('profile') // test
     //this.openDialog('student', 'add') // test
-    this.page.type = 'password-edit'
+    //this.page.type = 'password-edit'
+  },
+  eros: {
+	beforeBackAppear (params, options) {
+		console.log('cxiaowu beforeBackAppear ')
+		if(this.pageReload === true){
+			this.pageReload = false
+			this.$router.refresh()
+		}
+	}
   },
   methods: {
+    bindEvent() {
+		this.$event.on('login.update', resData => {
+			this.pageReload = true
+			console.log('cxiaowu login.update ', resData)
+		})
+    },
     navbarClick(key) {
       if (key === 'profile') {
         this.popup.type = 'profile'

@@ -41,6 +41,7 @@ export default {
         abstract.log(this.loginstatus)
         if(this.loginstatus !== 'doing'){
         	this.loginstatus = 'doing'
+            abstract.clearLoginData()
         	abstract.openLoginPage()
         }
       })

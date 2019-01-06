@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div :style="{'height': statusBarHeight, 'background-color': navBarBgColor}"></div>
     <am-nav-bar 
       ref="amnavbar"
@@ -9,7 +9,7 @@
       :left-btn = "[{is: 'text', text: '本校老师', key: 'staff'}]"
       :right-btn="[{is: 'text', text: '班级', key: 'classes'}]"
       @click="navbarClick"></am-nav-bar>
-    <home class="warp" :style="{'top': homeTop}"></home>
+    <home class="pagewarp"></home>
     <am-popup
       :show.sync="popup.show"
       :position="popup.position"
@@ -23,13 +23,16 @@
 </template>
 
 <style lang="less" scoped>
-.warp {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #ffffff;
+.wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #cccccc;
+  }
+.pagewarp {
+ flex:1;
 }
 </style>
 
@@ -54,7 +57,7 @@ export default {
       statusBarHeight: weex.config.eros.statusBarHeight,
       navBarBgColor: '#108ee9',
       popup: { show: false, position: 'right', type: 'classes' },
-      homeTop: 150
+      pageReload: false
     }
   },
   computed: {
@@ -64,18 +67,24 @@ export default {
   },
   created () {
     this.$store.commit('init', this)
+    this.bindEvent()
   },
-  mounted () {
-    this.$nextTick(function () {
-      const dom = weex.requireModule('dom')
-      dom.getComponentRect(this.$refs.amnavbar, option => {
-        this.homeTop = option.size.bottom
-      })
-    })
-    
-    // this.navbarClick('staff') // test
+  eros: {
+	beforeBackAppear (params, options) {
+		console.log('cjiaowu beforeBackAppear ')
+		if(this.pageReload === true){
+			this.pageReload = false
+			this.$router.refresh()
+		}
+	}
   },
   methods: {
+    bindEvent() {
+		this.$event.on('login.update', resData => {
+			this.pageReload = true
+			console.log('cjiaowu login.update ', resData)
+		})
+    },
     navbarClick(key) {
       this.popup.type = key
       if (key === 'staff') {

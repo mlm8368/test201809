@@ -16,7 +16,8 @@ const abstract = new Abstract()
     abstract.setVue(this)
     //  abstract.log('dddd123')
     //abstract.log(dddd)
-    if(!abstract.isLogin()) abstract.openLoginPage()
+    //if(!abstract.isLogin()) abstract.openLoginPage()
+    if(!abstract.isLogin()) this.$event.emit('login.openpage')
     }
 	}
 </script>
