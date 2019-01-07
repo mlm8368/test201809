@@ -1,3 +1,7 @@
+const tabBar = require('./school.tabbar')
+// const tabBar = require('./teacher.tabbar')
+// const tabBar = require('./student.tabbar')
+
 module.exports = {
   'appName': 'weexeros',
   'appBoard': '/config/index.js',
@@ -28,6 +32,8 @@ module.exports = {
     'appKey': '',
     'appSecret': ''
   },
+  'tabBar': tabBar
+  /*
   'tabBar': {
     'color': '#777777',
     'selectedColor': '#00b4cb',
@@ -58,4 +64,5 @@ module.exports = {
       'navTitle': '更多信息'
     }]
   }
+  */
 }
