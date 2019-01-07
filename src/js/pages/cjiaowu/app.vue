@@ -71,7 +71,7 @@ export default {
   },
   eros: {
 	beforeBackAppear (params, options) {
-		console.log('cjiaowu beforeBackAppear ')
+		//console.log('cjiaowu beforeBackAppear ')
 		if(this.pageReload === true){
 			this.pageReload = false
 			this.$router.refresh()
@@ -82,7 +82,7 @@ export default {
     bindEvent() {
 		this.$event.on('login.update', resData => {
 			this.pageReload = true
-			console.log('cjiaowu login.update ', resData)
+			//console.log('cjiaowu login.update ', resData)
 		})
     },
     navbarClick(key) {

@@ -5,4 +5,8 @@ export default class Grade extends App {
     super()
     return this
   }
+  
+  save() {
+
+  }
 }

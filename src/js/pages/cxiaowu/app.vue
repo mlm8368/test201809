@@ -130,7 +130,7 @@ export default {
   },
   eros: {
 	beforeBackAppear (params, options) {
-		console.log('cxiaowu beforeBackAppear ')
+		//console.log('cxiaowu beforeBackAppear ')
 		if(this.pageReload === true){
 			this.pageReload = false
 			this.$router.refresh()
@@ -141,7 +141,7 @@ export default {
     bindEvent() {
 		this.$event.on('login.update', resData => {
 			this.pageReload = true
-			console.log('cxiaowu login.update ', resData)
+			//console.log('cxiaowu login.update ', resData)
 		})
     },
     navbarClick(key) {

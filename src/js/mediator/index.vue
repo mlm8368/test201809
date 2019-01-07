@@ -35,10 +35,10 @@ export default {
       this.$event.on('login.update.add', resData => {
         this.loginstatus = 'done'
         this.loginupdate++
-        abstract.log(this.loginupdate)
+        //abstract.log(this.loginupdate)
       })
       this.$event.on('login.openpage', resData => {
-        abstract.log(this.loginstatus)
+        //abstract.log(this.loginstatus)
         if(this.loginstatus !== 'doing'){
         	this.loginstatus = 'doing'
             abstract.clearLoginData()

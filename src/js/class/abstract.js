@@ -102,15 +102,12 @@ export default class Abstract {
   }
 
   isLogin() {
-    return 0 // test
+    //return 0 // test
     return (this.getStorage(appStorageKey.accessToken)) ? 1 : 0
   }
   
   openLoginPage(){
-		this.Vue.$router.open({ name: 'login', type: 'PRESENT', canBack: false, gesBack: false, backCallback: ()=>{
-			//this.Vue.$router.refresh()
-			//console.log('openLoginPage() backCallback')
-		} })
+		this.Vue.$router.open({ name: 'login', type: 'PRESENT', canBack: false, gesBack: false})
 	}
   
   setLoginData(userInfo, updateAccessToken = true) {
