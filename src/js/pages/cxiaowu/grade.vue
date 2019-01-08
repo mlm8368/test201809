@@ -4,16 +4,16 @@
 	<scroller>
       <header>
         <div class="header">
-          <text class="header-cell page-left-padded">升级VIP</text>
+          <text class="header-cell page-left-padded">{{title}}</text>
         </div>
       </header>
-      <template v-if="gradeinfo.havedays > 0">
-      <bui-list-item label="到期时间" :title="gradeinfo.totime"></bui-list-item>
-      <bui-list-item label="剩余天数" :title="`${gradeinfo.havedays} 天`"></bui-list-item>
+      <template v-if="gradeinfo.vip > 0">
+      	<bui-list-item label="到期时间" :title="gradeinfo.todate"></bui-list-item>
+      	<bui-list-item label="剩余天数" :title="`${gradeinfo.havedays} 天`"></bui-list-item>
       </template>
       <bui-list-item label="服务费用" :title="`${gradeinfo.fee} 元/年`"></bui-list-item>
-      <bui-list-item label="服务年限" >
-        <div slot="title" @click="showPicker('year', '服务年限')">
+      <bui-list-item label="购买年限" >
+        <div slot="title" @click="showPicker('year', '购买年限')">
           <text v-if="gradeinfo.year.length > 0">{{`${gradeinfo.year[0]} 年`}}</text>
           <text v-else>请选择</text>
         </div>
@@ -64,7 +64,8 @@ export default {
   mixins: [FormMixins],
   data () {
     return {
-      gradeinfo: {totime:'0000-00-00', havedays: 0, fee: 0, year: []},
+      title: '升级VIP',
+      gradeinfo: {vip:0, todate: '0000-00-00', havedays: 0, fee: 0, year: []},
       formData: {year: 0, fee: 0},
       picker: { key: '', show: false, title: '请选择', data: [], value: [] },
       pickerData: {year: [[{ label: '1年', value: '1' },{ label: '2年', value: '2' },{ label: '3年', value: '3' },{ label: '4年', value: '4' },{ label: '5年', value: '5' }]]}
@@ -72,14 +73,23 @@ export default {
   },
     created() {
       grade.setVue(this)
-      this.gradeinfo.havedays = 10
-      this.gradeinfo.fee = 3000
-      this.gradeinfo.year.push('1')
-      this.formData.fee = 3000
+      
+      grade.getSchool(userinfo => {
+      	this.gradeinfo.fee = userinfo.vipfee
+      	if(userinfo.vip) {
+              this.title='VIP续费'
+      		this.gradeinfo.vip = userinfo.vip
+      		this.gradeinfo.todate = grade.getFormatDate(new Date(userinfo.totime*1000))
+      		this.gradeinfo.havedays = Math.ceil((userinfo.totime - grade.DATE_TIME/1000)/86400)
+      	}
+      	this.gradeinfo.year.push('1')
+      	this.formData.year = 1
+      	this.formData.fee = userinfo.vipfee
+      })
     },
     methods: {
       buttonClick () {
-        grade.save()
+        grade.buyVip()
       },
       showPicker (key, title) {
       this.picker.key = key
