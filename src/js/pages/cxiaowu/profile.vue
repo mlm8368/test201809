@@ -25,7 +25,7 @@
         </div>
       </header>
       <cell><bui-list-item label="VIP级别">
-        <image slot="title" :src="defaultAvatar"></image>
+        <image slot="title" src="bmlocal://assets/bos/forkme_right_gray_6d6d6d.png" width="30" height="10"></image>
       </bui-list-item></cell>
       <cell><bui-list-item label="服务开始" :title="schoolInfo.fromtime"></bui-list-item></cell>
       <cell><bui-list-item label="服务结束" :title="schoolInfo.totime"></bui-list-item></cell>

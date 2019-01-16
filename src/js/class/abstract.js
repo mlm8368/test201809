@@ -1,3 +1,4 @@
+//import { is as R_is } from 'ramda'
 import { appStorageKey, appCacheKey } from './enum'
 import Cache from './cache'
 import { config } from '../config/app'
@@ -267,12 +268,15 @@ export default class Abstract {
 
   getBosObjectKey(type, ext) {
     const _uuid = this.uuid(8);
+    const _userid = this.getStorage(appStorageKey.userid)
     
     const date = new Date();
     if(type === 'avatar') {
-        const hour = date.getHours()
-        const minute = date.getMinutes()
-		return 'avatar/' + _uuid + hour + minute + '.' + ext;
+		return 'avatar/' + _userid + '.' + ext;
+	} else if (type === 'user') {
+		const hour = date.getHours()
+    	const minute = date.getMinutes()
+		return 'u/' + _userid + '/' + _uuid + hour + minute + '.' + ext;
 	}
     const year = date.getFullYear();
     let month = date.getMonth() + 1;

@@ -1,7 +1,7 @@
 <template>
   <scroller>
     <slider class="banner" interval="3000" auto-play="true" show-indicators="true">
-      <div class="banner-frame" v-for="(img, index) in bannerImgList" :key="index">
+      <div class="banner-frame" v-for="(img, index) in banners" :key="index"  @click="goPage('banner')">
         <image class="banner-frame-image" resize="cover" :src="img"></image>
       </div>
       <indicator class="banner-indicator"></indicator>
@@ -92,7 +92,7 @@ export default {
   components: { AmIcon, AmGrid },
   data () {
     return {
-      bannerImgList: [],
+      banners: ['bmlocal://assets/defaultAvatar.png'],
       gridList: [
         { icon: 'bmlocal://assets/tmp/kh.png', text: '学校公告'},
         { icon: 'bmlocal://assets/tmp/news.png', text: '学校新闻'},
@@ -111,8 +111,17 @@ export default {
     home.setVue(this)
 
     home.getSchool((userinfo) => {
-      if (userinfo.banners.length > 0) this.bannerImgList = userinfo.banners
+      if (userinfo.banners.length > 0) this.banners = userinfo.banners
     })
+    
+    //this.goPage('banner')
+  },
+  methods: {
+    goPage(type, param) {
+      const apppage = { type: type, params: null }
+      if (param) apppage.params = { vkind: param }
+      this.$store.commit('setAppPage', apppage)
+    }
   }
 }
 </script>

@@ -74,6 +74,7 @@ import Grade from './grade.vue'
 import ProfileEdit from './profile-edit.vue'
 import PasswordEdit from './password-edit.vue'
 import Validate from './validate.vue'
+import Banner from './banner.vue'
 
 export default {
   name: 'cxiaowuApp',
@@ -86,7 +87,8 @@ export default {
     'page-grade': function (resolve) { resolve(Grade) },
     'page-profile-edit': function (resolve) { resolve(ProfileEdit) },
     'page-password-edit': function (resolve) { resolve(PasswordEdit) },
-    'page-validate': function (resolve) { resolve(Validate) }
+    'page-validate': function (resolve) { resolve(Validate) },
+    'page-banner': function (resolve) { resolve(Banner) }
   },
   data () {
     return {

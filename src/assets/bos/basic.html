@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>bce-bos-uploader-lite simple demo</title>
-    <!--[if lte IE 9]><script src="https://cdn.rawgit.com/moxiecode/moxie/v1.4.1/bin/js/moxie.min.js"></script><![endif]-->
-    <script src="https://cdn.bdstatic.com/bce-bos-uploader-lite/1.0.7-beta.1/bce-bos-uploader-lite.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="demo.css" />
+    <script src="./bce-bos-uploader-lite.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./demo.css" />
   </head>
   <body>
     <div class="main">
@@ -14,13 +13,13 @@
           <legend>配置信息</legend>
           <table>
             <tr>
-              <th>bos_ak</th><td><input id="bos_ak" /></td>
+              <th>bos_ak</th><td><input id="bos_ak" value="50c26363e0da4c84be42265e8f8632e5" /></td>
             </tr>
             <tr>
-              <th>bos_sk</th><td><input id="bos_sk" /></td>
+              <th>bos_sk</th><td><input id="bos_sk"  value="6a59c5b7538943efac7343c18f75c452" /></td>
             </tr>
             <tr>
-              <th>bos_bucket</th><td><input id="bos_bucket" /></td>
+              <th>bos_bucket</th><td><input id="bos_bucket"  value="dogquan" /></td>
             </tr>
             <tr>
               <th>bos_endpoint</th><td><input id="bos_endpoint" value="http://bj.bcebos.com" /></td>
@@ -46,7 +45,7 @@
     var uploader = new baidubce.bos.Uploader({
       browse_button: '#file',
       multi_selection: true,
-      flash_swf_url: '../bower_components/moxie/bin/flash/Moxie.swf',
+      flash_swf_url: '',
       init: {
         FilesAdded: function (_, files) {
           for (var i = 0; i < files.length; i++) {
