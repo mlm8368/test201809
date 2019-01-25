@@ -273,6 +273,8 @@ export default class Abstract {
     const date = new Date();
     if(type === 'avatar') {
 		return 'avatar/' + _userid + '.' + ext;
+	} else if (type === 'validate') { 
+		return 'validate /' + _userid + '/' + _uuid + '.' + ext; 
 	} else if (type === 'user') {
 		const hour = date.getHours()
     	const minute = date.getMinutes()

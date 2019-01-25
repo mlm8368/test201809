@@ -11,7 +11,7 @@
       @click="navbarClick"></am-nav-bar>
     <div class="pagewarp">
       <keep-alive>
-        <component :is="currentPageComponent"></component>
+        <component :is="currentPageComponent" :params="page.params"></component>
       </keep-alive>
     </div>
     <am-popup

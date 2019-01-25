@@ -37,13 +37,10 @@
         </div>
       </header>
       <cell><bui-list-item label="学校认证">
-        <text slot="title" class="link" @click="goPage('validate', 'school')">未认证</text>
+        <text slot="title" class="link" @click="goPage('validate', 'company')">去认证</text>
       </bui-list-item></cell>
-      <cell><bui-list-item label="手机认证">
-        <text slot="title" class="link" @click="goPage('validate', 'mobile')">未认证</text>
-      </bui-list-item></cell>
-      <cell><bui-list-item label="邮箱认证">
-        <text slot="title" class="link" @click="goPage('validate', 'email')">未认证</text>
+      <cell><bui-list-item label="个人认证">
+        <text slot="title" class="link" @click="goPage('validate', 'truename')">去认证</text>
       </bui-list-item></cell>
       <header>
         <div class="school-header header">
@@ -161,7 +158,7 @@ export default {
   methods: {
     goPage(type, param) {
       const apppage = { type: type, params: null }
-      if (param) apppage.params = { vkind: param }
+      if (param) apppage.params = param
       this.$store.commit('setAppPage', apppage)
       this.$emit('closePopup')
     }
